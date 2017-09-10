@@ -1,0 +1,17 @@
+[
+    {
+       "name":"k4h4shi.com",
+       "url":"https://github.com/k4h4shi/k4h4shi.com",
+       "desc":"My home page."
+    },
+    {
+       "name":"dotfiles",
+       "url":"http://github.com/k4h4shi/dotfiles",
+       "desc":"My dotfiles."
+    },
+    {
+       "name":"todo-rest-server",
+       "url":"http://github.com/k4h4shi/todo-rest-server",
+       "desc":"a simple todo rest api server powered by Spring Data REST."
+    }
+]
