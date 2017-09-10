@@ -3,16 +3,16 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle:
-description:
-author: John Doe
-language:
-timezone:
+title: k4h4shi.com
+subtitle: kotaro.t@k4h4shi's homepage.
+description: Hello world, I'm a web developer who mostly use Java for dev.
+author: kotaro takahashi
+language: ja
+timezone: Japan
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://k4h4shi.com
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
