@@ -12,6 +12,12 @@
     {
        "name":"todo-rest-server",
        "url":"http://github.com/k4h4shi/todo-rest-server",
-       "desc":"a simple todo rest api server powered by Spring Data REST."
+       "desc":"A simple todo rest api server powered by Spring Data REST."
+    },
+    {
+       "name":"three rows diary",
+       "url":"http://github.com/k4h4shi/three-rows-diary",
+       "desc":"An app for write a diary that only has three rows, build with Java."
     }
+
 ]
