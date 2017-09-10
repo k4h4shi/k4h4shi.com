@@ -5,7 +5,7 @@
 # Site
 title: k4h4shi.com
 subtitle: kotaro.t@k4h4shi's homepage.
-description: Hello world, I'm a web developer who mostly use Java for dev.
+description: This kotaro.t@k4h4shi's Home Page.
 author: kotaro takahashi
 language: ja
 timezone: Japan
@@ -16,6 +16,7 @@ url: http://k4h4shi.github.io/k4h4shi.com
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
+
 
 # Directory
 source_dir: source
@@ -72,7 +73,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: cactus-dark
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
