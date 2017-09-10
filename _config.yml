@@ -5,14 +5,14 @@
 # Site
 title: k4h4shi.com
 subtitle: kotaro.t@k4h4shi's homepage.
-description: This kotaro.t@k4h4shi's Home Page.
+description: This is kotaro.t@k4h4shi's Home Page.
 author: kotaro takahashi
 language: ja
 timezone: Japan
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://k4h4shi.github.io/k4h4shi.com
+url: http://k4h4shi.com
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
