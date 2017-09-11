@@ -1,38 +1,18 @@
 ---
 title: Hello World
+date: 2017/09/09 20:58:10
 ---
-Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
 
-## Quick Start
+[Hexo](https://hexo.io/)を使ってホームページ兼ブログを開設しました。
+ドメインが余っていたことと、シンプルなブログが欲しかったためです。
 
-### Create a new post
+もともと[はてなブログ](http://k4h4shi.hatenablog.com/)を使っていましたが、今後はこちらを利用していきます。
 
-``` bash
-$ hexo new "My New Post"
-```
+## ブログの方針について
+今後はチュートリアルや忘備録、Tips系の技術記事をメインに書いていきます。
+技術系の情報に関しては、以下の方針で投稿しています。
 
-More info: [Writing](https://hexo.io/docs/writing.html)
+- [Qiita](http://qiita.com/k4h4shi): 体系的なまとめ記事
+- [当ブログ](http://k4h4shi.hatenablog.com): チュートリアル、忘備録、tips等の技術記事。
 
-### Run server
-
-``` bash
-$ hexo server
-```
-
-More info: [Server](https://hexo.io/docs/server.html)
-
-### Generate static files
-
-``` bash
-$ hexo generate
-```
-
-More info: [Generating](https://hexo.io/docs/generating.html)
-
-### Deploy to remote sites
-
-``` bash
-$ hexo deploy
-```
-
-More info: [Deployment](https://hexo.io/docs/deployment.html)
+上記の通りQiitaの方にも主に特定技術に関する体系的なまとめを書いているので、よかったら参照ください。
