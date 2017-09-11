@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "server": "hexo server",
-    "browser": "opener http://localhost:4000",
-    "start": "npm-run-all -p server browser",
+    "start": "hexo server -o",
     "prestart": "npm run build",
     "build": "hexo generate",
-    "create": "hexo new",
+    "post": "hexo new post",
+    "draft": "hexo new draft",
+    "page": "hexo new page",
     "deploy": "hexo deploy -g"
   },
   "hexo": {
