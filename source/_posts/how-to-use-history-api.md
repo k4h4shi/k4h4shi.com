@@ -1,5 +1,5 @@
 ---
-title: how_to_use_history_api
+title: history APIの使い方
 date: 2017-09-19 22:44:15
 tags:
 - javascript
