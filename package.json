@@ -5,9 +5,9 @@
   "scripts": {
     "server": "hexo server",
     "start": "hexo server -o",
-    "predeploy": "npm run build",
-    "build": "hexo generate",
+    "predeploy": "hexo generate",
     "create": "hexo new",
+    "edit": "hexo edit",
     "deploy": "hexo deploy -g"
   },
   "hexo": {
