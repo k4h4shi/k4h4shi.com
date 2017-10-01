@@ -1,8 +1,8 @@
 ---
-title: javascriptのコンストラクタについて
-date: 2017-09-28 10:29:02
+title: JavaScriptのコンストラクタについて
+date: 2017-09-30 10:29:02
 tags:
-- javascript
+- JavaScript
 - oop
 - memo
 ---
@@ -34,13 +34,33 @@ console.log(i1.prop);
 const i2 = new c2('hello');
 console.log(i2.prop);
 ```
-これを応用すればたとえば、配列にコンストラクタを格納し、順々にインスタンスを生成したりすることもできると思う。
+
+これを応用すれば、たとえば、配列にコンストラクタを格納し、順々にインスタンスを生成したりすることもできます。
+
+```
+const constArray = [
+  class SomeClass {
+      constructor(prop) {
+          this.prop = prop;
+          this.clazz = 'SomeClass';
+      }
+  },
+  class OtherClass {
+    constructor(prop) {
+      this.prop = prop;
+      this.clazz = 'OtherClass';
+    }
+  }
+]
+
+constArray.forEach(c => console.log(new c().clazz));
+```
 
 
 ## JavaScriptのnew
 また、newの挙動が気になったので少し調べてみた。
 
-特に難しいところはなく、newによる呼び出しの場合は少しコードが補足されて実行されるみたい。
+特に難しいところはなく、newによる呼び出しの場合は少しコードが補足されて実行されるようです。
 
 ```
 var Constructor = function(prop) {
@@ -50,3 +70,7 @@ this.prop = prop;
 }
 ```
 
+## まとめ
+JavaScriptのコンストラクタは、変数や配列、マップに格納できます。
+また、関数の引数や戻り値にすることもできます。
+オブジェクトの生成を行う際には、コンストラクタをどのように実行するかを考えてみると良いと思います。
