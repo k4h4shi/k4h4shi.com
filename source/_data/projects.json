@@ -5,24 +5,28 @@
        "desc":"My home page."
     },
     {
-       "name":"dotfiles",
-       "url":"http://github.com/k4h4shi/dotfiles",
-       "desc":"My dotfiles."
+        "name":"dotfiles",
+        "url":"http://github.com/k4h4shi/dotfiles",
+        "desc":"My dotfiles."
+    },
+    {
+        "name":"dpndon",
+        "url":"https://github.com/k4h4shi/dpndon",
+        "desc":"A library for fetch information of npm modules that the project depend on."
+    },
+    {
+        "name":"dpndon.io",
+        "url":"https://k4h4shi.github.io/dpndon.io",
+        "desc":"The page to list npm modules that the project depend on."
+    },
+    {
+        "name":"dpndon-cli",
+        "url":"https://github.com/k4h4shi/dpndon-cli",
+        "desc":"the CLI tool that helps refer information of dependencies of a npm module."
     },
     {
        "name":"intensityjs",
        "url":"http://github.com/k4h4shi/intensityjs",
        "desc":"A library for calculate Japanese scale intensity of earth quake."
-    },
-    {
-       "name":"todo-rest-server",
-       "url":"http://github.com/k4h4shi/todo-rest-server",
-       "desc":"A simple todo rest api server powered by Spring Data REST."
-    },
-    {
-       "name":"three rows diary",
-       "url":"http://github.com/k4h4shi/three-rows-diary",
-       "desc":"An app for write a diary that only has three rows, build with Java."
     }
-
 ]
