@@ -7,36 +7,40 @@ tags:
 - validation
 - front-end
 ---
-ReactのPropTypes Validatorについてのメモ
 
+React の PropTypes Validator についてのメモ
 
-## PropTypes Validatorとは
-Reactコンポーネントで型チェックをするためのもの。
+## PropTypes Validator とは
+
+React コンポーネントで型チェックをするためのもの。
 
 コンポーネントがどんな属性を持っていて、どんな属性が必須で、どんなタイプの値を貰うべきかを定義するもの。
 
-もともとは、React本体に`React.PropTypes`として定義されていた。
+もともとは、React 本体に`React.PropTypes`として定義されていた。
 
 現在では、`prop-types`として別パッケージとして切り出されている。
 
-## prop-typesを導入する
+## prop-types を導入する
+
 `prop-types`は以下のコマンドでインストールできる。
 
 ```
 $ npm i --save prop-types
 ```
 
-TypeScriptやFlowもPropType Validatorの代替として使える。
+TypeScript や Flow も PropType Validator の代替として使える。
 
-それらの静的型チェックの方法については、[公式](https://reactjs.org/docs/static-type-checking.html)を参照のこと。
+それらの静的型チェックの方法については、[公式](https://reactjs.org/docs/static-type-checking.html)を参照のこと。
 
-## PropTypes Validatorの記述方法
-`PropTypes`をimportした上で、コンポーネントの`propTypes`プロパティに、オブジェクトとして設定する。
+## PropTypes Validator の記述方法
+
+`PropTypes`を import した上で、コンポーネントの`propTypes`プロパティに、オブジェクトとして設定する。
 
 ### 型チェック
+
 型チェックのための値は`PropTypes`のプロパティとして用意されている。
 
-`PropTypes.object`と`PropTypes.array`は非推奨となっている。
+`PropTypes.object`と`PropTypes.array`は非推奨となっている。
 
 そのために代わりに、`PropTypes.objectOf`または、`PropTypes.shape`、`PropTypes.arrayOf`を使う。
 |型|説明|
@@ -52,15 +56,16 @@ TypeScriptやFlowもPropType Validatorの代替として使える。
 |PropTypes.shape| 引数に渡した型のオブジェクトであることをチェック。|
 |PropTypes.arrayOf| 引数に渡した型の配列であることをチェック。|
 |PropTypes.node| レンダリングできる値であるかチェック。|
-|PropTypes.element| React elementであるかチェック。|
+|PropTypes.element| React element であるかチェック。|
 |PropTypes.instanceOf| 引数に渡した型のインスタンスであるかチェック。|
 |PropTypes.oneOf| 引数に渡した配列の値のどれかであるかチェック。|
 |PropTypes.any.isRequired| 型はなんでも良いが必須チェック。|
 
 ### サンプル
-以下は`id`と`name`, `age`というプロパティを持つ`Employee`というコンポーネントの例。
 
-各プロパティの型と、`id`と`name`が必須であることを定義している。
+以下は`id`と`name`, `age`というプロパティを持つ`Employee`というコンポーネントの例。
+
+各プロパティの型と、`id`と`name`が必須であることを定義している。
 
 ```
 import PropTypes from 'prop-types';
@@ -86,4 +91,5 @@ Employee.propTypes = {
 ```
 
 ## 参考リンク
-- [Typechecking With PropTypes](https://reactjs.org/docs/typechecking-with-proptypes.html)
+
+* [Typechecking With PropTypes](https://reactjs.org/docs/typechecking-with-proptypes.html)

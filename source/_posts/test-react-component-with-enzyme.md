@@ -9,38 +9,44 @@ tags:
 - create-react-app
 ---
 
-Reactコンポーネントのテストのために、Enzymeというツールを導入したのでその方法をまとめる。
+React コンポーネントのテストのために、Enzyme というツールを導入したのでその方法をまとめる。
 
-## Enzymeとは
-[Enzyme](http://airbnb.io/enzyme/)はReactコンポーネントのテストを容易にするツール。
+## Enzyme とは
 
-Reactコンポーネントを評価して描画するためには、仮想domの環境が必要になる。
+[Enzyme](http://airbnb.io/enzyme/)は React コンポーネントのテストを容易にするツール。
 
-Enzymeはテストの際にそこを担ってくれ、さらにテストのためのユーティリティも提供してくれる。
+React コンポーネントを評価して描画するためには、仮想 dom の環境が必要になる。
 
-## Enzymeの導入例
+Enzyme はテストの際にそこを担ってくれ、さらにテストのためのユーティリティも提供してくれる。
+
+## Enzyme の導入例
+
 `create-react-app`で構築した環境に導入するのであれば、以下を実行。
+
 ```
 $ yarn add enzyme \
   enzyme-adapter-react-16 \
   react-test-renderer
 ```
 
-- enzyme: Enzyme本体
-- enzyme-adapter-react-16: React16のためのアダプタ
-- react-test-renderer: Enzymeの依存モジュール
+* enzyme: Enzyme 本体
+* enzyme-adapter-react-16: React16 のためのアダプタ
+* react-test-renderer: Enzyme の依存モジュール
 
-## Enzymeの使用例
+## Enzyme の使用例
+
 `create-react-app`で構築した環境に導入する場合、テスティングフレームワークには[Jest](https://facebook.github.io/jest/)を使うのが楽。
 
-### Enzymeのセットアップ
-Enzymeでテストを始めるために、以下を行う。
+### Enzyme のセットアップ
 
-- `src/setupTests.js`を追加して、Adapterを初期化するように設定する。
-- `src/App.test.js`をEnzymeを利用するように修正する
-- `npm test`を実行して、動作確認をする。
+Enzyme でテストを始めるために、以下を行う。
+
+* `src/setupTests.js`を追加して、Adapter を初期化するように設定する。
+* `src/App.test.js`を Enzyme を利用するように修正する
+* `npm test`を実行して、動作確認をする。
 
 #### src/setupTests.js
+
 ```
 import Enzyme from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
@@ -49,6 +55,7 @@ Enzyme.configure({ adapter: new Adapter() })
 ```
 
 #### src/App.test.js
+
 ```
 import React from 'react';
 import { shallow } from 'enzyme';
@@ -65,15 +72,17 @@ it('renders without crashing', () => {
 $ npm test
 ```
 
-動作すれば、Jest+Enzymeでテストを行う環境が整ったことになる。
+動作すれば、Jest+Enzyme でテストを行う環境が整ったことになる。
 
-### 単純なコンポーネントの描画テスト
+### 単純なコンポーネントの描画テスト
+
 テスト対象コンポーネントは以下のようにする。
 
 #### src/HelloWorld.js
+
 ```
 import React, { Component } from 'react';
- 
+
 export class HelloWorld extends Component {
   render() {
     return <span>Hello world!</span>
@@ -81,8 +90,10 @@ export class HelloWorld extends Component {
 }
 ```
 
-上記をテストするファイルは以下のようにする。
+上記をテストするファイルは以下のようにする。
+
 #### src/HelloWorld.test.js
+
 ```
 import { shallow } from 'enzyme'
 import HelloWorld from './HelloWorld'
@@ -95,29 +106,34 @@ it('works', () => {
 })
 ```
 
-### より詳しいテスト
-[公式のAPIドキュメント](http://airbnb.io/enzyme/docs/api/)や[Enzymeチートシート](https://devhints.io/enzyme)が参考になる。
+### より詳しいテスト
 
-## Reactのテストの考え方
-
+[公式の API ドキュメント](http://airbnb.io/enzyme/docs/api/)や[Enzyme チートシート](https://devhints.io/enzyme)が参考になる。
+
+## React のテストの考え方
+
 ### テストの対象
+
 以下の観点からテストを行う。
 
-- レンダリングされること
-- プロパティに対するアウトプット
-- 状態をテストする
-- イベントをテストする
-- エッジケースをテストする
+* レンダリングされること
+* プロパティに対するアウトプット
+* 状態をテストする
+* イベントをテストする
+* エッジケースをテストする
 
-ReduxでいうContainerコンポーネントと、Presentatinalコンポーネントでもテストの方法は当然異なるはずなので、うまく使い分ける。
+Redux でいう Container コンポーネントと、Presentatinal コンポーネントでもテストの方法は当然異なるはずなので、うまく使い分ける。
 
-### shallow renderingを積極的に使う
-shallow renderingは、第一階層の深さのコンポーネントだけをレンダリングする。
+### shallow rendering を積極的に使う
 
-これを用いることでテスト対象のコンポーネントの依存コンポーネントを気にすることなくテストが出来る。
+shallow rendering は、第一階層の深さのコンポーネントだけをレンダリングする。
 
-#### shallow renderingの例
+これを用いることでテスト対象のコンポーネントの依存コンポーネントを気にすることなくテストが出来る。
+
+#### shallow rendering の例
+
 例えば、`name`と`age`を持つ、`enployee`というようなコンポーネントがあるとする。
+
 ```
 let Employee = ({employee}) => (
   <span>
@@ -126,7 +142,9 @@ let Employee = ({employee}) => (
   </span>
 )
 ```
-上記コンポーネントをshallow renderingした場合、`name`と`age`は評価されず、以下のようになる。
+
+上記コンポーネントを shallow rendering した場合、`name`と`age`は評価されず、以下のようになる。
+
 ```
 <span>
   <Name employee={employee}/>
@@ -134,13 +152,15 @@ let Employee = ({employee}) => (
 </span>
 ```
 
-これにより、依存するコンポーネントの変更を、利用するコンポーネントに影響させずにテストが出来る。
+これにより、依存するコンポーネントの変更を、利用するコンポーネントに影響させずにテストが出来る。
 
 ## 補足
-Enzymeは、Reactだけでなく、React Nativeのテストにも利用できる。
 
-組み合わせるテスティングフレームワークはJestに限らずMochaなども利用できる。
+Enzyme は、React だけでなく、React Native のテストにも利用できる。
 
-## 参考資料
-- [ReactでTDD（テスト駆動開発）を始めよう](http://postd.cc/getting-started-with-tdd-in-react/)
-- [enzymeならjsdomなしでReactのテストがほぼ全てできる](https://qiita.com/uryyyyyyy/items/cde942e51faf45f94e67)
+組み合わせるテスティングフレームワークは Jest に限らず Mocha なども利用できる。
+
+## 参考資料
+
+* [React で TDD（テスト駆動開発）を始めよう](http://postd.cc/getting-started-with-tdd-in-react/)
+* [enzyme なら jsdom なしで React のテストがほぼ全てできる](https://qiita.com/uryyyyyyy/items/cde942e51faf45f94e67)

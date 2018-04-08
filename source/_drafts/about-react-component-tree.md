@@ -23,6 +23,5 @@ React のコンポーネントは、コンポーネントツリーを形成し�
 また、イベントは子から親の方向へ一方向へ流れていきます。
 
 それを処理することができるコンポーネントが、処理を行います。
-
 
 ![react-data-flow](http://blog.embengineering.com/assets/images/react-data-flow.png)

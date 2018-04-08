@@ -7,14 +7,17 @@ tags:
 - UI
 - front-end
 ---
-storybookを導入する際の備忘録です。
 
-## storybookとは
-storybookはUIコンポーネントのための開発環境。
-様々な状態におけるUIを可視化しつつ、インタラクティブに開発できる。
+storybook を導入する際の備忘録です。
 
-## storybookのsetup
+## storybook とは
+
+storybook は UI コンポーネントのための開発環境。様々な状態における UI を可視化しつつ、インタラクティブに開発できる。
+
+## storybook の setup
+
 公式の通りに以下のコマンドを実行する
+
 ```
 $ npm i -g @storybook/cli
 $ cd my-react-app
@@ -22,22 +25,27 @@ $ getstorybook
 ```
 
 上記コマンドによって、以下が行われる。
-- プロジェクトにstorybookの依存性をインストールする
-- package.jsonファイルにstorybookとbuild-storybookのスクリプトを加える
-- 基本設定が入っている.storybookフォルダーと、コンポーネントとストーリーのサンプルが入ったstoriesフォルダーを生成する
 
-たまに`storybook`をグローバルにインストールするというような情報を見かけるけど、最新のReactでは動作しないので注意。
+* プロジェクトに storybook の依存性をインストールする
+* package.json ファイルに storybook と build-storybook のスクリプトを加える
+* 基本設定が入っている.storybook フォルダーと、コンポーネントとストーリーのサンプルが入った stories フォルダーを生成する
 
-## storybookの起動
-インストールをした状態で以下コマンドを打つと、storybookが立ち上がる。
+たまに`storybook`をグローバルにインストールするというような情報を見かけるけど、最新の React では動作しないので注意。
+
+## storybook の起動
+
+インストールをした状態で以下コマンドを打つと、storybook が立ち上がる。
+
 ```
 $ npm run storybook
 ```
-起動後はブラウザでアクセスできる。
 
-## storybookの設定ファイル
-storybookの設定ファイルは、`.storybook`以下に配置されている。
-以下は、storyがどこに配置されているかだけを記した、`.storybook/config.js`。
+起動後はブラウザでアクセスできる。
+
+## storybook の設定ファイル
+
+storybook の設定ファイルは、`.storybook`以下に配置されている。以下は、story がどこに配置されているかだけを記した、`.storybook/config.js`。
+
 ```
 import { configure } from '@storybook/react';
 
@@ -48,11 +56,13 @@ function loadStories() {
 
 configure(loadStories, module);
 ```
-これにより、storyを記述したファイルを読み込むことができる。
 
-## storyを書く
-storybookでは、storyという形式である特定のUIの状態を記述していける。
-以下は、ボタンに関する2つのstoryの例。
+これにより、story を記述したファイルを読み込むことができる。
+
+## story を書く
+
+storybook では、story という形式である特定の UI の状態を記述していける。以下は、ボタンに関する 2 つの story の例。
+
 ```
 import React from 'react';
 import { storiesOf } from '@storybook/react';
@@ -66,8 +76,11 @@ storiesOf('Button', module)
     <button onClick={action('clicked')}>😀 😎 👍 💯</button>
   ));
 ```
+
 ## まとめ
+
 まだ導入したばかりのため、逐次追記していくつもり。
 
 ## 参考文献
-- [storybook.js.org](https://storybook.js.org/)
+
+* [storybook.js.org](https://storybook.js.org/)

@@ -1,16 +1,19 @@
 ---
 title: hexo-deplyer-gitで静的コンテンツをgitにデプロイする
+date: 2017-09-18 21:10:00
 ---
 
-# hexo-deplyer-gitで静的コンテンツをgitにデプロイする
+# hexo-deplyer-git で静的コンテンツを git にデプロイする
 
-[hexo-deployer-git](https://github.com/hexojs/hexo-deployer-git)を使うことで、hexoのデプロイ時にgitにpushさせることができます。
+[hexo-deployer-git](https://github.com/hexojs/hexo-deployer-git)を使うことで、hexo のデプロイ時に git に push させることができます。
 
-## hexo-deployer-gitとは
-`hexo deploy`コマンド実行時に、生成された静的コンテンツを任意のgitリポジトリの特定ブランチにpushできます。
+## hexo-deployer-git とは
 
-### hexoプロジェクトのディレクトリ構成
-hexoによるプロジェクトのディレクトリ構成は以下のようになっています。
+`hexo deploy`コマンド実行時に、生成された静的コンテンツを任意の git リポジトリの特定ブランチに push できます。
+
+### hexo プロジェクトのディレクトリ構成
+
+hexo によるプロジェクトのディレクトリ構成は以下のようになっています。
 
 ```
 .
@@ -23,9 +26,12 @@ hexoによるプロジェクトのディレクトリ構成は以下のように�
 |   └── _posts
 └── themes
 ```
+
 ### 静的コンテンツのディレクトリ構成
-ジェネレートされたファイルは、publicというディレクトリに展開されます。
+
+ジェネレートされたファイルは、public というディレクトリに展開されます。
 public/は、以下のようなディレクトリ構成となっております。
+
 ```
 .
 ├── 2017
@@ -53,18 +59,18 @@ public/は、以下のようなディレクトリ構成となっております�
 ├── index.html
 └── js
     └── script.js
-
 ```
- 
-これをwebサーバに配置すれば、ブログが配信できます。
 
-### hexo-deployer-gitによるデプロイ
+これを web サーバに配置すれば、ブログが配信できます。
 
-静的コンテンツを任意のgithubプロジェクトのorigin/masterにデプロイする。ということが可能です。
+### hexo-deployer-git によるデプロイ
 
-hexoプロジェクトの、\_config.ymlにて、設定を行います。
+静的コンテンツを任意の github プロジェクトの origin/master にデプロイする。ということが可能です。
+
+hexo プロジェクトの、\_config.yml にて、設定を行います。
 
 設定項目は以下です。
+
 ```
 deploy:
   type: git
@@ -73,10 +79,9 @@ deploy:
   message: [message]
 ```
 
-設定後は、`hexo deploy`時に.deploy\_gitというディレクトリが生成され、それがpushされます。
-.deploy\_githexoはpublicディレクトリと同様の内容のため、gitに静的コンテンツがデプロイされます。
+設定後は、`hexo deploy`時に.deploy_git というディレクトリが生成され、それが push されます。
+.deploy_githexo は public ディレクトリと同様の内容のため、git に静的コンテンツがデプロイされます。
 
 ### まとめ
-今回は、hexo-deployer-gitについて紹介しました。
-これをgithub hookなどと併用することで、ローカルから静的コンテンツをwebサーバにデプロイすることなどができます。
-それについても、次回以降の記事で書きます。
+
+今回は、hexo-deployer-git について紹介しました。これを github hook などと併用することで、ローカルから静的コンテンツを web サーバにデプロイすることなどができます。それについても、次回以降の記事で書きます。

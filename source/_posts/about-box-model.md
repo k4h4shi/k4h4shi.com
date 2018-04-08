@@ -22,5 +22,5 @@ box model は以下の構成要素を持ちます。
 * height: content の高さ
 * width: content の幅
 * border: content が入った box の外枠
-* padding: content と border の間のスペース
-* margin: box の外側のスペース 
+* padding: content と border の間のスペース
+* margin: box の外側のスペース
