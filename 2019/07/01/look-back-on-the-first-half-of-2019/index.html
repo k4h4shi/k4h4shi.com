@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang=ja>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="はじめにHandii でフロントエンドエンジニアをやってます、kotaro です。 半年間は色々なことがあった為、節目として振り返りを行います。 なお、前回の振り返りは、業務経験 3 年目のプログラマが今年を振り返るにまとめてあります。 振り返りすぎてほぼドリルですが、よろしくお願いします。 2019 年上半期について今年の 1 月に株式会社 Handiiに転職し、デザイナーやバックエンドのエンジ">
+<meta name="keywords" content="lookback">
+<meta property="og:type" content="article">
+<meta property="og:title" content="スタートアップのフロントエンドエンジニアが2019年の上半期を振り返る">
+<meta property="og:url" content="http://k4h4shi.com/2019/07/01/look-back-on-the-first-half-of-2019/index.html">
+<meta property="og:site_name" content="k4h4shi.com">
+<meta property="og:description" content="はじめにHandii でフロントエンドエンジニアをやってます、kotaro です。 半年間は色々なことがあった為、節目として振り返りを行います。 なお、前回の振り返りは、業務経験 3 年目のプログラマが今年を振り返るにまとめてあります。 振り返りすぎてほぼドリルですが、よろしくお願いします。 2019 年上半期について今年の 1 月に株式会社 Handiiに転職し、デザイナーやバックエンドのエンジ">
+<meta property="og:locale" content="ja">
+<meta property="og:updated_time" content="2019-06-30T15:43:30.975Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="スタートアップのフロントエンドエンジニアが2019年の上半期を振り返る">
+<meta name="twitter:description" content="はじめにHandii でフロントエンドエンジニアをやってます、kotaro です。 半年間は色々なことがあった為、節目として振り返りを行います。 なお、前回の振り返りは、業務経験 3 年目のプログラマが今年を振り返るにまとめてあります。 振り返りすぎてほぼドリルですが、よろしくお願いします。 2019 年上半期について今年の 1 月に株式会社 Handiiに転職し、デザイナーやバックエンドのエンジ">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=16">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=192" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=180">
+          
+        
+    
+    <!-- title -->
+    <title>スタートアップのフロントエンドエンジニアが2019年の上半期を振り返る</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2019/01/04/look-back-on-the-third-year-as-a-programmer/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2019/07/01/look-back-on-the-first-half-of-2019/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2019/07/01/look-back-on-the-first-half-of-2019/&text=スタートアップのフロントエンドエンジニアが2019年の上半期を振り返る"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2019/07/01/look-back-on-the-first-half-of-2019/&title=スタートアップのフロントエンドエンジニアが2019年の上半期を振り返る"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2019/07/01/look-back-on-the-first-half-of-2019/&is_video=false&description=スタートアップのフロントエンドエンジニアが2019年の上半期を振り返る"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=スタートアップのフロントエンドエンジニアが2019年の上半期を振り返る&body=Check out this article: http://k4h4shi.com/2019/07/01/look-back-on-the-first-half-of-2019/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2019/07/01/look-back-on-the-first-half-of-2019/&title=スタートアップのフロントエンドエンジニアが2019年の上半期を振り返る"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2019/07/01/look-back-on-the-first-half-of-2019/&title=スタートアップのフロントエンドエンジニアが2019年の上半期を振り返る"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2019/07/01/look-back-on-the-first-half-of-2019/&title=スタートアップのフロントエンドエンジニアが2019年の上半期を振り返る"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2019/07/01/look-back-on-the-first-half-of-2019/&title=スタートアップのフロントエンドエンジニアが2019年の上半期を振り返る"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2019/07/01/look-back-on-the-first-half-of-2019/&name=スタートアップのフロントエンドエンジニアが2019年の上半期を振り返る&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#はじめに"><span class="toc-number">1.</span> <span class="toc-text">はじめに</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2019-年上半期について"><span class="toc-number">2.</span> <span class="toc-text">2019 年上半期について</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Handii-について"><span class="toc-number">2.1.</span> <span class="toc-text">Handii について</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#職場環境・制度などについて"><span class="toc-number">2.1.1.</span> <span class="toc-text">職場環境・制度などについて</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#開発チームについて"><span class="toc-number">2.1.2.</span> <span class="toc-text">開発チームについて</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ここまでの目標の達成具合について"><span class="toc-number">2.2.</span> <span class="toc-text">ここまでの目標の達成具合について</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ワーク"><span class="toc-number">2.2.1.</span> <span class="toc-text">ワーク</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ライフ"><span class="toc-number">2.2.2.</span> <span class="toc-text">ライフ</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#キャッチアップする技術"><span class="toc-number">2.2.3.</span> <span class="toc-text">キャッチアップする技術</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2019-年下半期について"><span class="toc-number">3.</span> <span class="toc-text">2019 年下半期について</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#目標"><span class="toc-number">3.1.</span> <span class="toc-text">目標</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ワーク-1"><span class="toc-number">3.1.1.</span> <span class="toc-text">ワーク</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ライフ-1"><span class="toc-number">3.1.2.</span> <span class="toc-text">ライフ</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#キャッチアップする技術-1"><span class="toc-number">3.1.3.</span> <span class="toc-text">キャッチアップする技術</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最後に"><span class="toc-number">4.</span> <span class="toc-text">最後に</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#外部リンク"><span class="toc-number">5.</span> <span class="toc-text">外部リンク</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#参考リンク"><span class="toc-number">5.1.</span> <span class="toc-text">参考リンク</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PR-関連記事リンク"><span class="toc-number">5.2.</span> <span class="toc-text">PR 関連記事リンク</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        スタートアップのフロントエンドエンジニアが2019年の上半期を振り返る
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">k4h4shi.com</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-06-30T15:28:10.000Z" itemprop="datePublished">2019-07-01</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/lookback/">lookback</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="はじめに"><a href="#はじめに" class="headerlink" title="はじめに"></a>はじめに</h2><p>Handii でフロントエンドエンジニアをやってます、kotaro です。</p>
+<p>半年間は色々なことがあった為、節目として振り返りを行います。</p>
+<p>なお、前回の振り返りは、<a href="https://k4h4shi.com/2019/01/04/look-back-on-the-third-year-as-a-programmer/">業務経験 3 年目のプログラマが今年を振り返る</a>にまとめてあります。</p>
+<p>振り返りすぎてほぼドリルですが、よろしくお願いします。</p>
+<h2 id="2019-年上半期について"><a href="#2019-年上半期について" class="headerlink" title="2019 年上半期について"></a>2019 年上半期について</h2><p>今年の 1 月に<a href="https://www.handii.co.jp/" target="_blank" rel="external">株式会社 Handii</a>に転職し、デザイナーやバックエンドのエンジニアと協働し、主に UI の開発を担当していました。</p>
+<p>それと並行して、以下のようなタスクをこなしていました。</p>
+<ul>
+<li>チームでの要件定義</li>
+<li>デザイナと協力しての UI の設計</li>
+<li>マーケターと協力してストーリーの設計</li>
+</ul>
+<p>上半期はとにかく周囲と協働することが重要だった為、コミュニケーションにおける自分の課題を再認識しました。</p>
+<p>具体的には、以下が課題だったと思います。</p>
+<ul>
+<li>何度か周囲と衝突を起こしていた</li>
+<li>自分が開発してるものだけにこだわってしまい、それ以外をおろそかにしてしまった</li>
+<li>イニチアシブを発揮すべき場面にそれをしなかった</li>
+</ul>
+<h3 id="Handii-について"><a href="#Handii-について" class="headerlink" title="Handii について"></a>Handii について</h3><p>先日、弊社は<a href="https://prtimes.jp/main/html/rd/p/000000005.000030365.html" target="_blank" rel="external">プレスリリース</a>を行い、今秋に法人向けウォレットサービスである paild をリリースする事を発表し、現在僕を含む開発陣は鋭意開発を行っています。</p>
+<p>以下は、そんな Handii で僕が半年間働いてみて感じた事です。</p>
+<h4 id="職場環境・制度などについて"><a href="#職場環境・制度などについて" class="headerlink" title="職場環境・制度などについて"></a>職場環境・制度などについて</h4><p>以下の理由で、ストレスを溜めずに働けてます。</p>
+<ul>
+<li>都内で一人暮らしをするのに十分な賃金が貰えている</li>
+<li>フルフレックスを採用しており、生活と仕事を両立しやすい</li>
+<li>悪天や体調などによりリモートワーク可能</li>
+<li>組織として上下の関係が強くなく、思った事はなんでも言ってもいいという安心感がある</li>
+</ul>
+<p>正直に言ってこの環境を維持する事が、僕の働くモチベーションになってるくらい、いい環境だと思います。</p>
+<h4 id="開発チームについて"><a href="#開発チームについて" class="headerlink" title="開発チームについて"></a>開発チームについて</h4><p>開発チームの雰囲気は、比較的常に冗談を飛ばしあっていて、定時後に誰からともなく型や数学、アルゴリズムなどについて講義が始まる面白い人たちの集まりです。</p>
+<p>フロントエンドの技術スタックは、TypeScript + React を採用しており、UI の状態管理は redux を、非同期処理は redux-saga を導入しています。</p>
+<p>個人的に React とその関連技術は、堅実なユーザー体験と開発体験を両立しやすい為、開発が楽しいです。</p>
+<h3 id="ここまでの目標の達成具合について"><a href="#ここまでの目標の達成具合について" class="headerlink" title="ここまでの目標の達成具合について"></a>ここまでの目標の達成具合について</h3><p>2019 年の目標は、「ワークとライフのバランスを取りつつ、充実させたい。」でしたが、問題なく達成出来ています。</p>
+<p>一人暮らしを始めており、帰宅後は趣味のコーディングをして、休日には彼女と出かけたり、普通に充実しています。</p>
+<p>以下は具体的な達成状況です。</p>
+<h4 id="ワーク"><a href="#ワーク" class="headerlink" title="ワーク"></a>ワーク</h4><p>個人的に知る限り、Handii の開発チームはさいつよの開発チームだと思います。</p>
+<ul>
+<li style="list-style: none"><input type="checkbox" checked> さいつよの開発チームの中で働く</li>
+</ul>
+<h4 id="ライフ"><a href="#ライフ" class="headerlink" title="ライフ"></a>ライフ</h4><p>まず一人暮らしの開始と、確定申告、それに関連するタスクと、すごい H 本の読破が出来たので、概ね達成出来たと思います。</p>
+<ul>
+<li style="list-style: none"><input type="checkbox" checked> 家計簿つける</li>
+<li style="list-style: none"><input type="checkbox" checked> 都心に引っ越しする</li>
+<li style="list-style: none"><input type="checkbox" checked> Haskell の勉強する</li>
+<li style="list-style: none"><input type="checkbox" checked> 税理士に相談する</li>
+<li style="list-style: none"><input type="checkbox" checked> 確定申告する</li>
+</ul>
+<h4 id="キャッチアップする技術"><a href="#キャッチアップする技術" class="headerlink" title="キャッチアップする技術"></a>キャッチアップする技術</h4><p>上半期には、react-native と hooks, firebase を使って簡単なアプリを作りました。<br>また、elm 本とチュートリアルを途中までこなしました。</p>
+<ul>
+<li style="list-style: none"><input type="checkbox" checked> React Hooks</li>
+<li style="list-style: none"><input type="checkbox" checked> Elm</li>
+</ul>
+<h2 id="2019-年下半期について"><a href="#2019-年下半期について" class="headerlink" title="2019 年下半期について"></a>2019 年下半期について</h2><h3 id="目標"><a href="#目標" class="headerlink" title="目標"></a>目標</h3><p>上半期に得た反省を活かして、下半期の目標を言葉にしました。<br>また、具体目標を一部修正しました。</p>
+<p><em>理想的で完璧な状態のものを作り上げてみせる事ではなく、限られた時間の中でベストを尽くし、マイルストーンを通過していく事に注力する。その為に周囲と協働し、必要であれば積極的にリードしていく。</em></p>
+<h4 id="ワーク-1"><a href="#ワーク-1" class="headerlink" title="ワーク"></a>ワーク</h4><p>まず絶対リリースです。<br>そののちに、その開発から得た知見を持って、対外的に活動する予定です。</p>
+<ul>
+<li style="list-style: none"><input type="checkbox"> 自社サービスの 0 から 1 の開発</li>
+<li style="list-style: none"><input type="checkbox"> 対外的なコミュニティ活動を行う</li>
+</ul>
+<h4 id="ライフ-1"><a href="#ライフ-1" class="headerlink" title="ライフ"></a>ライフ</h4><p>リゾートへ旅行に行きたくて、とりあえず夏にバリにいく予定立てました。<br>あと、そろそろアラサーになったのでジムに通い始めて、専用口座作って貯金したいです。</p>
+<ul>
+<li style="list-style: none"><input type="checkbox"> バリに旅行にいく</li>
+<li style="list-style: none"><input type="checkbox"> ジムにいく</li>
+<li style="list-style: none"><input type="checkbox"> 定期預金を始める</li>
+</ul>
+<h4 id="キャッチアップする技術-1"><a href="#キャッチアップする技術-1" class="headerlink" title="キャッチアップする技術"></a>キャッチアップする技術</h4><p>hooks に関しては、react から生えてるものに関してはある程度キャッチアップ 出来たので、react-redux, react-router など周辺のライブラリ についてキャッチアップをします。<br>elm に関してはチュートリアルを最後までこなします。<br>web components と wasm に関しては、職場の人がちょっと詳しいはずなのでまず聞いてみようと思います。</p>
+<ul>
+<li style="list-style: none"><input type="checkbox"> hooks</li>
+<li style="list-style: none"><input type="checkbox"> Elm</li>
+<li style="list-style: none"><input type="checkbox"> web components</li>
+<li style="list-style: none"><input type="checkbox"> wasm</li>
+</ul>
+<h2 id="最後に"><a href="#最後に" class="headerlink" title="最後に"></a>最後に</h2><p>とにかく生きるのがめっちゃ楽しいです。<br>これから 2, 3 年は勝負の年なので、あとで後悔する事の無いよう、慢心する事なく頑張ります。</p>
+<h2 id="外部リンク"><a href="#外部リンク" class="headerlink" title="外部リンク"></a>外部リンク</h2><h3 id="参考リンク"><a href="#参考リンク" class="headerlink" title="参考リンク"></a>参考リンク</h3><ul>
+<li><a href="https://www.youtube.com/watch?v=_odL-IeWTEI" target="_blank" rel="external">見返りすぎてほぼドリル『びじゅチューン！』</a></li>
+</ul>
+<h3 id="PR-関連記事リンク"><a href="#PR-関連記事リンク" class="headerlink" title="PR 関連記事リンク"></a>PR 関連記事リンク</h3><ul>
+<li><a href="https://www.nikkei.com/article/DGXMZO46565450V20C19A6XY0000/" target="_blank" rel="external">法人電子財布の Handii、VC から 3 億円調達</a></li>
+<li><a href="https://jp.techcrunch.com/2019/06/25/handii-fundraising" target="_blank" rel="external">発行も管理もすべてオンライン完結、法人カードで企業の決済課題を解決する Handii が 3 億円を調達</a></li>
+<li><a href="https://thebridge.jp/2019/06/handii-pre-series-a-round-funding" target="_blank" rel="external">VISA 加盟店で使える法人向けカード「paild（ペイルド）」開発の Handii、ニッセイ・キャピタルと Coral Capital から約 3 億円を調達</a></li>
+<li><a href="https://forbesjapan.com/articles/detail/28051" target="_blank" rel="external">すぐに何枚でも法人カードを発行可能 ── クレカの上限金額に悩むスタートアップを救うサービスが登場</a></li>
+<li><a href="https://ascii.jp/elem/000/001/882/1882487/" target="_blank" rel="external">ウェブですぐ発行できるプリペイド式法人カード「paild」今秋リリース</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#はじめに"><span class="toc-number">1.</span> <span class="toc-text">はじめに</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2019-年上半期について"><span class="toc-number">2.</span> <span class="toc-text">2019 年上半期について</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Handii-について"><span class="toc-number">2.1.</span> <span class="toc-text">Handii について</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#職場環境・制度などについて"><span class="toc-number">2.1.1.</span> <span class="toc-text">職場環境・制度などについて</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#開発チームについて"><span class="toc-number">2.1.2.</span> <span class="toc-text">開発チームについて</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ここまでの目標の達成具合について"><span class="toc-number">2.2.</span> <span class="toc-text">ここまでの目標の達成具合について</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ワーク"><span class="toc-number">2.2.1.</span> <span class="toc-text">ワーク</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ライフ"><span class="toc-number">2.2.2.</span> <span class="toc-text">ライフ</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#キャッチアップする技術"><span class="toc-number">2.2.3.</span> <span class="toc-text">キャッチアップする技術</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2019-年下半期について"><span class="toc-number">3.</span> <span class="toc-text">2019 年下半期について</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#目標"><span class="toc-number">3.1.</span> <span class="toc-text">目標</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ワーク-1"><span class="toc-number">3.1.1.</span> <span class="toc-text">ワーク</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ライフ-1"><span class="toc-number">3.1.2.</span> <span class="toc-text">ライフ</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#キャッチアップする技術-1"><span class="toc-number">3.1.3.</span> <span class="toc-text">キャッチアップする技術</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最後に"><span class="toc-number">4.</span> <span class="toc-text">最後に</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#外部リンク"><span class="toc-number">5.</span> <span class="toc-text">外部リンク</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#参考リンク"><span class="toc-number">5.1.</span> <span class="toc-text">参考リンク</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PR-関連記事リンク"><span class="toc-number">5.2.</span> <span class="toc-text">PR 関連記事リンク</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2019/07/01/look-back-on-the-first-half-of-2019/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2019/07/01/look-back-on-the-first-half-of-2019/&text=スタートアップのフロントエンドエンジニアが2019年の上半期を振り返る"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2019/07/01/look-back-on-the-first-half-of-2019/&title=スタートアップのフロントエンドエンジニアが2019年の上半期を振り返る"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2019/07/01/look-back-on-the-first-half-of-2019/&is_video=false&description=スタートアップのフロントエンドエンジニアが2019年の上半期を振り返る"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=スタートアップのフロントエンドエンジニアが2019年の上半期を振り返る&body=Check out this article: http://k4h4shi.com/2019/07/01/look-back-on-the-first-half-of-2019/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2019/07/01/look-back-on-the-first-half-of-2019/&title=スタートアップのフロントエンドエンジニアが2019年の上半期を振り返る"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2019/07/01/look-back-on-the-first-half-of-2019/&title=スタートアップのフロントエンドエンジニアが2019年の上半期を振り返る"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2019/07/01/look-back-on-the-first-half-of-2019/&title=スタートアップのフロントエンドエンジニアが2019年の上半期を振り返る"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2019/07/01/look-back-on-the-first-half-of-2019/&title=スタートアップのフロントエンドエンジニアが2019年の上半期を振り返る"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2019/07/01/look-back-on-the-first-half-of-2019/&name=スタートアップのフロントエンドエンジニアが2019年の上半期を振り返る&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 kotaro takahashi
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
