@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang=ja>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="アプリケーションの設定ファイルの多くは、.から始まります。dotfilesとは、それをまとめたリポジトリであり、それは自分の設定をいつでもどこでも利用することを意図しています。 makeによるdotfilesの管理のタスク化開発者を煩わしさから解放してくれるという点で、自動化は良いものです。例えばJSではnpmやGulpを使って依存性の管理やタスクを自動化しますJavaでもAntやMaven, G">
+<meta name="keywords" content="dotfiles,shellscript,make,github">
+<meta property="og:type" content="article">
+<meta property="og:title" content="個人の設定ファイルをdotfilesリポジトリで管理する">
+<meta property="og:url" content="http://k4h4shi.com/2017/09/16/manage-your-own-setting-with-dotfiles/index.html">
+<meta property="og:site_name" content="k4h4shi.com">
+<meta property="og:description" content="アプリケーションの設定ファイルの多くは、.から始まります。dotfilesとは、それをまとめたリポジトリであり、それは自分の設定をいつでもどこでも利用することを意図しています。 makeによるdotfilesの管理のタスク化開発者を煩わしさから解放してくれるという点で、自動化は良いものです。例えばJSではnpmやGulpを使って依存性の管理やタスクを自動化しますJavaでもAntやMaven, G">
+<meta property="og:locale" content="ja">
+<meta property="og:updated_time" content="2019-06-30T11:17:25.030Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="個人の設定ファイルをdotfilesリポジトリで管理する">
+<meta name="twitter:description" content="アプリケーションの設定ファイルの多くは、.から始まります。dotfilesとは、それをまとめたリポジトリであり、それは自分の設定をいつでもどこでも利用することを意図しています。 makeによるdotfilesの管理のタスク化開発者を煩わしさから解放してくれるという点で、自動化は良いものです。例えばJSではnpmやGulpを使って依存性の管理やタスクを自動化しますJavaでもAntやMaven, G">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=16">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=192" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=180">
+          
+        
+    
+    <!-- title -->
+    <title>個人の設定ファイルをdotfilesリポジトリで管理する</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/09/17/change_default_editor_of_raspbian/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/09/16/how-to-edit-ssh-config/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/09/16/manage-your-own-setting-with-dotfiles/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/09/16/manage-your-own-setting-with-dotfiles/&text=個人の設定ファイルをdotfilesリポジトリで管理する"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/09/16/manage-your-own-setting-with-dotfiles/&title=個人の設定ファイルをdotfilesリポジトリで管理する"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/09/16/manage-your-own-setting-with-dotfiles/&is_video=false&description=個人の設定ファイルをdotfilesリポジトリで管理する"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=個人の設定ファイルをdotfilesリポジトリで管理する&body=Check out this article: http://k4h4shi.com/2017/09/16/manage-your-own-setting-with-dotfiles/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/09/16/manage-your-own-setting-with-dotfiles/&title=個人の設定ファイルをdotfilesリポジトリで管理する"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/09/16/manage-your-own-setting-with-dotfiles/&title=個人の設定ファイルをdotfilesリポジトリで管理する"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/09/16/manage-your-own-setting-with-dotfiles/&title=個人の設定ファイルをdotfilesリポジトリで管理する"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/09/16/manage-your-own-setting-with-dotfiles/&title=個人の設定ファイルをdotfilesリポジトリで管理する"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/09/16/manage-your-own-setting-with-dotfiles/&name=個人の設定ファイルをdotfilesリポジトリで管理する&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#makeによるdotfilesの管理のタスク化"><span class="toc-number">1.</span> <span class="toc-text">makeによるdotfilesの管理のタスク化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#タスクランナーには何を使うべきか"><span class="toc-number">1.1.</span> <span class="toc-text">タスクランナーには何を使うべきか</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Makefile"><span class="toc-number">1.2.</span> <span class="toc-text">Makefile</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#まとめ"><span class="toc-number">2.</span> <span class="toc-text">まとめ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献"><span class="toc-number">3.</span> <span class="toc-text">参考文献</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        個人の設定ファイルをdotfilesリポジトリで管理する
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">k4h4shi.com</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-09-16T12:25:14.000Z" itemprop="datePublished">2017-09-16</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/dotfiles/">dotfiles</a>, <a class="tag-link" href="/tags/github/">github</a>, <a class="tag-link" href="/tags/make/">make</a>, <a class="tag-link" href="/tags/shellscript/">shellscript</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>アプリケーションの設定ファイルの多くは、.から始まります。<br>dotfilesとは、それをまとめたリポジトリであり、それは自分の設定をいつでもどこでも利用することを意図しています。</p>
+<h2 id="makeによるdotfilesの管理のタスク化"><a href="#makeによるdotfilesの管理のタスク化" class="headerlink" title="makeによるdotfilesの管理のタスク化"></a>makeによるdotfilesの管理のタスク化</h2><p>開発者を煩わしさから解放してくれるという点で、自動化は良いものです。<br>例えばJSではnpmやGulpを使って依存性の管理やタスクを自動化します<br>JavaでもAntやMaven, Gradleなどが同様の役割を果たします。</p>
+<p>dotfilesにおいても、タスクの自動化が行えると楽です。<br>タスクというのは例えば、新たな環境に対しての設定の反映がワンラインで行うといったものです。</p>
+<h3 id="タスクランナーには何を使うべきか"><a href="#タスクランナーには何を使うべきか" class="headerlink" title="タスクランナーには何を使うべきか"></a>タスクランナーには何を使うべきか</h3><p>dotfilesが実行される環境は多岐にわたります。<br>そのため、極力OSやツールに依存しない方法が求められます。<br>MakeはC言語などのコンパイルの自動化などに用いられてきましたが、特定の言語に依存しないタスクランナーです。<br>ほとんどのUNIXライクのシステムで動作します。枯れた技術のため、安定しています。</p>
+<p>これによって、設定ファイルのみの反映や、アプリケーションのインストールを含めた完全な初期化までのそれぞれをタスク化します。</p>
+<h3 id="Makefile"><a href="#Makefile" class="headerlink" title="Makefile"></a>Makefile</h3><p>MakeのタスクはMakefileで定義を行います。</p>
+<p>その構文はシンプルで直感的です。</p>
+<p>以下は僕がdotfilesリポジトリに配置しているMakefileです。</p>
+<p>ほんの少しのアレンジを加えていますが、そのほとんどは<a href="https://github.com/b4b4r07/dotfiles/blob/master/Makefile" target="_blank" rel="external">b4b4r07さんのdotfilesのMakefile</a>を参考にしています。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">DOTPATH    := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))</div><div class="line">CANDIDATES := $(wildcard .??*) bin</div><div class="line">EXCLUSIONS := .DS_Store .git .gitmodules</div><div class="line">DOTFILES   := $(filter-out $(EXCLUSIONS), $(CANDIDATES))</div><div class="line"></div><div class="line">.DEFAULT_GOAL := help</div><div class="line"></div><div class="line">all:</div><div class="line">	</div><div class="line">help:</div><div class="line">	@echo &quot;init    =&gt; Initialize enviroment settings.&quot;</div><div class="line">	@echo &quot;deploy  =&gt; Create symlinks to home directory.&quot;</div><div class="line">	@echo &quot;update  =&gt; Fetch all changes from remote repo.&quot;</div><div class="line">	@echo &quot;install =&gt; Run update, deploy, init&quot;</div><div class="line">	@echo &quot;clean   =&gt; remove the dotfiles&quot;</div><div class="line">	@echo &quot;destroy =&gt; remove the dotfiles and this repo&quot;</div><div class="line"></div><div class="line">init:</div><div class="line">	@DOTPAH=$(DOTPATH) bash $(DOTPATH)/etc/init/init.sh</div><div class="line"></div><div class="line">deploy:</div><div class="line">	@echo &apos;==&gt; Start to deploy dotfiles to home directory.&apos;</div><div class="line">	@echo &apos;&apos;</div><div class="line">	@$(foreach val, $(DOTFILES), ln -sfnv $(abspath $(val)) $(HOME)/$(val);)</div><div class="line"></div><div class="line">update:</div><div class="line">	git pull origin master</div><div class="line">	git submodule init</div><div class="line">	git submodule update</div><div class="line">	git submodule foreach git pull origin master</div><div class="line"></div><div class="line">install: update deploy init</div><div class="line"></div><div class="line">clean:</div><div class="line">	@echo &apos;Remove dot files from your home directory.&apos;</div><div class="line">	@-$(foreach val, $(DOTFILES), rm -vrf $(HOME)/$(val);)</div><div class="line"></div><div class="line">destroy: clean</div><div class="line">	@echo &apos;Romove this repository.&apos;</div><div class="line">	-rm -rf $(DOTPATH)</div></pre></td></tr></table></figure>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p><a href="https://github.com/b4b4r07" target="_blank" rel="external">b4b4r07</a>さんが<a href="http://qiita.com/b4b4r07/items/b70178e021bef12cd4a2" target="_blank" rel="external">dotfiles</a>の運用やその仕組みについて、とても良い資料を残しています。<br>最初は彼のdotfilesをインストールしたこともありますが、全く使いこなせなかったため自分自身のdotfilesを用意しました。<br>僕のdotfilesはほとんどの点において彼の模倣ですが、まずは自分自身で理解出来る範囲のみを模倣しています。</p>
+<p><a href="https://github.com/b4b4r07/dotfiles" target="_blank" rel="external">b4b4r07さんのdotfiles</a>を見てみると、もっと多くを学べるかもしれません。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a href="http://qiita.com/b4b4r07/items/b70178e021bef12cd4a2" target="_blank" rel="external">最強の dotfiles 駆動開発と GitHub で管理する運用方法</a></li>
+<li><a href="http://www.ie.u-ryukyu.ac.jp/~e085739/c.makefile.tuts.html" target="_blank" rel="external">Makefile の書き方</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#makeによるdotfilesの管理のタスク化"><span class="toc-number">1.</span> <span class="toc-text">makeによるdotfilesの管理のタスク化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#タスクランナーには何を使うべきか"><span class="toc-number">1.1.</span> <span class="toc-text">タスクランナーには何を使うべきか</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Makefile"><span class="toc-number">1.2.</span> <span class="toc-text">Makefile</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#まとめ"><span class="toc-number">2.</span> <span class="toc-text">まとめ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献"><span class="toc-number">3.</span> <span class="toc-text">参考文献</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/09/16/manage-your-own-setting-with-dotfiles/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/09/16/manage-your-own-setting-with-dotfiles/&text=個人の設定ファイルをdotfilesリポジトリで管理する"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/09/16/manage-your-own-setting-with-dotfiles/&title=個人の設定ファイルをdotfilesリポジトリで管理する"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/09/16/manage-your-own-setting-with-dotfiles/&is_video=false&description=個人の設定ファイルをdotfilesリポジトリで管理する"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=個人の設定ファイルをdotfilesリポジトリで管理する&body=Check out this article: http://k4h4shi.com/2017/09/16/manage-your-own-setting-with-dotfiles/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/09/16/manage-your-own-setting-with-dotfiles/&title=個人の設定ファイルをdotfilesリポジトリで管理する"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/09/16/manage-your-own-setting-with-dotfiles/&title=個人の設定ファイルをdotfilesリポジトリで管理する"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/09/16/manage-your-own-setting-with-dotfiles/&title=個人の設定ファイルをdotfilesリポジトリで管理する"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/09/16/manage-your-own-setting-with-dotfiles/&title=個人の設定ファイルをdotfilesリポジトリで管理する"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/09/16/manage-your-own-setting-with-dotfiles/&name=個人の設定ファイルをdotfilesリポジトリで管理する&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 kotaro takahashi
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang=ja>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="今更ながら、レスポンシブデザインを行うために必要なことをまとめる。 レスポンシブデザインを行うためにレスポンシブデザインを行うためには、大きく分けて以下の 3 点で準備をする必要がある。  viewport: Web ページの表示領域を設定する ブレイクポイント: 表示が切り替わる地点 メディアクエリ: 画面の大きさによる CSS の切り替え  Viewportviewport は表示領域を設定す">
+<meta name="keywords" content="front-end,html,css,design,responsive-design">
+<meta property="og:type" content="article">
+<meta property="og:title" content="レスポンシブデザインのための準備">
+<meta property="og:url" content="http://k4h4shi.com/2017/12/29/responsive-deign/index.html">
+<meta property="og:site_name" content="k4h4shi.com">
+<meta property="og:description" content="今更ながら、レスポンシブデザインを行うために必要なことをまとめる。 レスポンシブデザインを行うためにレスポンシブデザインを行うためには、大きく分けて以下の 3 点で準備をする必要がある。  viewport: Web ページの表示領域を設定する ブレイクポイント: 表示が切り替わる地点 メディアクエリ: 画面の大きさによる CSS の切り替え  Viewportviewport は表示領域を設定す">
+<meta property="og:locale" content="ja">
+<meta property="og:updated_time" content="2019-06-30T11:17:25.032Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="レスポンシブデザインのための準備">
+<meta name="twitter:description" content="今更ながら、レスポンシブデザインを行うために必要なことをまとめる。 レスポンシブデザインを行うためにレスポンシブデザインを行うためには、大きく分けて以下の 3 点で準備をする必要がある。  viewport: Web ページの表示領域を設定する ブレイクポイント: 表示が切り替わる地点 メディアクエリ: 画面の大きさによる CSS の切り替え  Viewportviewport は表示領域を設定す">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=16">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=192" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=180">
+          
+        
+    
+    <!-- title -->
+    <title>レスポンシブデザインのための準備</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/12/31/look-back-on-the-second-year-as-a-programmer/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/12/29/how-to-use-object-assign/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/12/29/responsive-deign/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/12/29/responsive-deign/&text=レスポンシブデザインのための準備"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/12/29/responsive-deign/&title=レスポンシブデザインのための準備"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/12/29/responsive-deign/&is_video=false&description=レスポンシブデザインのための準備"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=レスポンシブデザインのための準備&body=Check out this article: http://k4h4shi.com/2017/12/29/responsive-deign/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/12/29/responsive-deign/&title=レスポンシブデザインのための準備"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/12/29/responsive-deign/&title=レスポンシブデザインのための準備"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/12/29/responsive-deign/&title=レスポンシブデザインのための準備"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/12/29/responsive-deign/&title=レスポンシブデザインのための準備"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/12/29/responsive-deign/&name=レスポンシブデザインのための準備&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#レスポンシブデザインを行うために"><span class="toc-number">1.</span> <span class="toc-text">レスポンシブデザインを行うために</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Viewport"><span class="toc-number">1.1.</span> <span class="toc-text">Viewport</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ブレイクポイント"><span class="toc-number">1.2.</span> <span class="toc-text">ブレイクポイント</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#メディアクエリ"><span class="toc-number">1.3.</span> <span class="toc-text">メディアクエリ</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#link-要素への記述例"><span class="toc-number">1.3.1.</span> <span class="toc-text">link 要素への記述例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#css-への記述例"><span class="toc-number">1.3.2.</span> <span class="toc-text">css への記述例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#レスポンシブデザイン"><span class="toc-number">2.</span> <span class="toc-text">レスポンシブデザイン</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#レスポンシブデザインでのサイズ指定"><span class="toc-number">2.1.</span> <span class="toc-text">レスポンシブデザインでのサイズ指定</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#まとめ"><span class="toc-number">3.</span> <span class="toc-text">まとめ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考資料"><span class="toc-number">4.</span> <span class="toc-text">参考資料</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        レスポンシブデザインのための準備
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">k4h4shi.com</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-12-29T13:07:12.000Z" itemprop="datePublished">2017-12-29</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/css/">css</a>, <a class="tag-link" href="/tags/design/">design</a>, <a class="tag-link" href="/tags/front-end/">front-end</a>, <a class="tag-link" href="/tags/html/">html</a>, <a class="tag-link" href="/tags/responsive-design/">responsive-design</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>今更ながら、レスポンシブデザインを行うために必要なことをまとめる。</p>
+<h2 id="レスポンシブデザインを行うために"><a href="#レスポンシブデザインを行うために" class="headerlink" title="レスポンシブデザインを行うために"></a>レスポンシブデザインを行うために</h2><p>レスポンシブデザインを行うためには、大きく分けて以下の 3 点で準備をする必要がある。</p>
+<ul>
+<li>viewport: Web ページの表示領域を設定する</li>
+<li>ブレイクポイント: 表示が切り替わる地点</li>
+<li>メディアクエリ: 画面の大きさによる CSS の切り替え</li>
+</ul>
+<h3 id="Viewport"><a href="#Viewport" class="headerlink" title="Viewport"></a>Viewport</h3><p>viewport は表示領域を設定するために必要な記述。</p>
+<p>HTML の head 要素内に meta 要素を利用して記述する。</p>
+<p>viewport を使うことで、は仮想的な表示領域を指定することができる。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=360"</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>上記の場合は、幅が 360 の仮想的な表示領域が作られ、これが viewport と呼ばれる。</p>
+<p>ブラウザなどは、この表示領域に合わせて描画を行う。</p>
+<p>以下は、レスポンシブデザインを行う際の viewport の設定例。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1"</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>width を device-width としていることで、デバイスの横幅と同じ幅を持つ viewport を作成している。</p>
+<p>initial-scale はデフォルトのズーム倍率のため、1 としておけば拡大も縮小もしていないことになる。</p>
+<ul>
+<li>width: viewport の幅</li>
+<li>initial-scale: 初期のズーム倍率の値</li>
+</ul>
+<h3 id="ブレイクポイント"><a href="#ブレイクポイント" class="headerlink" title="ブレイクポイント"></a>ブレイクポイント</h3><p>レスポンシブデザインでは、基本的に画面の横幅を基準に CSS を切り替える。</p>
+<p>例えば、横幅が 1000px 以下の端末ではこの CSS を使用すると言ったような感じ。</p>
+<p>そして、この切り替え地点(例で言うなら 1000px)がブレイクポイントと呼ばれる。</p>
+<p>ブレイクポイントの設定値 は、様々な要因を考慮して設定する必要がある 。</p>
+<p>そのため、絶対にこの値にすべきと言ったような値はない</p>
+<h3 id="メディアクエリ"><a href="#メディアクエリ" class="headerlink" title="メディアクエリ"></a>メディアクエリ</h3><p>ブレイクポイントを決めたら、それを CSS に反映させるための記述を 行う。</p>
+<p>このブレイクポイントの指定には、メディアクエリを用いる。</p>
+<p>メディアクエリは link に指定する方法と、CSS ファイルに直接記述する方法がある。</p>
+<p>ブレイクポイントごとに別々の CSS ファイルを読み込ませる場合は link 要素に記述する。</p>
+<h4 id="link-要素への記述例"><a href="#link-要素への記述例" class="headerlink" title="link 要素への記述例"></a>link 要素への記述例</h4><p>以下は、画面の幅が 600px 以下の場合、smartphone.css が適用されるという記述。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"css/smartphone.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">media</span>=<span class="string">"screen and (max-width: 600px"</span>&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="css-への記述例"><a href="#css-への記述例" class="headerlink" title="css への記述例"></a>css への記述例</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@<span class="keyword">media</span> screen and (max-width: <span class="number">600px</span>) &#123;</div><div class="line">  <span class="comment">/* 画面の幅が 600px 以下の場合のスタイルを記述する */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="レスポンシブデザイン"><a href="#レスポンシブデザイン" class="headerlink" title="レスポンシブデザイン"></a>レスポンシブデザイン</h2><h3 id="レスポンシブデザインでのサイズ指定"><a href="#レスポンシブデザインでのサイズ指定" class="headerlink" title="レスポンシブデザインでのサイズ指定"></a>レスポンシブデザインでのサイズ指定</h3><p>レスポンシブデザインでのサイズ指定には、viewport に応じて変化する<code>vw</code>を使うと便利です。</p>
+<p><code>vw</code>は、viewport width の略で、viewport の幅に対する割合を表します。</p>
+<p>viewport の横幅は常に<code>100vw</code>で表されます。</p>
+<p>例えば、ブラウザの幅が <code>1000px</code>の時、<code>1vw</code>は <code>10px</code>になります。</p>
+<p>%指定との違いは、%指定は親要素に対する割合ですが、vw はブラウザの幅に対する割合だということです。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>viewport と、ブレークポイント、メディアクエリを設定することで、表示するデバイスによってスタイルを切り替えることができる。</p>
+<p>これによって、レスポンシブデザイン を行うための最低限の準備が整ったことになる。</p>
+<h2 id="参考資料"><a href="#参考資料" class="headerlink" title="参考資料"></a>参考資料</h2><ul>
+<li><a href="https://qiita.com/ryounagaoka/items/045b2808a5ed43f96607" target="_blank" rel="external">もう逃げない。HTML の viewport をちゃんと理解する</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#レスポンシブデザインを行うために"><span class="toc-number">1.</span> <span class="toc-text">レスポンシブデザインを行うために</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Viewport"><span class="toc-number">1.1.</span> <span class="toc-text">Viewport</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ブレイクポイント"><span class="toc-number">1.2.</span> <span class="toc-text">ブレイクポイント</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#メディアクエリ"><span class="toc-number">1.3.</span> <span class="toc-text">メディアクエリ</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#link-要素への記述例"><span class="toc-number">1.3.1.</span> <span class="toc-text">link 要素への記述例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#css-への記述例"><span class="toc-number">1.3.2.</span> <span class="toc-text">css への記述例</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#レスポンシブデザイン"><span class="toc-number">2.</span> <span class="toc-text">レスポンシブデザイン</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#レスポンシブデザインでのサイズ指定"><span class="toc-number">2.1.</span> <span class="toc-text">レスポンシブデザインでのサイズ指定</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#まとめ"><span class="toc-number">3.</span> <span class="toc-text">まとめ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考資料"><span class="toc-number">4.</span> <span class="toc-text">参考資料</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/12/29/responsive-deign/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/12/29/responsive-deign/&text=レスポンシブデザインのための準備"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/12/29/responsive-deign/&title=レスポンシブデザインのための準備"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/12/29/responsive-deign/&is_video=false&description=レスポンシブデザインのための準備"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=レスポンシブデザインのための準備&body=Check out this article: http://k4h4shi.com/2017/12/29/responsive-deign/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/12/29/responsive-deign/&title=レスポンシブデザインのための準備"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/12/29/responsive-deign/&title=レスポンシブデザインのための準備"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/12/29/responsive-deign/&title=レスポンシブデザインのための準備"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/12/29/responsive-deign/&title=レスポンシブデザインのための準備"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/12/29/responsive-deign/&name=レスポンシブデザインのための準備&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 kotaro takahashi
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

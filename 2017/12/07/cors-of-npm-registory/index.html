@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang=ja>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="npmレジストリのCORS対応について現在個人的にnpmレジストリから情報を取得し、それを加工して表示するWebアプリを作成している。その際に、npmレジストリはCORSに対応しておらず、自身のサーバから配信したページによるクライアントからのリクエストができないという問題があった。その際はunpkg.comを代替として利用したけれど、その際調べたことを備忘録として残す。 npmレジストリのCORS">
+<meta name="keywords" content="npm,CORS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="npmレジストリのCORS対応について">
+<meta property="og:url" content="http://k4h4shi.com/2017/12/07/cors-of-npm-registory/index.html">
+<meta property="og:site_name" content="k4h4shi.com">
+<meta property="og:description" content="npmレジストリのCORS対応について現在個人的にnpmレジストリから情報を取得し、それを加工して表示するWebアプリを作成している。その際に、npmレジストリはCORSに対応しておらず、自身のサーバから配信したページによるクライアントからのリクエストができないという問題があった。その際はunpkg.comを代替として利用したけれど、その際調べたことを備忘録として残す。 npmレジストリのCORS">
+<meta property="og:locale" content="ja">
+<meta property="og:updated_time" content="2019-06-30T11:17:25.023Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="npmレジストリのCORS対応について">
+<meta name="twitter:description" content="npmレジストリのCORS対応について現在個人的にnpmレジストリから情報を取得し、それを加工して表示するWebアプリを作成している。その際に、npmレジストリはCORSに対応しておらず、自身のサーバから配信したページによるクライアントからのリクエストができないという問題があった。その際はunpkg.comを代替として利用したけれど、その際調べたことを備忘録として残す。 npmレジストリのCORS">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=16">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=192" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=180">
+          
+        
+    
+    <!-- title -->
+    <title>npmレジストリのCORS対応について</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/12/07/released-simple-spa-with-react/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/12/07/what-is-cors/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/12/07/cors-of-npm-registory/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/12/07/cors-of-npm-registory/&text=npmレジストリのCORS対応について"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/12/07/cors-of-npm-registory/&title=npmレジストリのCORS対応について"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/12/07/cors-of-npm-registory/&is_video=false&description=npmレジストリのCORS対応について"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=npmレジストリのCORS対応について&body=Check out this article: http://k4h4shi.com/2017/12/07/cors-of-npm-registory/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/12/07/cors-of-npm-registory/&title=npmレジストリのCORS対応について"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/12/07/cors-of-npm-registory/&title=npmレジストリのCORS対応について"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/12/07/cors-of-npm-registory/&title=npmレジストリのCORS対応について"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/12/07/cors-of-npm-registory/&title=npmレジストリのCORS対応について"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/12/07/cors-of-npm-registory/&name=npmレジストリのCORS対応について&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#npmレジストリのCORS対応について"><span class="toc-number">1.</span> <span class="toc-text">npmレジストリのCORS対応について</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#npmレジストリのCORS対応状況"><span class="toc-number">1.0.1.</span> <span class="toc-text">npmレジストリのCORS対応状況</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#考えられそうな解決策"><span class="toc-number">1.1.</span> <span class="toc-text">考えられそうな解決策</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        npmレジストリのCORS対応について
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">k4h4shi.com</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-12-07T12:08:56.000Z" itemprop="datePublished">2017-12-07</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/CORS/">CORS</a>, <a class="tag-link" href="/tags/npm/">npm</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="npmレジストリのCORS対応について"><a href="#npmレジストリのCORS対応について" class="headerlink" title="npmレジストリのCORS対応について"></a>npmレジストリのCORS対応について</h1><p>現在個人的にnpmレジストリから情報を取得し、それを加工して表示するWebアプリを作成している。<br>その際に、npmレジストリはCORSに対応しておらず、自身のサーバから配信したページによるクライアントからのリクエストができないという問題があった。<br>その際は<a href="http://unpkg.com" target="_blank" rel="external">unpkg.com</a>を代替として利用したけれど、その際調べたことを備忘録として残す。</p>
+<h3 id="npmレジストリのCORS対応状況"><a href="#npmレジストリのCORS対応状況" class="headerlink" title="npmレジストリのCORS対応状況"></a>npmレジストリのCORS対応状況</h3><p><a href="https://github.com/npm/npm-registry-couchapp/issues/108" target="_blank" rel="external">このイシュー</a>を見る限り、<br>一度採用されたことはある様だけど、セキュリティの問題であり取り下げられたみたい。</p>
+<p><a href="https://github.com/npm/registry/issues/110" target="_blank" rel="external">このイシュー</a>を見る限り、<br>HEADやGETなどの読み取りメソッドに関しては、前向きに検討されている様子。<br>ただし、セキュリティの課題が解決されていないために即座に採用はできないっぽい。</p>
+<h2 id="考えられそうな解決策"><a href="#考えられそうな解決策" class="headerlink" title="考えられそうな解決策"></a>考えられそうな解決策</h2><ul>
+<li>npmレジストリへの情報取得処理をサーバ側で行う</li>
+<li>CORSヘッダを付与するProxyサーバを利用する</li>
+<li><a href="http://unpkg.com" target="_blank" rel="external">unpkg.com</a>などのCDNを代替として用いる &lt;- これにした。</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#npmレジストリのCORS対応について"><span class="toc-number">1.</span> <span class="toc-text">npmレジストリのCORS対応について</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#npmレジストリのCORS対応状況"><span class="toc-number">1.0.1.</span> <span class="toc-text">npmレジストリのCORS対応状況</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#考えられそうな解決策"><span class="toc-number">1.1.</span> <span class="toc-text">考えられそうな解決策</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/12/07/cors-of-npm-registory/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/12/07/cors-of-npm-registory/&text=npmレジストリのCORS対応について"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/12/07/cors-of-npm-registory/&title=npmレジストリのCORS対応について"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/12/07/cors-of-npm-registory/&is_video=false&description=npmレジストリのCORS対応について"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=npmレジストリのCORS対応について&body=Check out this article: http://k4h4shi.com/2017/12/07/cors-of-npm-registory/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/12/07/cors-of-npm-registory/&title=npmレジストリのCORS対応について"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/12/07/cors-of-npm-registory/&title=npmレジストリのCORS対応について"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/12/07/cors-of-npm-registory/&title=npmレジストリのCORS対応について"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/12/07/cors-of-npm-registory/&title=npmレジストリのCORS対応について"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/12/07/cors-of-npm-registory/&name=npmレジストリのCORS対応について&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 kotaro takahashi
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

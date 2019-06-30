@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang=ja>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="CORSって何っていう質問にとりあえず答えるための雑なメモ CORSとはCross-Origin Resource Sharingの略。クライアントがページ取得元サーバとは異なるサーバに対し、リクエストを送信する場合にはクロスオリジンHTTPリクエストを行う。  クロスオリジンHTTPリクエストについてクライアントの送信するリクエストには、Originヘッダが含まれる。これにより、サーバはそのリク">
+<meta name="keywords" content="CORS,Web,http">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CORSってなにそれ食べれるの">
+<meta property="og:url" content="http://k4h4shi.com/2017/12/07/what-is-cors/index.html">
+<meta property="og:site_name" content="k4h4shi.com">
+<meta property="og:description" content="CORSって何っていう質問にとりあえず答えるための雑なメモ CORSとはCross-Origin Resource Sharingの略。クライアントがページ取得元サーバとは異なるサーバに対し、リクエストを送信する場合にはクロスオリジンHTTPリクエストを行う。  クロスオリジンHTTPリクエストについてクライアントの送信するリクエストには、Originヘッダが含まれる。これにより、サーバはそのリク">
+<meta property="og:locale" content="ja">
+<meta property="og:image" content="https://cdn.keycdn.com/support/wp-content/uploads/2015/09/cors.png">
+<meta property="og:updated_time" content="2019-06-30T11:17:25.037Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CORSってなにそれ食べれるの">
+<meta name="twitter:description" content="CORSって何っていう質問にとりあえず答えるための雑なメモ CORSとはCross-Origin Resource Sharingの略。クライアントがページ取得元サーバとは異なるサーバに対し、リクエストを送信する場合にはクロスオリジンHTTPリクエストを行う。  クロスオリジンHTTPリクエストについてクライアントの送信するリクエストには、Originヘッダが含まれる。これにより、サーバはそのリク">
+<meta name="twitter:image" content="https://cdn.keycdn.com/support/wp-content/uploads/2015/09/cors.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=16">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=192" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=180">
+          
+        
+    
+    <!-- title -->
+    <title>CORSってなにそれ食べれるの</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/12/07/cors-of-npm-registory/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/11/28/make-material-ui-floatingbutton/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/12/07/what-is-cors/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/12/07/what-is-cors/&text=CORSってなにそれ食べれるの"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/12/07/what-is-cors/&title=CORSってなにそれ食べれるの"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/12/07/what-is-cors/&is_video=false&description=CORSってなにそれ食べれるの"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CORSってなにそれ食べれるの&body=Check out this article: http://k4h4shi.com/2017/12/07/what-is-cors/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/12/07/what-is-cors/&title=CORSってなにそれ食べれるの"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/12/07/what-is-cors/&title=CORSってなにそれ食べれるの"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/12/07/what-is-cors/&title=CORSってなにそれ食べれるの"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/12/07/what-is-cors/&title=CORSってなにそれ食べれるの"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/12/07/what-is-cors/&name=CORSってなにそれ食べれるの&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CORSとは"><span class="toc-number">1.</span> <span class="toc-text">CORSとは</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#クロスオリジンHTTPリクエストについて"><span class="toc-number">2.</span> <span class="toc-text">クロスオリジンHTTPリクエストについて</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#プリフライトリクエストについて"><span class="toc-number">3.</span> <span class="toc-text">プリフライトリクエストについて</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献"><span class="toc-number">4.</span> <span class="toc-text">参考文献</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        CORSってなにそれ食べれるの
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">k4h4shi.com</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-12-07T11:34:30.000Z" itemprop="datePublished">2017-12-07</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/CORS/">CORS</a>, <a class="tag-link" href="/tags/Web/">Web</a>, <a class="tag-link" href="/tags/http/">http</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>CORSって何っていう質問にとりあえず答えるための雑なメモ</p>
+<h2 id="CORSとは"><a href="#CORSとは" class="headerlink" title="CORSとは"></a>CORSとは</h2><p>Cross-Origin Resource Sharingの略。<br>クライアントがページ取得元サーバとは異なるサーバに対し、リクエストを送信する場合にはクロスオリジンHTTPリクエストを行う。</p>
+<p><img src="https://cdn.keycdn.com/support/wp-content/uploads/2015/09/cors.png" alt="cors.pngv"></p>
+<h2 id="クロスオリジンHTTPリクエストについて"><a href="#クロスオリジンHTTPリクエストについて" class="headerlink" title="クロスオリジンHTTPリクエストについて"></a>クロスオリジンHTTPリクエストについて</h2><p>クライアントの送信するリクエストには、<code>Origin</code>ヘッダが含まれる。<br>これにより、サーバはそのリクエストが送信されたリソースが、どのドメインを取得元とするリソースかを知ることができる。</p>
+<p>サーバの送信するレスポンスには、<code>Access-Control-Allow-Origin</code>ヘッダが含まれる。<br>サーバはこれによって、受け付けるリクエストを、取得元ドメインによって、制限することができる。</p>
+<h2 id="プリフライトリクエストについて"><a href="#プリフライトリクエストについて" class="headerlink" title="プリフライトリクエストについて"></a>プリフライトリクエストについて</h2><p>他ドメインのリソースを変更する可能性があるようなリクエストの場合、プリフライトリクエストを行う。<br>特に以下のような場合に行われる。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/HTTP/HTTP_access_control" target="_blank" rel="external">mdn: HTTP アクセス制御 (CORS)</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CORSとは"><span class="toc-number">1.</span> <span class="toc-text">CORSとは</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#クロスオリジンHTTPリクエストについて"><span class="toc-number">2.</span> <span class="toc-text">クロスオリジンHTTPリクエストについて</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#プリフライトリクエストについて"><span class="toc-number">3.</span> <span class="toc-text">プリフライトリクエストについて</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献"><span class="toc-number">4.</span> <span class="toc-text">参考文献</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/12/07/what-is-cors/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/12/07/what-is-cors/&text=CORSってなにそれ食べれるの"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/12/07/what-is-cors/&title=CORSってなにそれ食べれるの"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/12/07/what-is-cors/&is_video=false&description=CORSってなにそれ食べれるの"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CORSってなにそれ食べれるの&body=Check out this article: http://k4h4shi.com/2017/12/07/what-is-cors/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/12/07/what-is-cors/&title=CORSってなにそれ食べれるの"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/12/07/what-is-cors/&title=CORSってなにそれ食べれるの"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/12/07/what-is-cors/&title=CORSってなにそれ食べれるの"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/12/07/what-is-cors/&title=CORSってなにそれ食べれるの"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/12/07/what-is-cors/&name=CORSってなにそれ食べれるの&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 kotaro takahashi
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

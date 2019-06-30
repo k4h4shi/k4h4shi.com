@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang=ja>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="この記事はk4h4shi’s blogからの移転記事です。 はじめに西尾 泰和さんによって出版された、コーディングを支える技術を読んで考えたこと。 この本では、コーディングにおける数多の記法に対して、それ以前にあった問題とそれ以降に何が解決したのかを、歴史と具体例と共に纏めている。 以下は、あくまで本の内容に触発されて構成された持論です。 プログラミング言語と構文プログラマの中で、構文とプログラミ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="変わり続けるプログラミング言語と付き合うために">
+<meta property="og:url" content="http://k4h4shi.com/2017/08/27/how_to_get_along_with_programming_langage/index.html">
+<meta property="og:site_name" content="k4h4shi.com">
+<meta property="og:description" content="この記事はk4h4shi’s blogからの移転記事です。 はじめに西尾 泰和さんによって出版された、コーディングを支える技術を読んで考えたこと。 この本では、コーディングにおける数多の記法に対して、それ以前にあった問題とそれ以降に何が解決したのかを、歴史と具体例と共に纏めている。 以下は、あくまで本の内容に触発されて構成された持論です。 プログラミング言語と構文プログラマの中で、構文とプログラミ">
+<meta property="og:locale" content="ja">
+<meta property="og:updated_time" content="2019-06-30T11:17:25.027Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="変わり続けるプログラミング言語と付き合うために">
+<meta name="twitter:description" content="この記事はk4h4shi’s blogからの移転記事です。 はじめに西尾 泰和さんによって出版された、コーディングを支える技術を読んで考えたこと。 この本では、コーディングにおける数多の記法に対して、それ以前にあった問題とそれ以降に何が解決したのかを、歴史と具体例と共に纏めている。 以下は、あくまで本の内容に触発されて構成された持論です。 プログラミング言語と構文プログラマの中で、構文とプログラミ">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=16">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=192" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=180">
+          
+        
+    
+    <!-- title -->
+    <title>変わり続けるプログラミング言語と付き合うために</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/09/09/hello-world/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/07/17/use_node_red/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/08/27/how_to_get_along_with_programming_langage/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/08/27/how_to_get_along_with_programming_langage/&text=変わり続けるプログラミング言語と付き合うために"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/08/27/how_to_get_along_with_programming_langage/&title=変わり続けるプログラミング言語と付き合うために"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/08/27/how_to_get_along_with_programming_langage/&is_video=false&description=変わり続けるプログラミング言語と付き合うために"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=変わり続けるプログラミング言語と付き合うために&body=Check out this article: http://k4h4shi.com/2017/08/27/how_to_get_along_with_programming_langage/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/08/27/how_to_get_along_with_programming_langage/&title=変わり続けるプログラミング言語と付き合うために"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/08/27/how_to_get_along_with_programming_langage/&title=変わり続けるプログラミング言語と付き合うために"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/08/27/how_to_get_along_with_programming_langage/&title=変わり続けるプログラミング言語と付き合うために"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/08/27/how_to_get_along_with_programming_langage/&title=変わり続けるプログラミング言語と付き合うために"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/08/27/how_to_get_along_with_programming_langage/&name=変わり続けるプログラミング言語と付き合うために&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#はじめに"><span class="toc-number">1.</span> <span class="toc-text">はじめに</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#プログラミング言語と構文"><span class="toc-number">2.</span> <span class="toc-text">プログラミング言語と構文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#プログラミング言語はツール、それも進化する"><span class="toc-number">2.1.</span> <span class="toc-text">プログラミング言語はツール、それも進化する</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#変わる知識と変わらない知識"><span class="toc-number">3.</span> <span class="toc-text">変わる知識と変わらない知識</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第2言語を学んだことからの経験則"><span class="toc-number">3.1.</span> <span class="toc-text">第2言語を学んだことからの経験則</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#プログラミング言語を選択することについて"><span class="toc-number">4.</span> <span class="toc-text">プログラミング言語を選択することについて</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#言語の中でのプログラミングと、言語の中へのプログラミング"><span class="toc-number">4.1.</span> <span class="toc-text">言語の中でのプログラミングと、言語の中へのプログラミング</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#関連する情報について"><span class="toc-number">4.1.0.1.</span> <span class="toc-text">関連する情報について</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最後に"><span class="toc-number">5.</span> <span class="toc-text">最後に</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        変わり続けるプログラミング言語と付き合うために
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">k4h4shi.com</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-08-27T13:29:21.000Z" itemprop="datePublished">2017-08-27</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>この記事は<a href="http://k4h4shi.hatenablog.com/entry/2017/08/27/222921" target="_blank" rel="external">k4h4shi’s blog</a>からの移転記事です。</p>
+<h2 id="はじめに"><a href="#はじめに" class="headerlink" title="はじめに"></a>はじめに</h2><p><a href="https://www.amazon.co.jp/西尾-泰和/e/B00C5W8D9G/ref=dp_byline_cont_book_1" target="_blank" rel="external">西尾 泰和</a>さんによって出版された、<a href="https://www.amazon.co.jp/コーディングを支える技術-~成り立ちから学ぶプログラミング作法-WEB-PRESS-plus/dp/477415654X" target="_blank" rel="external">コーディングを支える技術</a>を読んで考えたこと。</p>
+<p>この本では、コーディングにおける数多の記法に対して、それ以前にあった問題とそれ以降に何が解決したのかを、歴史と具体例と共に纏めている。</p>
+<p>以下は、あくまで本の内容に触発されて構成された持論です。</p>
+<h2 id="プログラミング言語と構文"><a href="#プログラミング言語と構文" class="headerlink" title="プログラミング言語と構文"></a>プログラミング言語と構文</h2><p>プログラマの中で、構文とプログラミング言語は密接に結びついていることがある。</p>
+<p>しかし、これはある意味ではとても危ういことでもある。</p>
+<p>なぜなら、現存しているプログラミング言語は、制約の中で数多の記法の一部をある時点での言語仕様として採用しているに過ぎないから。</p>
+<p>これからも同じだとは限らないし、最近の言語はドラスティックな変更が言語仕様に加えられることも多い。</p>
+<p>確かに、特定のプログラミング言語の構文を通じて、プログラマはあらゆる問題の解決方法のサブセットを利用する。</p>
+<p>けれど、それは決して全てではないし、同じ問題に対しての解決方法が1つとも限らない。</p>
+<p>現存しているプログラミング言語が1つではない事も、それを表しているように思う。</p>
+<p>そしておそらく、これからもそうなる事は無いだろうという事は経験から推測できる。</p>
+<h3 id="プログラミング言語はツール、それも進化する"><a href="#プログラミング言語はツール、それも進化する" class="headerlink" title="プログラミング言語はツール、それも進化する"></a>プログラミング言語はツール、それも進化する</h3><p>例えるならば、プログラミング言語はそれぞれ目的を持ったツールであり、使い方も異なれば、壊れもするし廃れもする。</p>
+<p>ただし、作られて消費されていくだけのツールではなく、改善されもすれば、進化していくツールでもある。</p>
+<p>だからきっとプログラミング言語が変わり続けることだけは、これからも変わらない。</p>
+<h2 id="変わる知識と変わらない知識"><a href="#変わる知識と変わらない知識" class="headerlink" title="変わる知識と変わらない知識"></a>変わる知識と変わらない知識</h2><p>では、プログラマに求められることは何か。</p>
+<p>プログラマには、もちろんプログラミング言語を適切に使って、問題解決を行う事が求められる。</p>
+<p>しかし、それが日々変わっていくとしたらどうなるだろう。</p>
+<p>冗談ではなく、本当にそうなっている気さえしているのは自分だけではないと思う。</p>
+<p>最近でもEcma Script 2017がリリースされ、Java 9のリリースも控えている。</p>
+<p>やはり、より俯瞰的な視点を持ち問題解決に当たる事が求められる。</p>
+<p>そのために何をすべきかということに答えることは、容易なことではない。</p>
+<p>それこそ、答えは人によって異なる。</p>
+<p>ただ一つの回答として、特定のプログラミング言語に縛られない知識を持つことはその助けになる。</p>
+<p>そうすれば少なくとも、1つの言語と心中することにはならない。</p>
+<h3 id="第2言語を学んだことからの経験則"><a href="#第2言語を学んだことからの経験則" class="headerlink" title="第2言語を学んだことからの経験則"></a>第2言語を学んだことからの経験則</h3><p>現在、第2言語としてJSを学習している。</p>
+<p>それによって例えばスコープや、リテラル、関数と言ったものについての考え方は、大きく変わった。</p>
+<p>JSで関数を書いていくことで、それと並行してJavaのStream APIに対する理解もより進んだ。</p>
+<p>異なる言語を比較しつつ身につける事は、既存の知識を強化することにもつながる。</p>
+<p>それに、最初のプログラミング言語を学ぶことに比べたら、はるかにマシだった。</p>
+<p>コーディングを支える技術には、数多くの言語によるサンプルコードが掲載されている。</p>
+<p>その種類はJava, JavaScript, Perl, Python, Ruby, アセンブリ言語まで幅広い。</p>
+<p>ちょうど第2言語を学ぼうと思っている人へは、副読本としてもお勧めできる。</p>
+<h2 id="プログラミング言語を選択することについて"><a href="#プログラミング言語を選択することについて" class="headerlink" title="プログラミング言語を選択することについて"></a>プログラミング言語を選択することについて</h2><p>個人的には、プログラミング言語を選択することには慎重になるべきだけれど、選り好みするべきではないと考えている。</p>
+<p>それよりも重要なことは、少なくとも1つの言語に精通することだと思う。</p>
+<p>それによって、今後言語を選択する基準ができる。</p>
+<p>また、案外求められていることは、基本的にどんな言語でも実装できるってことがだんだんわかってくる。</p>
+<p>ただ、生産性に影響を与えることは確実なため、そういう意味で、慎重になるべきだはと思う。</p>
+<h3 id="言語の中でのプログラミングと、言語の中へのプログラミング"><a href="#言語の中でのプログラミングと、言語の中へのプログラミング" class="headerlink" title="言語の中でのプログラミングと、言語の中へのプログラミング"></a>言語の中でのプログラミングと、言語の中へのプログラミング</h3><p>少しコンテキストが異なるけれど、プログラミング言語を選択することについては、スティーブマコネルも自著の中で触れている。</p>
+<p>この場合は開発に利用すべき言語を選択することについてだが、重要なコンセプトが書かれている。</p>
+<p>それは言語の中でのプログラミングと言語の中へのプログラミングを区別する事の重要性についてだ。</p>
+<p>身近な言葉で言うなら、道具に使われるな、道具を使え。ということになる。</p>
+<p>嬉しいことにプログラマは道具(プログラミング言語)を使って道具(関数やクラスやモジュール、フレームワークなど)を作れる。</p>
+<h5 id="関連する情報について"><a href="#関連する情報について" class="headerlink" title="関連する情報について"></a>関連する情報について</h5><p><a href="https://www.amazon.co.jp/CODE-COMPLETE-第2版-上-完全なプログラミングを目指して/dp/489100455X" target="_blank" rel="external">コードコンプリート第2版 上</a> の第4章の中で、プログラミング言語の選択についてと題された箇所がある。</p>
+<p>これは、コーディングを支える技術で語られているコンセプトを、開発に置けるよりマクロな視点から語られたものであり、参照することをおすすめする。</p>
+<h2 id="最後に"><a href="#最後に" class="headerlink" title="最後に"></a>最後に</h2><p>長々と持論を書いたけれど、コーディングを支える技術は良い本だと思ったってのが動機だった。</p>
+<p>出版されたのが2013年と少し古い本だけれど、その内容自体が廃れないものについてのために、古さを感じることはなかった。</p>
+<p>ただ、もしこの本が今書かれていたとしたら、例えば関数型プログラミングについても、取り上げられていただろうなとかは思う。</p>
+<p>しかしそれでも、プログラミングについて、言語に縛られない視点を持つことを助けてくれることに関しては、変わらない。</p>
+<p>少しでも言語オタクじみたところがあったり、第2言語を学ぼうと思っている人へなら、ぜひオススメしたい本だった。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#はじめに"><span class="toc-number">1.</span> <span class="toc-text">はじめに</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#プログラミング言語と構文"><span class="toc-number">2.</span> <span class="toc-text">プログラミング言語と構文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#プログラミング言語はツール、それも進化する"><span class="toc-number">2.1.</span> <span class="toc-text">プログラミング言語はツール、それも進化する</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#変わる知識と変わらない知識"><span class="toc-number">3.</span> <span class="toc-text">変わる知識と変わらない知識</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第2言語を学んだことからの経験則"><span class="toc-number">3.1.</span> <span class="toc-text">第2言語を学んだことからの経験則</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#プログラミング言語を選択することについて"><span class="toc-number">4.</span> <span class="toc-text">プログラミング言語を選択することについて</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#言語の中でのプログラミングと、言語の中へのプログラミング"><span class="toc-number">4.1.</span> <span class="toc-text">言語の中でのプログラミングと、言語の中へのプログラミング</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#関連する情報について"><span class="toc-number">4.1.0.1.</span> <span class="toc-text">関連する情報について</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最後に"><span class="toc-number">5.</span> <span class="toc-text">最後に</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/08/27/how_to_get_along_with_programming_langage/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/08/27/how_to_get_along_with_programming_langage/&text=変わり続けるプログラミング言語と付き合うために"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/08/27/how_to_get_along_with_programming_langage/&title=変わり続けるプログラミング言語と付き合うために"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/08/27/how_to_get_along_with_programming_langage/&is_video=false&description=変わり続けるプログラミング言語と付き合うために"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=変わり続けるプログラミング言語と付き合うために&body=Check out this article: http://k4h4shi.com/2017/08/27/how_to_get_along_with_programming_langage/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/08/27/how_to_get_along_with_programming_langage/&title=変わり続けるプログラミング言語と付き合うために"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/08/27/how_to_get_along_with_programming_langage/&title=変わり続けるプログラミング言語と付き合うために"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/08/27/how_to_get_along_with_programming_langage/&title=変わり続けるプログラミング言語と付き合うために"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/08/27/how_to_get_along_with_programming_langage/&title=変わり続けるプログラミング言語と付き合うために"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/08/27/how_to_get_along_with_programming_langage/&name=変わり続けるプログラミング言語と付き合うために&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 kotaro takahashi
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang=ja>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="dpndon.ioというものを作った現在はgithub pagesでホストしている。 作ったものunpkg.comというcdnから、package.jsonを取得し、依存関係にあるモジュールを列挙するというもの。unpkg.comはnpm registoryと同様の内容を配信している。最初はnpm registoryからpackage.jsonやらをfetchしてこようと思ってたのだけれど、COR">
+<meta name="keywords" content="react,spa,web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Reactでnpmの依存モジュールのホームページを開くための簡単なSPA作った。">
+<meta property="og:url" content="http://k4h4shi.com/2017/12/07/released-simple-spa-with-react/index.html">
+<meta property="og:site_name" content="k4h4shi.com">
+<meta property="og:description" content="dpndon.ioというものを作った現在はgithub pagesでホストしている。 作ったものunpkg.comというcdnから、package.jsonを取得し、依存関係にあるモジュールを列挙するというもの。unpkg.comはnpm registoryと同様の内容を配信している。最初はnpm registoryからpackage.jsonやらをfetchしてこようと思ってたのだけれど、COR">
+<meta property="og:locale" content="ja">
+<meta property="og:updated_time" content="2019-06-30T11:17:25.032Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Reactでnpmの依存モジュールのホームページを開くための簡単なSPA作った。">
+<meta name="twitter:description" content="dpndon.ioというものを作った現在はgithub pagesでホストしている。 作ったものunpkg.comというcdnから、package.jsonを取得し、依存関係にあるモジュールを列挙するというもの。unpkg.comはnpm registoryと同様の内容を配信している。最初はnpm registoryからpackage.jsonやらをfetchしてこようと思ってたのだけれど、COR">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=16">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=192" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=180">
+          
+        
+    
+    <!-- title -->
+    <title>Reactでnpmの依存モジュールのホームページを開くための簡単なSPA作った。</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/12/09/embed-codepen/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/12/07/cors-of-npm-registory/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/12/07/released-simple-spa-with-react/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/12/07/released-simple-spa-with-react/&text=Reactでnpmの依存モジュールのホームページを開くための簡単なSPA作った。"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/12/07/released-simple-spa-with-react/&title=Reactでnpmの依存モジュールのホームページを開くための簡単なSPA作った。"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/12/07/released-simple-spa-with-react/&is_video=false&description=Reactでnpmの依存モジュールのホームページを開くための簡単なSPA作った。"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Reactでnpmの依存モジュールのホームページを開くための簡単なSPA作った。&body=Check out this article: http://k4h4shi.com/2017/12/07/released-simple-spa-with-react/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/12/07/released-simple-spa-with-react/&title=Reactでnpmの依存モジュールのホームページを開くための簡単なSPA作った。"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/12/07/released-simple-spa-with-react/&title=Reactでnpmの依存モジュールのホームページを開くための簡単なSPA作った。"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/12/07/released-simple-spa-with-react/&title=Reactでnpmの依存モジュールのホームページを開くための簡単なSPA作った。"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/12/07/released-simple-spa-with-react/&title=Reactでnpmの依存モジュールのホームページを開くための簡単なSPA作った。"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/12/07/released-simple-spa-with-react/&name=Reactでnpmの依存モジュールのホームページを開くための簡単なSPA作った。&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#作ったもの"><span class="toc-number">1.</span> <span class="toc-text">作ったもの</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作った動機"><span class="toc-number">2.</span> <span class="toc-text">作った動機</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#今後やりたいこと"><span class="toc-number">3.</span> <span class="toc-text">今後やりたいこと</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reactを使ってみた所感"><span class="toc-number">4.</span> <span class="toc-text">Reactを使ってみた所感</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Reactでnpmの依存モジュールのホームページを開くための簡単なSPA作った。
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">k4h4shi.com</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-12-07T12:36:04.000Z" itemprop="datePublished">2017-12-07</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/react/">react</a>, <a class="tag-link" href="/tags/spa/">spa</a>, <a class="tag-link" href="/tags/web/">web</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><a href="https://k4h4shi.github.io/dpndon.io/" target="_blank" rel="external">dpndon.io</a>というものを作った<br>現在はgithub pagesでホストしている。</p>
+<h2 id="作ったもの"><a href="#作ったもの" class="headerlink" title="作ったもの"></a>作ったもの</h2><p><a href="http://unpkg.com" target="_blank" rel="external">unpkg.com</a>というcdnから、package.jsonを取得し、依存関係にあるモジュールを列挙するというもの。<br><a href="http://unpkg.com" target="_blank" rel="external">unpkg.com</a>はnpm registoryと同様の内容を配信している。<br>最初はnpm registoryからpackage.jsonやらをfetchしてこようと思ってたのだけれど、CORSを許可していないために、ブラウザからfetchできなかった。<br>ブラウザのみで動作し、ページを配信するHTTPサーバだけがあれば動作するというものにしたかったから、<a href="http://unpkg.com" target="_blank" rel="external">unpkg.com</a>を代替として使った。</p>
+<h2 id="作った動機"><a href="#作った動機" class="headerlink" title="作った動機"></a>作った動機</h2><p>node.jsで開発を始めたこともあり、ES6の知識がついたのでフロントエンドのフレームワークを嗜むことにした。<br>なにつくろっかと考えた時、そもそも、npmやら使ってJSで開発してると依存モジュールめっちゃ増えるよね。っていう課題があった。<br>そんで、ローカルでそれらの公式サイトとかのリンク集みたいなページ配信するサーバとか立てたらめっちゃ捗るんじゃねと思った。<br>どうやろっかなと考えた時、package.json使えばできるんじゃねと思った。</p>
+<p>いろいろ試した結果として、とりあえずpackage.jsonとネットワークがあれば、必要な情報を集めることはできることがわかった。<br>現在のようにWebで公開している限りには、ローカルのプロジェクトの依存モジュールは閲覧できないけど、ローカルでサーバ立てればできると思う。</p>
+<h2 id="今後やりたいこと"><a href="#今後やりたいこと" class="headerlink" title="今後やりたいこと"></a>今後やりたいこと</h2><ul>
+<li>ローカルで動作するプロジェクトの依存関係モジュールを列挙するツールとしても使えるようにする<ul>
+<li>プロジェクト依存関係に追加して、ルートのパッケージJSONを取得して生成したページを配信するサーバ立てる</li>
+<li>Electronでネイティブアプリとして作る。<ul>
+<li>組み込みのブラウザ</li>
+<li>ローカルや、npm上のプロジェクトのpackage.jsonのアドレスを保存する。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>独自ドメインを取得して、そこから配信する<ul>
+<li>広告を表示する</li>
+</ul>
+</li>
+</ul>
+<h2 id="Reactを使ってみた所感"><a href="#Reactを使ってみた所感" class="headerlink" title="Reactを使ってみた所感"></a>Reactを使ってみた所感</h2><p>React使うことにしたのは3年遅れで<a href="https://qiita.com/mizchi/items/4d25bc26def1719d52e6" target="_blank" rel="external">魂が震えた</a>からなんだけど、Reactは実際かなりシンプルで使いやすい。<br>すでにHTML/CSSの知識があって、ES6がわかって、<code>create-react-app</code>もある今なら1日で覚えられると思う。<br>ただし、Reduxなんかを導入すると簡単に精神が暗黒面に落ちるので、そこが分厚い壁。<br>あと、<code>create-react-app</code>から卒業する方法がわからない。<br>とりあえず今後はその辺と、FacebookつながりでJestとFlowあたりを覚えたい。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#作ったもの"><span class="toc-number">1.</span> <span class="toc-text">作ったもの</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作った動機"><span class="toc-number">2.</span> <span class="toc-text">作った動機</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#今後やりたいこと"><span class="toc-number">3.</span> <span class="toc-text">今後やりたいこと</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reactを使ってみた所感"><span class="toc-number">4.</span> <span class="toc-text">Reactを使ってみた所感</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/12/07/released-simple-spa-with-react/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/12/07/released-simple-spa-with-react/&text=Reactでnpmの依存モジュールのホームページを開くための簡単なSPA作った。"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/12/07/released-simple-spa-with-react/&title=Reactでnpmの依存モジュールのホームページを開くための簡単なSPA作った。"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/12/07/released-simple-spa-with-react/&is_video=false&description=Reactでnpmの依存モジュールのホームページを開くための簡単なSPA作った。"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Reactでnpmの依存モジュールのホームページを開くための簡単なSPA作った。&body=Check out this article: http://k4h4shi.com/2017/12/07/released-simple-spa-with-react/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/12/07/released-simple-spa-with-react/&title=Reactでnpmの依存モジュールのホームページを開くための簡単なSPA作った。"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/12/07/released-simple-spa-with-react/&title=Reactでnpmの依存モジュールのホームページを開くための簡単なSPA作った。"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/12/07/released-simple-spa-with-react/&title=Reactでnpmの依存モジュールのホームページを開くための簡単なSPA作った。"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/12/07/released-simple-spa-with-react/&title=Reactでnpmの依存モジュールのホームページを開くための簡単なSPA作った。"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/12/07/released-simple-spa-with-react/&name=Reactでnpmの依存モジュールのホームページを開くための簡単なSPA作った。&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 kotaro takahashi
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

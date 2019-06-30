@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang=ja>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="ES6のPromiseにおける例外処理Promiseの例外のハンドリングについてまとめる。 個人的にベストプラクティスだと思う方法基本的には、以下の2点で考えると良いと思う。  例外が発生する可能性がある箇所 処理の流れを判断する箇所  例えば、以下の関数は例外を発生させ、それを明示的に例外を外へ伝播させる。123456789101112const promiseFnA = () =&amp;gt; &amp;#">
+<meta name="keywords" content="ES6,promise,js,error-handling">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6のPromiseにおける例外処理">
+<meta property="og:url" content="http://k4h4shi.com/2017/12/19/how-to-handle-error-with-promise/index.html">
+<meta property="og:site_name" content="k4h4shi.com">
+<meta property="og:description" content="ES6のPromiseにおける例外処理Promiseの例外のハンドリングについてまとめる。 個人的にベストプラクティスだと思う方法基本的には、以下の2点で考えると良いと思う。  例外が発生する可能性がある箇所 処理の流れを判断する箇所  例えば、以下の関数は例外を発生させ、それを明示的に例外を外へ伝播させる。123456789101112const promiseFnA = () =&amp;gt; &amp;#">
+<meta property="og:locale" content="ja">
+<meta property="og:updated_time" content="2019-06-30T11:17:25.026Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6のPromiseにおける例外処理">
+<meta name="twitter:description" content="ES6のPromiseにおける例外処理Promiseの例外のハンドリングについてまとめる。 個人的にベストプラクティスだと思う方法基本的には、以下の2点で考えると良いと思う。  例外が発生する可能性がある箇所 処理の流れを判断する箇所  例えば、以下の関数は例外を発生させ、それを明示的に例外を外へ伝播させる。123456789101112const promiseFnA = () =&amp;gt; &amp;#">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=16">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=192" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=180">
+          
+        
+    
+    <!-- title -->
+    <title>ES6のPromiseにおける例外処理</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/12/19/unify-layout-of-text-file-with-editorconfig/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/12/19/create-uniq-array/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/12/19/how-to-handle-error-with-promise/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/12/19/how-to-handle-error-with-promise/&text=ES6のPromiseにおける例外処理"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/12/19/how-to-handle-error-with-promise/&title=ES6のPromiseにおける例外処理"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/12/19/how-to-handle-error-with-promise/&is_video=false&description=ES6のPromiseにおける例外処理"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ES6のPromiseにおける例外処理&body=Check out this article: http://k4h4shi.com/2017/12/19/how-to-handle-error-with-promise/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/12/19/how-to-handle-error-with-promise/&title=ES6のPromiseにおける例外処理"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/12/19/how-to-handle-error-with-promise/&title=ES6のPromiseにおける例外処理"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/12/19/how-to-handle-error-with-promise/&title=ES6のPromiseにおける例外処理"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/12/19/how-to-handle-error-with-promise/&title=ES6のPromiseにおける例外処理"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/12/19/how-to-handle-error-with-promise/&name=ES6のPromiseにおける例外処理&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ES6のPromiseにおける例外処理"><span class="toc-number">1.</span> <span class="toc-text">ES6のPromiseにおける例外処理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#個人的にベストプラクティスだと思う方法"><span class="toc-number">1.1.</span> <span class="toc-text">個人的にベストプラクティスだと思う方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#例外処理の設計のポイント"><span class="toc-number">1.2.</span> <span class="toc-text">例外処理の設計のポイント</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#末端では例外を処理しない"><span class="toc-number">1.2.1.</span> <span class="toc-text">末端では例外を処理しない</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例外を処理する個所を決める"><span class="toc-number">1.2.2.</span> <span class="toc-text">例外を処理する個所を決める</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#エラーコードなどを定義する"><span class="toc-number">1.2.3.</span> <span class="toc-text">エラーコードなどを定義する</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#まとめ"><span class="toc-number">1.3.</span> <span class="toc-text">まとめ</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        ES6のPromiseにおける例外処理
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">k4h4shi.com</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-12-19T12:18:18.000Z" itemprop="datePublished">2017-12-19</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/ES6/">ES6</a>, <a class="tag-link" href="/tags/error-handling/">error-handling</a>, <a class="tag-link" href="/tags/js/">js</a>, <a class="tag-link" href="/tags/promise/">promise</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="ES6のPromiseにおける例外処理"><a href="#ES6のPromiseにおける例外処理" class="headerlink" title="ES6のPromiseにおける例外処理"></a>ES6のPromiseにおける例外処理</h1><p>Promiseの例外のハンドリングについてまとめる。</p>
+<h2 id="個人的にベストプラクティスだと思う方法"><a href="#個人的にベストプラクティスだと思う方法" class="headerlink" title="個人的にベストプラクティスだと思う方法"></a>個人的にベストプラクティスだと思う方法</h2><p>基本的には、以下の2点で考えると良いと思う。</p>
+<ul>
+<li>例外が発生する可能性がある箇所</li>
+<li>処理の流れを判断する箇所</li>
+</ul>
+<p>例えば、以下の関数は例外を発生させ、それを明示的に例外を外へ伝播させる。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> promiseFnA = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</div><div class="line">    reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'this is a error.'</span>));</div><div class="line">  &#125;)</div><div class="line">  .then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'not executed'</span>)</div><div class="line">  &#125;)</div><div class="line">  <span class="comment">// 例外を処理せず、外へ伝播させる。</span></div><div class="line">  .catch(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</div><div class="line">    <span class="keyword">throw</span> error;</div><div class="line">  &#125;);</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>上記の関数の呼び出しを行う個所では、例外を適切に処理する必要がある。<br>例えば以下の関数は、例外を処理する関数である。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> promiseFnB = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">  <span class="keyword">return</span> promiseFnA()</div><div class="line">  <span class="comment">// 標準エラー出力することで例外を処理する</span></div><div class="line">  .catch(<span class="built_in">console</span>.error);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>このように、設計として例外を発生させる個所と処理する個所をわけるようにする。</p>
+<h2 id="例外処理の設計のポイント"><a href="#例外処理の設計のポイント" class="headerlink" title="例外処理の設計のポイント"></a>例外処理の設計のポイント</h2><p>try catchでもPromiseでも本質的には変わらない。</p>
+<h3 id="末端では例外を処理しない"><a href="#末端では例外を処理しない" class="headerlink" title="末端では例外を処理しない"></a>末端では例外を処理しない</h3><p>基本的には、末端では例外を処理しないようにする。</p>
+<p>なぜなら、個別に処理の中止や回復の判断を行うと全体的な流れが見えなくなってしまうから。<br>そうなると、大変な数の例外を相手にしなければならなくなり、どこかで握りつぶしたりする可能性がある。<br>そのため、末端の処理では例外を発生させるだけに留めると良い。</p>
+<h3 id="例外を処理する個所を決める"><a href="#例外を処理する個所を決める" class="headerlink" title="例外を処理する個所を決める"></a>例外を処理する個所を決める</h3><p>末端の処理から発生した例外を捕捉して、後者の処理の流れを判断する箇所を決める。<br>階層で構造化されている場合は、できるだけ上位の呼び出しもと階層で例外を捕捉するようにした方が扱いやすい。</p>
+<h3 id="エラーコードなどを定義する"><a href="#エラーコードなどを定義する" class="headerlink" title="エラーコードなどを定義する"></a>エラーコードなどを定義する</h3><p>末端では、例外の種類によってErrorオブジェクトにエラーコードなどを設定するとよい。<br>そうすることで、上位の階層でどのような例外処理を行うべきかの判断ができるようになる。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>例外処理で困らないためには、以下の点を意識して設計すること。</p>
+<ul>
+<li>末端では、エラーコードを設定しつつ、例外を発せさせる。</li>
+<li>中枢では、エラーコードによって、判断を行い、適切な例外処理を行う。</li>
+<li>中間では、例外を握りつぶさない。</li>
+</ul>
+<p>これらはPromise関係なく、例外処理に対して普遍的に適用できるルールだと思う。</p>
+<p>設定するエラーコードについては、コメントに明示しておくとなお親切だと思う。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ES6のPromiseにおける例外処理"><span class="toc-number">1.</span> <span class="toc-text">ES6のPromiseにおける例外処理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#個人的にベストプラクティスだと思う方法"><span class="toc-number">1.1.</span> <span class="toc-text">個人的にベストプラクティスだと思う方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#例外処理の設計のポイント"><span class="toc-number">1.2.</span> <span class="toc-text">例外処理の設計のポイント</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#末端では例外を処理しない"><span class="toc-number">1.2.1.</span> <span class="toc-text">末端では例外を処理しない</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#例外を処理する個所を決める"><span class="toc-number">1.2.2.</span> <span class="toc-text">例外を処理する個所を決める</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#エラーコードなどを定義する"><span class="toc-number">1.2.3.</span> <span class="toc-text">エラーコードなどを定義する</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#まとめ"><span class="toc-number">1.3.</span> <span class="toc-text">まとめ</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/12/19/how-to-handle-error-with-promise/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/12/19/how-to-handle-error-with-promise/&text=ES6のPromiseにおける例外処理"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/12/19/how-to-handle-error-with-promise/&title=ES6のPromiseにおける例外処理"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/12/19/how-to-handle-error-with-promise/&is_video=false&description=ES6のPromiseにおける例外処理"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ES6のPromiseにおける例外処理&body=Check out this article: http://k4h4shi.com/2017/12/19/how-to-handle-error-with-promise/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/12/19/how-to-handle-error-with-promise/&title=ES6のPromiseにおける例外処理"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/12/19/how-to-handle-error-with-promise/&title=ES6のPromiseにおける例外処理"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/12/19/how-to-handle-error-with-promise/&title=ES6のPromiseにおける例外処理"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/12/19/how-to-handle-error-with-promise/&title=ES6のPromiseにおける例外処理"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/12/19/how-to-handle-error-with-promise/&name=ES6のPromiseにおける例外処理&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 kotaro takahashi
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang=ja>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Reactのコンポーネントを雑にしか理解していなかったためにまとめる。 コンポーネントコンポーネントは、関数またはクラスで作ることができる。 関数コンポーネント関数コンポーネントは見た目だけを担当し、与えられたプロパティによってUIを返す関数とする。そのため、状態を持たない純粋な関数として作る。 クラスコンポーネントクラスコンポーネントは、見た目だけではなく状態を持つ。ES6のclass構文を使っ">
+<meta name="keywords" content="component,react,lifecycle,frontend">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Reactのコンポーネントについて">
+<meta property="og:url" content="http://k4h4shi.com/2017/12/18/about-react-component/index.html">
+<meta property="og:site_name" content="k4h4shi.com">
+<meta property="og:description" content="Reactのコンポーネントを雑にしか理解していなかったためにまとめる。 コンポーネントコンポーネントは、関数またはクラスで作ることができる。 関数コンポーネント関数コンポーネントは見た目だけを担当し、与えられたプロパティによってUIを返す関数とする。そのため、状態を持たない純粋な関数として作る。 クラスコンポーネントクラスコンポーネントは、見た目だけではなく状態を持つ。ES6のclass構文を使っ">
+<meta property="og:locale" content="ja">
+<meta property="og:updated_time" content="2019-06-30T11:17:25.020Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Reactのコンポーネントについて">
+<meta name="twitter:description" content="Reactのコンポーネントを雑にしか理解していなかったためにまとめる。 コンポーネントコンポーネントは、関数またはクラスで作ることができる。 関数コンポーネント関数コンポーネントは見た目だけを担当し、与えられたプロパティによってUIを返す関数とする。そのため、状態を持たない純粋な関数として作る。 クラスコンポーネントクラスコンポーネントは、見た目だけではなく状態を持つ。ES6のclass構文を使っ">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=16">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=192" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=180">
+          
+        
+    
+    <!-- title -->
+    <title>Reactのコンポーネントについて</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/12/19/create-uniq-array/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/12/18/about-proptypes-validator/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/12/18/about-react-component/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/12/18/about-react-component/&text=Reactのコンポーネントについて"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/12/18/about-react-component/&title=Reactのコンポーネントについて"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/12/18/about-react-component/&is_video=false&description=Reactのコンポーネントについて"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Reactのコンポーネントについて&body=Check out this article: http://k4h4shi.com/2017/12/18/about-react-component/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/12/18/about-react-component/&title=Reactのコンポーネントについて"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/12/18/about-react-component/&title=Reactのコンポーネントについて"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/12/18/about-react-component/&title=Reactのコンポーネントについて"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/12/18/about-react-component/&title=Reactのコンポーネントについて"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/12/18/about-react-component/&name=Reactのコンポーネントについて&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#コンポーネント"><span class="toc-number">1.</span> <span class="toc-text">コンポーネント</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#関数コンポーネント"><span class="toc-number">1.1.</span> <span class="toc-text">関数コンポーネント</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#クラスコンポーネント"><span class="toc-number">1.2.</span> <span class="toc-text">クラスコンポーネント</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#主要なメソッド"><span class="toc-number">1.2.1.</span> <span class="toc-text">主要なメソッド</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#主要な属性"><span class="toc-number">1.2.2.</span> <span class="toc-text">主要な属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ライフサイクルメソッド"><span class="toc-number">1.2.3.</span> <span class="toc-text">ライフサイクルメソッド</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#命名規則"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">命名規則</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ライフサイクルの種類"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">ライフサイクルの種類</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献"><span class="toc-number">2.</span> <span class="toc-text">参考文献</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Reactのコンポーネントについて
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">k4h4shi.com</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-12-18T13:20:30.000Z" itemprop="datePublished">2017-12-18</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/component/">component</a>, <a class="tag-link" href="/tags/frontend/">frontend</a>, <a class="tag-link" href="/tags/lifecycle/">lifecycle</a>, <a class="tag-link" href="/tags/react/">react</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>Reactのコンポーネントを雑にしか理解していなかったためにまとめる。</p>
+<h2 id="コンポーネント"><a href="#コンポーネント" class="headerlink" title="コンポーネント"></a>コンポーネント</h2><p>コンポーネントは、関数またはクラスで作ることができる。</p>
+<h3 id="関数コンポーネント"><a href="#関数コンポーネント" class="headerlink" title="関数コンポーネント"></a>関数コンポーネント</h3><p>関数コンポーネントは見た目だけを担当し、与えられたプロパティによってUIを返す関数とする。<br>そのため、状態を持たない純粋な関数として作る。</p>
+<h3 id="クラスコンポーネント"><a href="#クラスコンポーネント" class="headerlink" title="クラスコンポーネント"></a>クラスコンポーネント</h3><p>クラスコンポーネントは、見た目だけではなく状態を持つ。<br>ES6のclass構文を使って、React.Componentを継承する。<br>その際は、renderメソッドを純粋な関数として実装する。<br>その他にもいくつかの属性やメソッドを持っており、必要に応じて利用できる。</p>
+<h4 id="主要なメソッド"><a href="#主要なメソッド" class="headerlink" title="主要なメソッド"></a>主要なメソッド</h4><ul>
+<li>render</li>
+<li>setState</li>
+</ul>
+<h4 id="主要な属性"><a href="#主要な属性" class="headerlink" title="主要な属性"></a>主要な属性</h4><ul>
+<li>prop</li>
+<li>state</li>
+</ul>
+<h4 id="ライフサイクルメソッド"><a href="#ライフサイクルメソッド" class="headerlink" title="ライフサイクルメソッド"></a>ライフサイクルメソッド</h4><p>その他にも、ある時点で実行されるライフサイクルメソッドをOverrideして、特定のコードを実行することができる。</p>
+<h5 id="命名規則"><a href="#命名規則" class="headerlink" title="命名規則"></a>命名規則</h5><p>何かが起こる直前に実行されるメソッドはWill, 直後に実行されるメソッドはDidがプレフィックスとなる。<br>例: componentWillMount, componentDidMount</p>
+<h5 id="ライフサイクルの種類"><a href="#ライフサイクルの種類" class="headerlink" title="ライフサイクルの種類"></a>ライフサイクルの種類</h5><ul>
+<li>Mount<ul>
+<li>constructor</li>
+<li>componentWillMount</li>
+<li>render</li>
+<li>componentDidMount</li>
+</ul>
+</li>
+<li>Update<ul>
+<li>componentWillRecieveProps</li>
+<li>shouldComponentUpdate</li>
+<li>componentWillUpdate</li>
+<li>render</li>
+<li>componentDidUpdate</li>
+</ul>
+</li>
+<li>Unmount<ul>
+<li>componentWillUnmount</li>
+</ul>
+</li>
+<li>Error Handling<ul>
+<li>componentDidCatch</li>
+</ul>
+</li>
+</ul>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a href="https://reactjs.org/docs/react-component.html" target="_blank" rel="external">公式ページ</a></li>
+<li><a href="https://qiita.com/kawachi/items/092bfc281f88e3a6e456" target="_blank" rel="external">ライフサイクル図</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#コンポーネント"><span class="toc-number">1.</span> <span class="toc-text">コンポーネント</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#関数コンポーネント"><span class="toc-number">1.1.</span> <span class="toc-text">関数コンポーネント</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#クラスコンポーネント"><span class="toc-number">1.2.</span> <span class="toc-text">クラスコンポーネント</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#主要なメソッド"><span class="toc-number">1.2.1.</span> <span class="toc-text">主要なメソッド</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#主要な属性"><span class="toc-number">1.2.2.</span> <span class="toc-text">主要な属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ライフサイクルメソッド"><span class="toc-number">1.2.3.</span> <span class="toc-text">ライフサイクルメソッド</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#命名規則"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">命名規則</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ライフサイクルの種類"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">ライフサイクルの種類</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献"><span class="toc-number">2.</span> <span class="toc-text">参考文献</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/12/18/about-react-component/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/12/18/about-react-component/&text=Reactのコンポーネントについて"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/12/18/about-react-component/&title=Reactのコンポーネントについて"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/12/18/about-react-component/&is_video=false&description=Reactのコンポーネントについて"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Reactのコンポーネントについて&body=Check out this article: http://k4h4shi.com/2017/12/18/about-react-component/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/12/18/about-react-component/&title=Reactのコンポーネントについて"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/12/18/about-react-component/&title=Reactのコンポーネントについて"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/12/18/about-react-component/&title=Reactのコンポーネントについて"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/12/18/about-react-component/&title=Reactのコンポーネントについて"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/12/18/about-react-component/&name=Reactのコンポーネントについて&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 kotaro takahashi
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

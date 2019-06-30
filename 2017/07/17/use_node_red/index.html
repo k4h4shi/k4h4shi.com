@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang=ja>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="この記事はk4h4shi’s blogからの移転記事です。 はじめに仕事でnode-REDに触れる可能性があるので事前に調査を行い、実際に弄ってみました。 node-REDとはnode-REDは視覚的にnodeとedgeを描くことでハードウェアやデバイス、オンラインサービスを接続するためのツールです。  node-REDの特徴ブラウザ上に構築されているnode-REDはブラウザで動作するFlowエ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="node-REDを弄ってみた">
+<meta property="og:url" content="http://k4h4shi.com/2017/07/17/use_node_red/index.html">
+<meta property="og:site_name" content="k4h4shi.com">
+<meta property="og:description" content="この記事はk4h4shi’s blogからの移転記事です。 はじめに仕事でnode-REDに触れる可能性があるので事前に調査を行い、実際に弄ってみました。 node-REDとはnode-REDは視覚的にnodeとedgeを描くことでハードウェアやデバイス、オンラインサービスを接続するためのツールです。  node-REDの特徴ブラウザ上に構築されているnode-REDはブラウザで動作するFlowエ">
+<meta property="og:locale" content="ja">
+<meta property="og:image" content="https://camo.githubusercontent.com/01ed64b01d73046a485ea82b645a3be529c64809/687474703a2f2f6e6f64657265642e6f72672f696d616765732f6e6f64652d7265642d73637265656e73686f742e706e67">
+<meta property="og:updated_time" content="2019-06-30T11:17:25.037Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="node-REDを弄ってみた">
+<meta name="twitter:description" content="この記事はk4h4shi’s blogからの移転記事です。 はじめに仕事でnode-REDに触れる可能性があるので事前に調査を行い、実際に弄ってみました。 node-REDとはnode-REDは視覚的にnodeとedgeを描くことでハードウェアやデバイス、オンラインサービスを接続するためのツールです。  node-REDの特徴ブラウザ上に構築されているnode-REDはブラウザで動作するFlowエ">
+<meta name="twitter:image" content="https://camo.githubusercontent.com/01ed64b01d73046a485ea82b645a3be529c64809/687474703a2f2f6e6f64657265642e6f72672f696d616765732f6e6f64652d7265642d73637265656e73686f742e706e67">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=16">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=192" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=180">
+          
+        
+    
+    <!-- title -->
+    <title>node-REDを弄ってみた</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/08/27/how_to_get_along_with_programming_langage/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/06/01/structrue_code_vs_real_code/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/07/17/use_node_red/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/07/17/use_node_red/&text=node-REDを弄ってみた"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/07/17/use_node_red/&title=node-REDを弄ってみた"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/07/17/use_node_red/&is_video=false&description=node-REDを弄ってみた"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=node-REDを弄ってみた&body=Check out this article: http://k4h4shi.com/2017/07/17/use_node_red/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/07/17/use_node_red/&title=node-REDを弄ってみた"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/07/17/use_node_red/&title=node-REDを弄ってみた"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/07/17/use_node_red/&title=node-REDを弄ってみた"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/07/17/use_node_red/&title=node-REDを弄ってみた"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/07/17/use_node_red/&name=node-REDを弄ってみた&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#はじめに"><span class="toc-number">1.</span> <span class="toc-text">はじめに</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#node-REDとは"><span class="toc-number">2.</span> <span class="toc-text">node-REDとは</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#node-REDの特徴"><span class="toc-number">3.</span> <span class="toc-text">node-REDの特徴</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ブラウザ上に構築されている"><span class="toc-number">3.1.</span> <span class="toc-text">ブラウザ上に構築されている</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#node-js上で構築されている"><span class="toc-number">3.2.</span> <span class="toc-text">node.js上で構築されている</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Json形式のインポート-エクスポートによるFlowの共有"><span class="toc-number">3.3.</span> <span class="toc-text">Json形式のインポート/エクスポートによるFlowの共有</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#実際に弄ってみる"><span class="toc-number">4.</span> <span class="toc-text">実際に弄ってみる</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Node-REDのインストールと起動"><span class="toc-number">4.0.1.</span> <span class="toc-text">Node-REDのインストールと起動</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Node-REDへアクセス"><span class="toc-number">4.0.2.</span> <span class="toc-text">Node-REDへアクセス</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hello-worldを表示してみる"><span class="toc-number">4.1.</span> <span class="toc-text">Hello worldを表示してみる</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Flowの構成"><span class="toc-number">4.1.1.</span> <span class="toc-text">Flowの構成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Flow作成の手順"><span class="toc-number">4.1.2.</span> <span class="toc-text">Flow作成の手順</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#HTTP-Request-Nodeを追加する"><span class="toc-number">4.1.2.1.</span> <span class="toc-text">HTTP Request Nodeを追加する</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#HTTP-Requrest-Nodeのパラメータを編集する"><span class="toc-number">4.1.2.2.</span> <span class="toc-text">HTTP Requrest Nodeのパラメータを編集する</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#HTTP-Response-Nodeを追加する"><span class="toc-number">4.1.2.3.</span> <span class="toc-text">HTTP Response Nodeを追加する</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Request-Node-と-Response-Nodeをつなげる"><span class="toc-number">4.1.2.4.</span> <span class="toc-text">Request Node と Response Nodeをつなげる</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#一旦デプロイしてみる"><span class="toc-number">4.1.2.5.</span> <span class="toc-text">一旦デプロイしてみる</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#エンドポイントにアクセス"><span class="toc-number">4.1.2.6.</span> <span class="toc-text">エンドポイントにアクセス</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Http-Response-Bodyを設定する"><span class="toc-number">4.1.2.7.</span> <span class="toc-text">Http Response Bodyを設定する</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#差分デプロイを行う。"><span class="toc-number">4.1.3.</span> <span class="toc-text">差分デプロイを行う。</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#再度エンドポイントへアクセスする"><span class="toc-number">4.1.3.1.</span> <span class="toc-text">再度エンドポイントへアクセスする</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#まとめ"><span class="toc-number">4.2.</span> <span class="toc-text">まとめ</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#素早いプロトタイピング"><span class="toc-number">4.2.1.</span> <span class="toc-text">素早いプロトタイピング</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#関数型プログラミングとの共通点"><span class="toc-number">4.2.2.</span> <span class="toc-text">関数型プログラミングとの共通点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#今後について"><span class="toc-number">4.2.3.</span> <span class="toc-text">今後について</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考リンク"><span class="toc-number">5.</span> <span class="toc-text">参考リンク</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        node-REDを弄ってみた
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">k4h4shi.com</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-07-17T14:49:22.000Z" itemprop="datePublished">2017-07-17</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>この記事は<a href="http://k4h4shi.hatenablog.com/entry/2017/07/17/234922" target="_blank" rel="external">k4h4shi’s blog</a>からの移転記事です。</p>
+<h2 id="はじめに"><a href="#はじめに" class="headerlink" title="はじめに"></a>はじめに</h2><p>仕事でnode-REDに触れる可能性があるので事前に調査を行い、実際に弄ってみました。</p>
+<h2 id="node-REDとは"><a href="#node-REDとは" class="headerlink" title="node-REDとは"></a>node-REDとは</h2><p>node-REDは視覚的にnodeとedgeを描くことでハードウェアやデバイス、オンラインサービスを接続するためのツールです。</p>
+<p><img src="https://camo.githubusercontent.com/01ed64b01d73046a485ea82b645a3be529c64809/687474703a2f2f6e6f64657265642e6f72672f696d616765732f6e6f64652d7265642d73637265656e73686f742e706e67" alt="img"></p>
+<h2 id="node-REDの特徴"><a href="#node-REDの特徴" class="headerlink" title="node-REDの特徴"></a>node-REDの特徴</h2><h3 id="ブラウザ上に構築されている"><a href="#ブラウザ上に構築されている" class="headerlink" title="ブラウザ上に構築されている"></a>ブラウザ上に構築されている</h3><p>node-REDはブラウザで動作するFlowエディタを提供しており、視覚的にFlowを記述できます。</p>
+<p>FlowはNode(プラグイン/モジュール)とEdge(Node間の接続)からなり、ワンクリックで実行環境にデプロイ可能です。</p>
+<p>リッチテキストエディタでJavascriptプログラミングが行えるNodeを利用してプログラムを作成することもできます。</p>
+<p>作成したテンプレートやFlowはエディタに組み込まれたライブラリに保存し、再利用することもできます。</p>
+<h3 id="node-js上で構築されている"><a href="#node-js上で構築されている" class="headerlink" title="node.js上で構築されている"></a>node.js上で構築されている</h3><p>node.js上に構築されており、イベント駆動/ノンブロッキングモデルを活用できます。</p>
+<p>そのためにRaspberry Piなどの低コストハードウェア、クラウド上で実行するにも理想的な環境が提供されています。</p>
+<p>また、Node.jsのエコシステムに存在するモジュールを利用して、Node-REDを拡張できることも意味します。</p>
+<h3 id="Json形式のインポート-エクスポートによるFlowの共有"><a href="#Json形式のインポート-エクスポートによるFlowの共有" class="headerlink" title="Json形式のインポート/エクスポートによるFlowの共有"></a>Json形式のインポート/エクスポートによるFlowの共有</h3><p>Node-REDで作成したFlowはJson形式でインポート/エクスポートすることで他の人と共有できます。</p>
+<p><a href="https://flows.nodered.org/" target="_blank" rel="external">オンラインFlowライブラリ</a>にて、作成したFlowを公開、または利用することも可能です。</p>
+<h2 id="実際に弄ってみる"><a href="#実際に弄ってみる" class="headerlink" title="実際に弄ってみる"></a>実際に弄ってみる</h2><h4 id="Node-REDのインストールと起動"><a href="#Node-REDのインストールと起動" class="headerlink" title="Node-REDのインストールと起動"></a>Node-REDのインストールと起動</h4><p>Linux/OS Xで既にNode.jsをインストールしている場合はTerminalにて以下を実行します。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ sudo npm install -g node-red</div><div class="line">$ node-red</div></pre></td></tr></table></figure></p>
+<p>僕の場合は条件に合致しましたが、それ以外の場合は<a href="https://nodered.jp/docs/getting-started/" target="_blank" rel="external">公式のGetting Started</a>を参照ください。</p>
+<h4 id="Node-REDへアクセス"><a href="#Node-REDへアクセス" class="headerlink" title="Node-REDへアクセス"></a>Node-REDへアクセス</h4><p>デフォルトの場合はブラウザから以下のポートでアクセスできます。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://localhost:1880/</div></pre></td></tr></table></figure></p>
+<p>アクセスするとブラウザでFlowエディタが立ち上がります。</p>
+<h3 id="Hello-worldを表示してみる"><a href="#Hello-worldを表示してみる" class="headerlink" title="Hello worldを表示してみる"></a>Hello worldを表示してみる</h3><p>新しい技術に触れた時はとりあえずHello worldだと思います。</p>
+<p>ということでhttpで/helloworldエンドポイントへアクセスしたら、helloworldと表示するFlowを作ってみました。</p>
+<p>最終的なFlowはこんな感じになります。</p>
+<h4 id="Flowの構成"><a href="#Flowの構成" class="headerlink" title="Flowの構成"></a>Flowの構成</h4><p>Flowは、以下のNodeから構成されています。</p>
+<ul>
+<li>HTTP Request Node</li>
+<li>Template Node</li>
+<li>HTTP Response Node</li>
+</ul>
+<p>これらをつなげることで、「こんなリクエストがあった時、こんなメッセージを、こんな風に返す。」という一連の流れを記述できます。</p>
+<p>今回の場合は、</p>
+<ul>
+<li>/helloworldにGETされる</li>
+<li>msgは’Hello World!’</li>
+<li>msgをBodyに含むレスポンスを返す。</li>
+</ul>
+<p>というようなFlowを作ります。</p>
+<h4 id="Flow作成の手順"><a href="#Flow作成の手順" class="headerlink" title="Flow作成の手順"></a>Flow作成の手順</h4><h5 id="HTTP-Request-Nodeを追加する"><a href="#HTTP-Request-Nodeを追加する" class="headerlink" title="HTTP Request Nodeを追加する"></a>HTTP Request Nodeを追加する</h5><p>左側のペインから、任意のノードをドラックして中央のFlowペインへドロップすることでNodeが追加できます。<br>今回は、まずはエンドポイントを追加したいので、httpノードをFlowに追加します。</p>
+<h5 id="HTTP-Requrest-Nodeのパラメータを編集する"><a href="#HTTP-Requrest-Nodeのパラメータを編集する" class="headerlink" title="HTTP Requrest Nodeのパラメータを編集する"></a>HTTP Requrest Nodeのパラメータを編集する</h5><p>Flowペインへ追加したノードをダブルクリックすることで、Nodeにパラメータを設定するためのDrawerが表示されます。<br>今回は、以下の設定を行います。</p>
+<ul>
+<li>Method: GET</li>
+<li>URL: /helloworld</li>
+</ul>
+<h5 id="HTTP-Response-Nodeを追加する"><a href="#HTTP-Response-Nodeを追加する" class="headerlink" title="HTTP Response Nodeを追加する"></a>HTTP Response Nodeを追加する</h5><p>Requestに対するResponseが必要なので、Nodeを追加します。<br>今回は特にResponseに設定は行わず、デフォルトのままにします。</p>
+<h5 id="Request-Node-と-Response-Nodeをつなげる"><a href="#Request-Node-と-Response-Nodeをつなげる" class="headerlink" title="Request Node と Response Nodeをつなげる"></a>Request Node と Response Nodeをつなげる</h5><p>Request Nodeの右端とResponse Nodeの左端をつなげます。<br>これにより、これらのNodeを関連づけ、左から右へ流れるFlowにすることができます。</p>
+<h5 id="一旦デプロイしてみる"><a href="#一旦デプロイしてみる" class="headerlink" title="一旦デプロイしてみる"></a>一旦デプロイしてみる</h5><p>まだBodyを設定していませんが、正常に動くかデプロイしてみます。<br>デプロイの際は、画面右上のdepoloyボタンを押下します。<br>上からトーストが出たら成功です。</p>
+<h5 id="エンドポイントにアクセス"><a href="#エンドポイントにアクセス" class="headerlink" title="エンドポイントにアクセス"></a>エンドポイントにアクセス</h5><p>/helloworldエンドポイントにアクセスしてみます。<br>今回の場合ですとurlは以下になります。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://localhost:1880/helloworld</div></pre></td></tr></table></figure></p>
+<p>空のレスポンスが帰ってきたら、ひとまずここまでは成功です。</p>
+<h5 id="Http-Response-Bodyを設定する"><a href="#Http-Response-Bodyを設定する" class="headerlink" title="Http Response Bodyを設定する"></a>Http Response Bodyを設定する</h5><p>では、レスポンスにBodyを設定するにはどうしたらよいのでしょうか。<br>HTTP ResponseNodeは左端に接続されているNodeのmsg.payloadの値をBodyとして返します。<br>ということで、Template Nodeを現在の2つのノードの間に追加して、msg.payloadに値を設定します。</p>
+<ul>
+<li>msg.payload: Hello World!</li>
+</ul>
+<h4 id="差分デプロイを行う。"><a href="#差分デプロイを行う。" class="headerlink" title="差分デプロイを行う。"></a>差分デプロイを行う。</h4><p>今回の変更では、すべてをデプロイし直す必要はないため、差分デプロイを行います。<br>そうすることで必要最低限だけ、デプロイし直してくれます。</p>
+<h5 id="再度エンドポイントへアクセスする"><a href="#再度エンドポイントへアクセスする" class="headerlink" title="再度エンドポイントへアクセスする"></a>再度エンドポイントへアクセスする</h5><p>/helloworldエンドポイントへアクセスしてみると、無事にHello Wolrd!と表示されていることがわかります。</p>
+<h3 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h3><p>このようにNode-REDでは、基本的に以下の流れで素早く開発ができます。</p>
+<ul>
+<li>Nodeを追加</li>
+<li>Nodeのパラメータの設定</li>
+<li>複数Nodeを関連付けてFlowを作成</li>
+<li>デプロイを行う</li>
+</ul>
+<h4 id="素早いプロトタイピング"><a href="#素早いプロトタイピング" class="headerlink" title="素早いプロトタイピング"></a>素早いプロトタイピング</h4><p>このような素早いプロトタイピングは、Node-REDを導入するメリットの一つだと思います。</p>
+<p>主にIoT分野での活用を想定しているツールだそうですが、個人的にはプロトタイピングやプログラミング学習などにも利用できるのではないかと思っています。</p>
+<h4 id="関数型プログラミングとの共通点"><a href="#関数型プログラミングとの共通点" class="headerlink" title="関数型プログラミングとの共通点"></a>関数型プログラミングとの共通点</h4><p>関数型プログラミングの特性が現れているのも面白い部分の一つです。</p>
+<p>ノードをつなげていくと、ちょうどフローチャートの様にも見えますが、ifやwhileと行った制御構文は登場しません。</p>
+<p>これは、ノードを使って記述しているのは処理そのものではなく、あくまでメッセージの受け取りと、加工、そして結果の受け渡しだからです。</p>
+<h4 id="今後について"><a href="#今後について" class="headerlink" title="今後について"></a>今後について</h4><p>今後は、ひとまず一通りどんなノードがあるのかを調べつつ引き続き学習していきます。<br><a href="http://qiita.com/k4h4shi/items/3a9d1d9286555ccdb77a" target="_blank" rel="external">各種ノードについてのまとめ</a>をしていきますので、よかったらご覧ください。</p>
+<h2 id="参考リンク"><a href="#参考リンク" class="headerlink" title="参考リンク"></a>参考リンク</h2><ul>
+<li><a href="https://nodered.jp/" target="_blank" rel="external">Node-RED User Group Japan</a></li>
+<li><a href="https://github.com/node-red/node-red" target="_blank" rel="external">github: node-red/node-red</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#はじめに"><span class="toc-number">1.</span> <span class="toc-text">はじめに</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#node-REDとは"><span class="toc-number">2.</span> <span class="toc-text">node-REDとは</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#node-REDの特徴"><span class="toc-number">3.</span> <span class="toc-text">node-REDの特徴</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ブラウザ上に構築されている"><span class="toc-number">3.1.</span> <span class="toc-text">ブラウザ上に構築されている</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#node-js上で構築されている"><span class="toc-number">3.2.</span> <span class="toc-text">node.js上で構築されている</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Json形式のインポート-エクスポートによるFlowの共有"><span class="toc-number">3.3.</span> <span class="toc-text">Json形式のインポート/エクスポートによるFlowの共有</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#実際に弄ってみる"><span class="toc-number">4.</span> <span class="toc-text">実際に弄ってみる</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Node-REDのインストールと起動"><span class="toc-number">4.0.1.</span> <span class="toc-text">Node-REDのインストールと起動</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Node-REDへアクセス"><span class="toc-number">4.0.2.</span> <span class="toc-text">Node-REDへアクセス</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hello-worldを表示してみる"><span class="toc-number">4.1.</span> <span class="toc-text">Hello worldを表示してみる</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Flowの構成"><span class="toc-number">4.1.1.</span> <span class="toc-text">Flowの構成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Flow作成の手順"><span class="toc-number">4.1.2.</span> <span class="toc-text">Flow作成の手順</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#HTTP-Request-Nodeを追加する"><span class="toc-number">4.1.2.1.</span> <span class="toc-text">HTTP Request Nodeを追加する</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#HTTP-Requrest-Nodeのパラメータを編集する"><span class="toc-number">4.1.2.2.</span> <span class="toc-text">HTTP Requrest Nodeのパラメータを編集する</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#HTTP-Response-Nodeを追加する"><span class="toc-number">4.1.2.3.</span> <span class="toc-text">HTTP Response Nodeを追加する</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Request-Node-と-Response-Nodeをつなげる"><span class="toc-number">4.1.2.4.</span> <span class="toc-text">Request Node と Response Nodeをつなげる</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#一旦デプロイしてみる"><span class="toc-number">4.1.2.5.</span> <span class="toc-text">一旦デプロイしてみる</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#エンドポイントにアクセス"><span class="toc-number">4.1.2.6.</span> <span class="toc-text">エンドポイントにアクセス</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Http-Response-Bodyを設定する"><span class="toc-number">4.1.2.7.</span> <span class="toc-text">Http Response Bodyを設定する</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#差分デプロイを行う。"><span class="toc-number">4.1.3.</span> <span class="toc-text">差分デプロイを行う。</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#再度エンドポイントへアクセスする"><span class="toc-number">4.1.3.1.</span> <span class="toc-text">再度エンドポイントへアクセスする</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#まとめ"><span class="toc-number">4.2.</span> <span class="toc-text">まとめ</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#素早いプロトタイピング"><span class="toc-number">4.2.1.</span> <span class="toc-text">素早いプロトタイピング</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#関数型プログラミングとの共通点"><span class="toc-number">4.2.2.</span> <span class="toc-text">関数型プログラミングとの共通点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#今後について"><span class="toc-number">4.2.3.</span> <span class="toc-text">今後について</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考リンク"><span class="toc-number">5.</span> <span class="toc-text">参考リンク</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/07/17/use_node_red/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/07/17/use_node_red/&text=node-REDを弄ってみた"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/07/17/use_node_red/&title=node-REDを弄ってみた"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/07/17/use_node_red/&is_video=false&description=node-REDを弄ってみた"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=node-REDを弄ってみた&body=Check out this article: http://k4h4shi.com/2017/07/17/use_node_red/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/07/17/use_node_red/&title=node-REDを弄ってみた"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/07/17/use_node_red/&title=node-REDを弄ってみた"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/07/17/use_node_red/&title=node-REDを弄ってみた"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/07/17/use_node_red/&title=node-REDを弄ってみた"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/07/17/use_node_red/&name=node-REDを弄ってみた&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 kotaro takahashi
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

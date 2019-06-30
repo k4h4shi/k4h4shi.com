@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang=ja>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Java本格入門を購入し、Javaに再入門しているところです。「周辺ツールで品質を上げる」という章があり、そこにJenkinsが紹介されていたので、使ってみようと思い立ちました。 一人で自宅でJenkins使う意味あんのかという話もありますが、CheckStyle, FindBungs, jUnitの結果レポートが見れるよー。ということで、ほなら見てみよっかな。くらいのモチベーションです。 いやあ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ローカルにJenkinsインストールしてみた。">
+<meta property="og:url" content="http://k4h4shi.com/2017/05/06/how_to_install_jenkins/index.html">
+<meta property="og:site_name" content="k4h4shi.com">
+<meta property="og:description" content="Java本格入門を購入し、Javaに再入門しているところです。「周辺ツールで品質を上げる」という章があり、そこにJenkinsが紹介されていたので、使ってみようと思い立ちました。 一人で自宅でJenkins使う意味あんのかという話もありますが、CheckStyle, FindBungs, jUnitの結果レポートが見れるよー。ということで、ほなら見てみよっかな。くらいのモチベーションです。 いやあ">
+<meta property="og:locale" content="ja">
+<meta property="og:updated_time" content="2019-06-30T11:17:25.027Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ローカルにJenkinsインストールしてみた。">
+<meta name="twitter:description" content="Java本格入門を購入し、Javaに再入門しているところです。「周辺ツールで品質を上げる」という章があり、そこにJenkinsが紹介されていたので、使ってみようと思い立ちました。 一人で自宅でJenkins使う意味あんのかという話もありますが、CheckStyle, FindBungs, jUnitの結果レポートが見れるよー。ということで、ほなら見てみよっかな。くらいのモチベーションです。 いやあ">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=16">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=192" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=180">
+          
+        
+    
+    <!-- title -->
+    <title>ローカルにJenkinsインストールしてみた。</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/06/01/structrue_code_vs_real_code/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/04/02/read_refactoring/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/05/06/how_to_install_jenkins/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/05/06/how_to_install_jenkins/&text=ローカルにJenkinsインストールしてみた。"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/05/06/how_to_install_jenkins/&title=ローカルにJenkinsインストールしてみた。"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/05/06/how_to_install_jenkins/&is_video=false&description=ローカルにJenkinsインストールしてみた。"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ローカルにJenkinsインストールしてみた。&body=Check out this article: http://k4h4shi.com/2017/05/06/how_to_install_jenkins/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/05/06/how_to_install_jenkins/&title=ローカルにJenkinsインストールしてみた。"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/05/06/how_to_install_jenkins/&title=ローカルにJenkinsインストールしてみた。"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/05/06/how_to_install_jenkins/&title=ローカルにJenkinsインストールしてみた。"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/05/06/how_to_install_jenkins/&title=ローカルにJenkinsインストールしてみた。"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/05/06/how_to_install_jenkins/&name=ローカルにJenkinsインストールしてみた。&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Jenkinsのインストール方法"><span class="toc-number">1.</span> <span class="toc-text">Jenkinsのインストール方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考資料"><span class="toc-number">2.</span> <span class="toc-text">参考資料</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        ローカルにJenkinsインストールしてみた。
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">k4h4shi.com</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-05-06T00:31:40.000Z" itemprop="datePublished">2017-05-06</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>Java本格入門を購入し、Javaに再入門しているところです。<br>「周辺ツールで品質を上げる」という章があり、そこにJenkinsが紹介されていたので、使ってみようと思い立ちました。</p>
+<p>一人で自宅でJenkins使う意味あんのかという話もありますが、CheckStyle, FindBungs, jUnitの結果レポートが見れるよー。<br>ということで、ほなら見てみよっかな。くらいのモチベーションです。</p>
+<p>いやあGWは好きなことできるんで最高ですね。</p>
+<h2 id="Jenkinsのインストール方法"><a href="#Jenkinsのインストール方法" class="headerlink" title="Jenkinsのインストール方法"></a>Jenkinsのインストール方法</h2><p>自宅の環境はMacのため、HomeBrewで落としてこれます。(ほんとこれなしでは生きていけない気がする。</p>
+<p>ということで以下のコマンドをTerminalで叩くだけです。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ brew update</div><div class="line">$ brew install Jenkins</div></pre></td></tr></table></figure></p>
+<p>インストールが終わったらJenkins起動してみます。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ Jenkins</div></pre></td></tr></table></figure>
+<p>だばーっとログがでますが、せっかちな僕はブラウザから即アクセスします。<br>以下をURLバーに打ち込めば良いです。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://localhost:8080</div></pre></td></tr></table></figure></p>
+<p>初めはブラウザでセキュリティ設定画面が開きますので、以下のコマンド叩いて表示される文字列をぺたりで良いです。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$cat ~/.jenkins/Home/secrets/initialAdminPassword</div></pre></td></tr></table></figure>
+<p>あとはブラウザでぽちぽちやって好きなようにすれば良いんじゃないでしょうか。</p>
+<h2 id="参考資料"><a href="#参考資料" class="headerlink" title="参考資料"></a>参考資料</h2><p><a href="http://qiita.com/t_n/items/22e6c5fd9f2ced3d5fc4" target="_blank" rel="external">MacへJenkinsをインストール</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Jenkinsのインストール方法"><span class="toc-number">1.</span> <span class="toc-text">Jenkinsのインストール方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考資料"><span class="toc-number">2.</span> <span class="toc-text">参考資料</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/05/06/how_to_install_jenkins/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/05/06/how_to_install_jenkins/&text=ローカルにJenkinsインストールしてみた。"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/05/06/how_to_install_jenkins/&title=ローカルにJenkinsインストールしてみた。"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/05/06/how_to_install_jenkins/&is_video=false&description=ローカルにJenkinsインストールしてみた。"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ローカルにJenkinsインストールしてみた。&body=Check out this article: http://k4h4shi.com/2017/05/06/how_to_install_jenkins/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/05/06/how_to_install_jenkins/&title=ローカルにJenkinsインストールしてみた。"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/05/06/how_to_install_jenkins/&title=ローカルにJenkinsインストールしてみた。"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/05/06/how_to_install_jenkins/&title=ローカルにJenkinsインストールしてみた。"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/05/06/how_to_install_jenkins/&title=ローカルにJenkinsインストールしてみた。"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/05/06/how_to_install_jenkins/&name=ローカルにJenkinsインストールしてみた。&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 kotaro takahashi
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

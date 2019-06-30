@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang=ja>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Node.js で開発していると、循環参照によって依存関係の解決が出来ず、モジュールが undefind になることがあります。 今回は、依存性の注入を利用してこの問題を解決します。 循環参照が起きる条件 あるモジュール同士が互いに互いをrequireしている。 module.exports に代入をしている  循環参照に陥った依存関係の例以下のように、2 つのモジュールが互いに互いをrequir">
+<meta name="keywords" content="ES6,node,require,commonJS,dependency-injection,software-design">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nodeモジュールの循環参照問題を、依存性の注入で解決する">
+<meta property="og:url" content="http://k4h4shi.com/2017/12/20/solve-recursive-ref-problem-with-di/index.html">
+<meta property="og:site_name" content="k4h4shi.com">
+<meta property="og:description" content="Node.js で開発していると、循環参照によって依存関係の解決が出来ず、モジュールが undefind になることがあります。 今回は、依存性の注入を利用してこの問題を解決します。 循環参照が起きる条件 あるモジュール同士が互いに互いをrequireしている。 module.exports に代入をしている  循環参照に陥った依存関係の例以下のように、2 つのモジュールが互いに互いをrequir">
+<meta property="og:locale" content="ja">
+<meta property="og:updated_time" content="2019-06-30T11:17:25.035Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nodeモジュールの循環参照問題を、依存性の注入で解決する">
+<meta name="twitter:description" content="Node.js で開発していると、循環参照によって依存関係の解決が出来ず、モジュールが undefind になることがあります。 今回は、依存性の注入を利用してこの問題を解決します。 循環参照が起きる条件 あるモジュール同士が互いに互いをrequireしている。 module.exports に代入をしている  循環参照に陥った依存関係の例以下のように、2 つのモジュールが互いに互いをrequir">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=16">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=192" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=180">
+          
+        
+    
+    <!-- title -->
+    <title>Nodeモジュールの循環参照問題を、依存性の注入で解決する</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/12/28/about-box-model/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/12/20/principles-for-writing-css/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/12/20/solve-recursive-ref-problem-with-di/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/12/20/solve-recursive-ref-problem-with-di/&text=Nodeモジュールの循環参照問題を、依存性の注入で解決する"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/12/20/solve-recursive-ref-problem-with-di/&title=Nodeモジュールの循環参照問題を、依存性の注入で解決する"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/12/20/solve-recursive-ref-problem-with-di/&is_video=false&description=Nodeモジュールの循環参照問題を、依存性の注入で解決する"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Nodeモジュールの循環参照問題を、依存性の注入で解決する&body=Check out this article: http://k4h4shi.com/2017/12/20/solve-recursive-ref-problem-with-di/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/12/20/solve-recursive-ref-problem-with-di/&title=Nodeモジュールの循環参照問題を、依存性の注入で解決する"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/12/20/solve-recursive-ref-problem-with-di/&title=Nodeモジュールの循環参照問題を、依存性の注入で解決する"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/12/20/solve-recursive-ref-problem-with-di/&title=Nodeモジュールの循環参照問題を、依存性の注入で解決する"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/12/20/solve-recursive-ref-problem-with-di/&title=Nodeモジュールの循環参照問題を、依存性の注入で解決する"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/12/20/solve-recursive-ref-problem-with-di/&name=Nodeモジュールの循環参照問題を、依存性の注入で解決する&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#循環参照が起きる条件"><span class="toc-number">1.</span> <span class="toc-text">循環参照が起きる条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#循環参照に陥った依存関係の例"><span class="toc-number">2.</span> <span class="toc-text">循環参照に陥った依存関係の例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#間接的な循環参照"><span class="toc-number">3.</span> <span class="toc-text">間接的な循環参照</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#循環参照に陥る原因と解決策"><span class="toc-number"></span> <span class="toc-text">循環参照に陥る原因と解決策</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#依存性の注入とは"><span class="toc-number">1.</span> <span class="toc-text">依存性の注入とは</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#問題点の整理"><span class="toc-number">2.</span> <span class="toc-text">問題点の整理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#依存性の注入で循環参照を解決する"><span class="toc-number"></span> <span class="toc-text">依存性の注入で循環参照を解決する</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#循環参照を陥った依存性の注入で解決する例"><span class="toc-number">1.</span> <span class="toc-text">循環参照を陥った依存性の注入で解決する例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#まとめ"><span class="toc-number"></span> <span class="toc-text">まとめ</span></a>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Nodeモジュールの循環参照問題を、依存性の注入で解決する
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">k4h4shi.com</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-12-20T13:08:40.000Z" itemprop="datePublished">2017-12-20</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/ES6/">ES6</a>, <a class="tag-link" href="/tags/commonJS/">commonJS</a>, <a class="tag-link" href="/tags/dependency-injection/">dependency-injection</a>, <a class="tag-link" href="/tags/node/">node</a>, <a class="tag-link" href="/tags/require/">require</a>, <a class="tag-link" href="/tags/software-design/">software-design</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>Node.js で開発していると、循環参照によって依存関係の解決が出来ず、モジュールが undefind になることがあります。</p>
+<p>今回は、依存性の注入を利用してこの問題を解決します。</p>
+<h3 id="循環参照が起きる条件"><a href="#循環参照が起きる条件" class="headerlink" title="循環参照が起きる条件"></a>循環参照が起きる条件</h3><ol>
+<li>あるモジュール同士が互いに互いを<code>require</code>している。</li>
+<li>module.exports に代入をしている</li>
+</ol>
+<h3 id="循環参照に陥った依存関係の例"><a href="#循環参照に陥った依存関係の例" class="headerlink" title="循環参照に陥った依存関係の例"></a>循環参照に陥った依存関係の例</h3><p>以下のように、2 つのモジュールが互いに互いを<code>require</code>してしまっていると、どちらかが undefined になります。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// class-a.js</span></div><div class="line"><span class="keyword">const</span> ClassB = <span class="built_in">require</span>(<span class="string">"./class-b"</span>);</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassA</span> </span>&#123;</div><div class="line">  fnA() &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"This is fnA"</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  callFnB() &#123;</div><div class="line">    <span class="keyword">new</span> ClassB().fnB();</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="built_in">module</span>.exports = ClassA;</div><div class="line"></div><div class="line"><span class="comment">// class-b.js</span></div><div class="line"><span class="keyword">const</span> ClassA = <span class="built_in">require</span>(<span class="string">"./class-a"</span>);</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassB</span> </span>&#123;</div><div class="line">  fnB() &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"this is fnB"</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  callFnA() &#123;</div><div class="line">    <span class="keyword">new</span> ClassB().fnB();</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="built_in">module</span>.exports = ClassB;</div></pre></td></tr></table></figure>
+<h3 id="間接的な循環参照"><a href="#間接的な循環参照" class="headerlink" title="間接的な循環参照"></a>間接的な循環参照</h3><p>相互に直接<code>require</code>するわけではなくとも、間接的に相互依存した時点でこの問題は発生します。</p>
+<p>それは例えば、モジュールが<code>a -&gt; b -&gt; c -&gt; d -&gt; a</code>と依存しているような状態です。</p>
+<h2 id="循環参照に陥る原因と解決策"><a href="#循環参照に陥る原因と解決策" class="headerlink" title="循環参照に陥る原因と解決策"></a>循環参照に陥る原因と解決策</h2><p>相互依存するモジュールが出来てしまうことは、設計の失敗を意味します。</p>
+<p>それは問題なのでどうするのかというと、依存性の注入を行うことで解決できます。</p>
+<h3 id="依存性の注入とは"><a href="#依存性の注入とは" class="headerlink" title="依存性の注入とは"></a>依存性の注入とは</h3><p>依存性の注入は、依存性を外部から渡すようにする設計方法です。</p>
+<p>今回の場合、あるモジュールの依存モジュールを外部から渡すことになります。</p>
+<p>これにより、依存しているモジュールは依存モジュールを<code>import</code>したり<code>require</code>しなくても利用できます。</p>
+<h3 id="問題点の整理"><a href="#問題点の整理" class="headerlink" title="問題点の整理"></a>問題点の整理</h3><p>この状況で起きている問題を整理すると、以下の状況だと考えられます。</p>
+<p>モジュール A とモジュール B は相互に機能を利用したいが、相互参照をしてはいけない。</p>
+<p>それならば、どちらかのモジュールがもう片方のモジュールを参照しないようにすればよいのです。</p>
+<h2 id="依存性の注入で循環参照を解決する"><a href="#依存性の注入で循環参照を解決する" class="headerlink" title="依存性の注入で循環参照を解決する"></a>依存性の注入で循環参照を解決する</h2><p>モジュール A がモジュール B に対し、依存性として自身を注入します。</p>
+<p>モジュール A はモジュール B を参照して依存していますが、モジュール B はもはやモジュール A を参照していません。</p>
+<p>もっと言えば、モジュール B は、特定のモジュール A に依存していません。</p>
+<h3 id="循環参照を陥った依存性の注入で解決する例"><a href="#循環参照を陥った依存性の注入で解決する例" class="headerlink" title="循環参照を陥った依存性の注入で解決する例"></a>循環参照を陥った依存性の注入で解決する例</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// class-a.js</span></div><div class="line"><span class="keyword">const</span> ClassB = <span class="built_in">require</span>(<span class="string">"./class-b"</span>);</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassA</span> </span>&#123;</div><div class="line">  fnA() &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"This is fnA"</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  callFnB() &#123;</div><div class="line">    <span class="keyword">return</span> createB().fnB();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  createB() &#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ClassB(<span class="keyword">this</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="built_in">module</span>.exports = ClassA;</div><div class="line"></div><div class="line"><span class="comment">// class-b.js</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ClassB</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span>(classA) &#123;</div><div class="line">    <span class="keyword">this</span>._classA = classA;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  fnB() &#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"this is fnB"</span>);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  callFnA() &#123;</div><div class="line">    <span class="keyword">this</span>._classA.fnA();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">//...</span></div><div class="line">&#125;</div><div class="line"><span class="built_in">module</span>.exports = ClassB;</div></pre></td></tr></table></figure>
+<p>これにより、モジュール A とモジュール B は相互に機能を呼び出すことができ、かつ循環参照を防ぐことができます。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>依存性の注入は DI コンテナなどが有名ですが、広義にはもっと単純な状況も指します。</p>
+<p>単体テストの容易性を高めたり、ポリモーフィズムを利用して柔軟なコードを書くための設計の技法です。</p>
+<p>覚えておくと必ず役に立つと思います。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#循環参照が起きる条件"><span class="toc-number">1.</span> <span class="toc-text">循環参照が起きる条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#循環参照に陥った依存関係の例"><span class="toc-number">2.</span> <span class="toc-text">循環参照に陥った依存関係の例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#間接的な循環参照"><span class="toc-number">3.</span> <span class="toc-text">間接的な循環参照</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#循環参照に陥る原因と解決策"><span class="toc-number"></span> <span class="toc-text">循環参照に陥る原因と解決策</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#依存性の注入とは"><span class="toc-number">1.</span> <span class="toc-text">依存性の注入とは</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#問題点の整理"><span class="toc-number">2.</span> <span class="toc-text">問題点の整理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#依存性の注入で循環参照を解決する"><span class="toc-number"></span> <span class="toc-text">依存性の注入で循環参照を解決する</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#循環参照を陥った依存性の注入で解決する例"><span class="toc-number">1.</span> <span class="toc-text">循環参照を陥った依存性の注入で解決する例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#まとめ"><span class="toc-number"></span> <span class="toc-text">まとめ</span></a>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/12/20/solve-recursive-ref-problem-with-di/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/12/20/solve-recursive-ref-problem-with-di/&text=Nodeモジュールの循環参照問題を、依存性の注入で解決する"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/12/20/solve-recursive-ref-problem-with-di/&title=Nodeモジュールの循環参照問題を、依存性の注入で解決する"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/12/20/solve-recursive-ref-problem-with-di/&is_video=false&description=Nodeモジュールの循環参照問題を、依存性の注入で解決する"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Nodeモジュールの循環参照問題を、依存性の注入で解決する&body=Check out this article: http://k4h4shi.com/2017/12/20/solve-recursive-ref-problem-with-di/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/12/20/solve-recursive-ref-problem-with-di/&title=Nodeモジュールの循環参照問題を、依存性の注入で解決する"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/12/20/solve-recursive-ref-problem-with-di/&title=Nodeモジュールの循環参照問題を、依存性の注入で解決する"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/12/20/solve-recursive-ref-problem-with-di/&title=Nodeモジュールの循環参照問題を、依存性の注入で解決する"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/12/20/solve-recursive-ref-problem-with-di/&title=Nodeモジュールの循環参照問題を、依存性の注入で解決する"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/12/20/solve-recursive-ref-problem-with-di/&name=Nodeモジュールの循環参照問題を、依存性の注入で解決する&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 kotaro takahashi
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

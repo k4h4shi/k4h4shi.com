@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang=ja>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="npm-scirptsとはnpm initを実行すると生成されるpackage.jsonに、”scripts”というプロパティがあります。ここにワンライナーのシェルスクリプトと、そのエイリアスを設定できます。 以下のように記述して設定します。12345678&amp;#123;  ...  &amp;quot;scripts&amp;quot;: &amp;#123;    &amp;quot;server&amp;quot;: &amp;quot;h">
+<meta name="keywords" content="tips,npm,npm-scripts">
+<meta property="og:type" content="article">
+<meta property="og:title" content="npm scriptsを使ってタスクを実行する">
+<meta property="og:url" content="http://k4h4shi.com/2017/09/14/how-to-create-npm-commands/index.html">
+<meta property="og:site_name" content="k4h4shi.com">
+<meta property="og:description" content="npm-scirptsとはnpm initを実行すると生成されるpackage.jsonに、”scripts”というプロパティがあります。ここにワンライナーのシェルスクリプトと、そのエイリアスを設定できます。 以下のように記述して設定します。12345678&amp;#123;  ...  &amp;quot;scripts&amp;quot;: &amp;#123;    &amp;quot;server&amp;quot;: &amp;quot;h">
+<meta property="og:locale" content="ja">
+<meta property="og:updated_time" content="2019-06-30T11:17:25.025Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="npm scriptsを使ってタスクを実行する">
+<meta name="twitter:description" content="npm-scirptsとはnpm initを実行すると生成されるpackage.jsonに、”scripts”というプロパティがあります。ここにワンライナーのシェルスクリプトと、そのエイリアスを設定できます。 以下のように記述して設定します。12345678&amp;#123;  ...  &amp;quot;scripts&amp;quot;: &amp;#123;    &amp;quot;server&amp;quot;: &amp;quot;h">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=16">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=192" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=180">
+          
+        
+    
+    <!-- title -->
+    <title>npm scriptsを使ってタスクを実行する</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/09/14/express-application-generator/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/09/14/build-a-server-with-express/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/09/14/how-to-create-npm-commands/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/09/14/how-to-create-npm-commands/&text=npm scriptsを使ってタスクを実行する"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/09/14/how-to-create-npm-commands/&title=npm scriptsを使ってタスクを実行する"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/09/14/how-to-create-npm-commands/&is_video=false&description=npm scriptsを使ってタスクを実行する"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=npm scriptsを使ってタスクを実行する&body=Check out this article: http://k4h4shi.com/2017/09/14/how-to-create-npm-commands/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/09/14/how-to-create-npm-commands/&title=npm scriptsを使ってタスクを実行する"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/09/14/how-to-create-npm-commands/&title=npm scriptsを使ってタスクを実行する"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/09/14/how-to-create-npm-commands/&title=npm scriptsを使ってタスクを実行する"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/09/14/how-to-create-npm-commands/&title=npm scriptsを使ってタスクを実行する"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/09/14/how-to-create-npm-commands/&name=npm scriptsを使ってタスクを実行する&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#npm-scirptsとは"><span class="toc-number">1.</span> <span class="toc-text">npm-scirptsとは</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#予約語のnpm-scripts"><span class="toc-number">1.1.</span> <span class="toc-text">予約語のnpm-scripts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#フックされるnpm-scripts"><span class="toc-number">1.2.</span> <span class="toc-text">フックされるnpm-scripts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#予約語ではないnpm-scripts"><span class="toc-number">1.3.</span> <span class="toc-text">予約語ではないnpm-scripts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前後に実行されるnpm-scripts"><span class="toc-number">1.4.</span> <span class="toc-text">前後に実行されるnpm-scripts</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#まとめ"><span class="toc-number">2.</span> <span class="toc-text">まとめ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献"><span class="toc-number">3.</span> <span class="toc-text">参考文献</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        npm scriptsを使ってタスクを実行する
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">k4h4shi.com</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-09-14T11:17:09.000Z" itemprop="datePublished">2017-09-14</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/npm/">npm</a>, <a class="tag-link" href="/tags/npm-scripts/">npm-scripts</a>, <a class="tag-link" href="/tags/tips/">tips</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="npm-scirptsとは"><a href="#npm-scirptsとは" class="headerlink" title="npm-scirptsとは"></a>npm-scirptsとは</h2><p><code>npm init</code>を実行すると生成されるpackage.jsonに、”scripts”というプロパティがあります。<br>ここにワンライナーのシェルスクリプトと、そのエイリアスを設定できます。</p>
+<p>以下のように記述して設定します。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  ...</div><div class="line">  &quot;scripts&quot;: &#123;</div><div class="line">    &quot;server&quot;: &quot;hexo server&quot;,</div><div class="line">    &quot;start&quot;: &quot;hexo server -o&quot;</div><div class="line">  &#125;,</div><div class="line">  ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>設定したnpm-scritpsはnpmコマンドで実行できるようになります。<br>key名によって以下の4つに分類され、それぞれ実行方式が異なります。</p>
+<ul>
+<li>予約語のnpm-scripts</li>
+<li>フックされるnpm-scirpts</li>
+<li>予約語ではないnpm-scripts</li>
+<li>前後に実行されるnpm-scripts</li>
+</ul>
+<h3 id="予約語のnpm-scripts"><a href="#予約語のnpm-scripts" class="headerlink" title="予約語のnpm-scripts"></a>予約語のnpm-scripts</h3><p>予約語のnpm-scriptsは、<code>npm ${name}</code>の形式で実行できます。</p>
+<ul>
+<li>start</li>
+<li>restart</li>
+<li>stop</li>
+<li>test</li>
+</ul>
+<p>予約されているのは名前だけのため、シェルスクリプトは自分で定義する必要があります。</p>
+<h3 id="フックされるnpm-scripts"><a href="#フックされるnpm-scripts" class="headerlink" title="フックされるnpm-scripts"></a>フックされるnpm-scripts</h3><p>あるコマンドが実行されるタイミングで実行されます。<br>詳細は<a href="https://docs.npmjs.com/misc/scripts" target="_blank" rel="external">npmjs.com</a>の公式ドキュメントをみてください。</p>
+<h3 id="予約語ではないnpm-scripts"><a href="#予約語ではないnpm-scripts" class="headerlink" title="予約語ではないnpm-scripts"></a>予約語ではないnpm-scripts</h3><p>予約語ではないnpm-scriptsは、<code>npm run ${name}</code>の形式で実行できます。<br>正式には<code>npm run-sctipt ${name}</code>ですが、長いのでエイリアスの方を使うことが多いです。</p>
+<h3 id="前後に実行されるnpm-scripts"><a href="#前後に実行されるnpm-scripts" class="headerlink" title="前後に実行されるnpm-scripts"></a>前後に実行されるnpm-scripts</h3><p>コマンド名をのプレフィックスを以下のどちらかで始めることで、任意のコマンドの前後に設定させることができます。</p>
+<ul>
+<li>pre </li>
+<li>post</li>
+</ul>
+<p>例えば、prestartは、startの前に実行されます。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>上記のようにnpm-scriptsはコマンド名によって挙動が変わります。<br>使いこなすことで開発時の繰り返しのタスクをある程度自動化できますので、ぜひ使ってみてください。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a href="https://docs.npmjs.com/misc/scripts" target="_blank" rel="external">npmjs.com</a></li>
+<li><a href="http://qiita.com/axross/items/a2a0d148e40b66074858" target="_blank" rel="external">npm-scriptsについて</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#npm-scirptsとは"><span class="toc-number">1.</span> <span class="toc-text">npm-scirptsとは</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#予約語のnpm-scripts"><span class="toc-number">1.1.</span> <span class="toc-text">予約語のnpm-scripts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#フックされるnpm-scripts"><span class="toc-number">1.2.</span> <span class="toc-text">フックされるnpm-scripts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#予約語ではないnpm-scripts"><span class="toc-number">1.3.</span> <span class="toc-text">予約語ではないnpm-scripts</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前後に実行されるnpm-scripts"><span class="toc-number">1.4.</span> <span class="toc-text">前後に実行されるnpm-scripts</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#まとめ"><span class="toc-number">2.</span> <span class="toc-text">まとめ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献"><span class="toc-number">3.</span> <span class="toc-text">参考文献</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/09/14/how-to-create-npm-commands/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/09/14/how-to-create-npm-commands/&text=npm scriptsを使ってタスクを実行する"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/09/14/how-to-create-npm-commands/&title=npm scriptsを使ってタスクを実行する"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/09/14/how-to-create-npm-commands/&is_video=false&description=npm scriptsを使ってタスクを実行する"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=npm scriptsを使ってタスクを実行する&body=Check out this article: http://k4h4shi.com/2017/09/14/how-to-create-npm-commands/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/09/14/how-to-create-npm-commands/&title=npm scriptsを使ってタスクを実行する"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/09/14/how-to-create-npm-commands/&title=npm scriptsを使ってタスクを実行する"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/09/14/how-to-create-npm-commands/&title=npm scriptsを使ってタスクを実行する"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/09/14/how-to-create-npm-commands/&title=npm scriptsを使ってタスクを実行する"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/09/14/how-to-create-npm-commands/&name=npm scriptsを使ってタスクを実行する&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 kotaro takahashi
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

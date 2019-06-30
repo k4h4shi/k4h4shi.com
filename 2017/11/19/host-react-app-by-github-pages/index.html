@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang=ja>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="最近個人的に React でフロントエンドの開発をしています。 そこで、まずはとりあえず使い始めるための方法をまとめようと思っています。 目的このエントリの目的は、React で作ったアプリを github pages でホストすることです。 React 自体の使い方などは、公式のチュートリアルが一番わかりやすいです。 使用するライブラリ/ツール今回使うツールは以下の 3 つです。 これさえあれば">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Reactで作ったアプリをgithub pagesでホストする">
+<meta property="og:url" content="http://k4h4shi.com/2017/11/19/host-react-app-by-github-pages/index.html">
+<meta property="og:site_name" content="k4h4shi.com">
+<meta property="og:description" content="最近個人的に React でフロントエンドの開発をしています。 そこで、まずはとりあえず使い始めるための方法をまとめようと思っています。 目的このエントリの目的は、React で作ったアプリを github pages でホストすることです。 React 自体の使い方などは、公式のチュートリアルが一番わかりやすいです。 使用するライブラリ/ツール今回使うツールは以下の 3 つです。 これさえあれば">
+<meta property="og:locale" content="ja">
+<meta property="og:updated_time" content="2019-06-30T11:17:25.025Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Reactで作ったアプリをgithub pagesでホストする">
+<meta name="twitter:description" content="最近個人的に React でフロントエンドの開発をしています。 そこで、まずはとりあえず使い始めるための方法をまとめようと思っています。 目的このエントリの目的は、React で作ったアプリを github pages でホストすることです。 React 自体の使い方などは、公式のチュートリアルが一番わかりやすいです。 使用するライブラリ/ツール今回使うツールは以下の 3 つです。 これさえあれば">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=16">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=192" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=180">
+          
+        
+    
+    <!-- title -->
+    <title>Reactで作ったアプリをgithub pagesでホストする</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/11/28/make-material-ui-floatingbutton/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/11/16/translate-webpack-concept/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/11/19/host-react-app-by-github-pages/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/11/19/host-react-app-by-github-pages/&text=Reactで作ったアプリをgithub pagesでホストする"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/11/19/host-react-app-by-github-pages/&title=Reactで作ったアプリをgithub pagesでホストする"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/11/19/host-react-app-by-github-pages/&is_video=false&description=Reactで作ったアプリをgithub pagesでホストする"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Reactで作ったアプリをgithub pagesでホストする&body=Check out this article: http://k4h4shi.com/2017/11/19/host-react-app-by-github-pages/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/11/19/host-react-app-by-github-pages/&title=Reactで作ったアプリをgithub pagesでホストする"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/11/19/host-react-app-by-github-pages/&title=Reactで作ったアプリをgithub pagesでホストする"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/11/19/host-react-app-by-github-pages/&title=Reactで作ったアプリをgithub pagesでホストする"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/11/19/host-react-app-by-github-pages/&title=Reactで作ったアプリをgithub pagesでホストする"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/11/19/host-react-app-by-github-pages/&name=Reactで作ったアプリをgithub pagesでホストする&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#目的"><span class="toc-number">1.</span> <span class="toc-text">目的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用するライブラリ-ツール"><span class="toc-number">2.</span> <span class="toc-text">使用するライブラリ/ツール</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#React"><span class="toc-number">2.1.</span> <span class="toc-text">React</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#create-react-app"><span class="toc-number">2.2.</span> <span class="toc-text">create-react-app</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#material-ui"><span class="toc-number">2.3.</span> <span class="toc-text">material-ui</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gh-pages"><span class="toc-number">2.4.</span> <span class="toc-text">gh-pages</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#環境を構築する"><span class="toc-number">3.</span> <span class="toc-text">環境を構築する</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#create-react-app-で-React-のプロジェクトを作る"><span class="toc-number">3.1.</span> <span class="toc-text">create-react-app で React のプロジェクトを作る</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#material-ui-を導入する"><span class="toc-number">3.2.</span> <span class="toc-text">material-ui を導入する</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-コマンドで-github-pages-にデプロイできるようにする"><span class="toc-number">3.3.</span> <span class="toc-text">1 コマンドで github pages にデプロイできるようにする</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#プロダクションビルドを生成する"><span class="toc-number">3.4.</span> <span class="toc-text">プロダクションビルドを生成する</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#package-json-に-homepage-を追加する"><span class="toc-number">3.5.</span> <span class="toc-text">package.json に homepage を追加する</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gh-pages-を導入する"><span class="toc-number">3.6.</span> <span class="toc-text">gh-pages を導入する</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#deploy-のスクリプトを追記する"><span class="toc-number">3.7.</span> <span class="toc-text">deploy のスクリプトを追記する</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#まとめ"><span class="toc-number">3.8.</span> <span class="toc-text">まとめ</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Reactで作ったアプリをgithub pagesでホストする
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">k4h4shi.com</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-11-19T04:02:38.000Z" itemprop="datePublished">2017-11-19</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>最近個人的に React でフロントエンドの開発をしています。</p>
+<p>そこで、まずはとりあえず使い始めるための方法をまとめようと思っています。</p>
+<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>このエントリの目的は、React で作ったアプリを github pages でホストすることです。</p>
+<p>React 自体の使い方などは、<a href="https://reactjs.org/tutorial/tutorial.html" target="_blank" rel="external">公式のチュートリアル</a><br>が一番わかりやすいです。</p>
+<h2 id="使用するライブラリ-ツール"><a href="#使用するライブラリ-ツール" class="headerlink" title="使用するライブラリ/ツール"></a>使用するライブラリ/ツール</h2><p>今回使うツールは以下の 3 つです。</p>
+<p>これさえあれば、ユーザの操作にインタラクティブに反応するビューを作ることができます。</p>
+<ul>
+<li>React</li>
+<li>material-ui</li>
+<li>create-react-app<ul>
+<li>yarn</li>
+</ul>
+</li>
+<li>gh-pages</li>
+</ul>
+<h3 id="React"><a href="#React" class="headerlink" title="React"></a>React</h3><p>言わずもがな、インタラクティブなビューを作るための Facebook 製のライブラリです。</p>
+<h3 id="create-react-app"><a href="#create-react-app" class="headerlink" title="create-react-app"></a>create-react-app</h3><p>React の開発の中である意味一番の難所でもある、環境構築をサポートするツールです。</p>
+<p>babel や webpack, eslint までモダンフロントエンドの開発に必要なツール群をラップしてくれています。</p>
+<p>create-react-app は、パッケージ管理ツールに yarn を利用しています。</p>
+<h3 id="material-ui"><a href="#material-ui" class="headerlink" title="material-ui"></a>material-ui</h3><p>Google の UI のガイドラインであるマテリアルデザインに沿ったコンポーネントを、React コンポーネントとして提供するライブラリです。</p>
+<p>質のいいコンポーネントを、自分のプロジェクトに流用することができます。</p>
+<h3 id="gh-pages"><a href="#gh-pages" class="headerlink" title="gh-pages"></a>gh-pages</h3><p>プロダクションビルドを、github pages に簡単にデプロイするツールです。</p>
+<h2 id="環境を構築する"><a href="#環境を構築する" class="headerlink" title="環境を構築する"></a>環境を構築する</h2><p>前提として、node, npm はすでにローカルに導入済みだと想定します。</p>
+<h3 id="create-react-app-で-React-のプロジェクトを作る"><a href="#create-react-app-で-React-のプロジェクトを作る" class="headerlink" title="create-react-app で React のプロジェクトを作る"></a>create-react-app で React のプロジェクトを作る</h3><p>まずは、create-reacta-app をグローバルにインストールします。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm i -g create-react-app</div></pre></td></tr></table></figure>
+<p>その後、以下の一連のコマンドを実行します。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ mkdir my-project</div><div class="line">$ cd my-project</div><div class="line">$ create-react-app .</div></pre></td></tr></table></figure>
+<p>すると、プロジェクトのひな型が作成されます。</p>
+<p>うまくいっていれば、以下のコマンドで、サーバが立ち上がると思います。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm start</div></pre></td></tr></table></figure>
+<h3 id="material-ui-を導入する"><a href="#material-ui-を導入する" class="headerlink" title="material-ui を導入する"></a>material-ui を導入する</h3><p>作成されたプロジェクトには materail-ui は含まれていないので、自分で導入する必要があります。</p>
+<p>create-react-app で作成したアプリに、自分で依存関係を追加したい場合は yarn を使います。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ yarn add material-ui</div></pre></td></tr></table></figure>
+<p>その後、問題なく動作するか確認するために、material-ui のボタンを置いてみます。</p>
+<p>例えば、src/App.js を以下のように書き換えてください。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">// src/App.js</div><div class="line">import React, &#123; Component &#125; from &apos;react&apos;;</div><div class="line">import ReactDOM from &quot;react-dom&quot;;</div><div class="line">import MuiThemeProvider from &quot;material-ui/styles/MuiThemeProvider&quot;;</div><div class="line">import FlatButton from &apos;material-ui/FlatButton&apos;;</div><div class="line"></div><div class="line">import logo from &apos;./logo.svg&apos;;</div><div class="line">import &apos;./App.css&apos;;</div><div class="line"></div><div class="line">const App = () =&gt; (</div><div class="line">  &lt;MuiThemeProvider&gt;</div><div class="line">    &lt;FlatButton label=&quot;Full width&quot; fullWidth=&#123;true&#125; /&gt;</div><div class="line">  &lt;/MuiThemeProvider&gt;</div><div class="line">)</div><div class="line"></div><div class="line">export default App;</div></pre></td></tr></table></figure>
+<p>変更後は、テストを行ってアプリが壊れていないか確認しましょう。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm test</div></pre></td></tr></table></figure>
+<p>テストが成功したら、再度以下のコマンドで、サーバが立ち上げます。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm start</div></pre></td></tr></table></figure>
+<p>Full Width と表示されたボタンが表示されていれば成功です。</p>
+<h3 id="1-コマンドで-github-pages-にデプロイできるようにする"><a href="#1-コマンドで-github-pages-にデプロイできるようにする" class="headerlink" title="1 コマンドで github pages にデプロイできるようにする"></a>1 コマンドで github pages にデプロイできるようにする</h3><p>これから、以下のコマンドを実行すれば github pages にデプロイできるように環境を作っていきます。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm run deploy</div></pre></td></tr></table></figure>
+<p>コマンド 1 つでデプロイできるようにしておくことは、こまめにデプロイしていく開発スタイルでは必要不可欠です。そのため、環境を構築したばかりのこの段階でデプロイの環境も構築しておきます。</p>
+<h3 id="プロダクションビルドを生成する"><a href="#プロダクションビルドを生成する" class="headerlink" title="プロダクションビルドを生成する"></a>プロダクションビルドを生成する</h3><p>現在、src/に存在するファイルは実行可能な形式ではありませんので、デプロイをする前に、ビルドをする必要があります。</p>
+<p>と言っても、create-react-app のおかげで以下のコマンドを実行するだけで良いです。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm run build</div></pre></td></tr></table></figure>
+<p>すると、build/が作成されると思います。</p>
+<h3 id="package-json-に-homepage-を追加する"><a href="#package-json-に-homepage-を追加する" class="headerlink" title="package.json に homepage を追加する"></a>package.json に homepage を追加する</h3><p>create-react-app はデフォルトでサーバールートでホスティングされる想定でビルドを行います。今回は、github-pages でデプロイを行うために、package.json の設定を変更します。</p>
+<p>以下の形式で package.json に追記してください。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;homepage&quot;: &quot;http;//&#123;yourName&#125;.github.io/&#123;yourAppName&#125;/&quot;</div></pre></td></tr></table></figure>
+<h3 id="gh-pages-を導入する"><a href="#gh-pages-を導入する" class="headerlink" title="gh-pages を導入する"></a>gh-pages を導入する</h3><p>github pages へのデプロイを CLI から行うために、gh-pages というプログインを導入します。<br>yarn を使って、以下のコマンドで導入します。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ yarn add --dev gh-pages</div></pre></td></tr></table></figure>
+<h3 id="deploy-のスクリプトを追記する"><a href="#deploy-のスクリプトを追記する" class="headerlink" title="deploy のスクリプトを追記する"></a>deploy のスクリプトを追記する</h3><p><code>npm run deploy</code> を実行した際、以下の 2 つのタスクを順に実行しさせます。</p>
+<ul>
+<li>プロダクションビルドを生成</li>
+<li>プロダクションビルドを github pages へデプロイする</li>
+</ul>
+<p>具体的には以下を package.json の <code>sprict</code>に追加します。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;deploy&quot; : &quot;npm run build&amp;&amp;gh-pages -d build&quot;</div></pre></td></tr></table></figure>
+<p><code>npm run deploy</code> でデプロイが可能になりました。先ほど、hopepege に指定した URL へアクセスして、確認してください。</p>
+<h3 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h3><p>割と簡単に github pages で、React で実装した web アプリを公開することができたと思います。</p>
+<p>全く実装はしていませんが、お膳立てはしたので、後はみなさんのクリエイティビティでなんとかしましょう。</p>
+<p>自分の環境では動作しないなど、不具合があった場合はコメント欄で連絡をもらえると助かります。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#目的"><span class="toc-number">1.</span> <span class="toc-text">目的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用するライブラリ-ツール"><span class="toc-number">2.</span> <span class="toc-text">使用するライブラリ/ツール</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#React"><span class="toc-number">2.1.</span> <span class="toc-text">React</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#create-react-app"><span class="toc-number">2.2.</span> <span class="toc-text">create-react-app</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#material-ui"><span class="toc-number">2.3.</span> <span class="toc-text">material-ui</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gh-pages"><span class="toc-number">2.4.</span> <span class="toc-text">gh-pages</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#環境を構築する"><span class="toc-number">3.</span> <span class="toc-text">環境を構築する</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#create-react-app-で-React-のプロジェクトを作る"><span class="toc-number">3.1.</span> <span class="toc-text">create-react-app で React のプロジェクトを作る</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#material-ui-を導入する"><span class="toc-number">3.2.</span> <span class="toc-text">material-ui を導入する</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-コマンドで-github-pages-にデプロイできるようにする"><span class="toc-number">3.3.</span> <span class="toc-text">1 コマンドで github pages にデプロイできるようにする</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#プロダクションビルドを生成する"><span class="toc-number">3.4.</span> <span class="toc-text">プロダクションビルドを生成する</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#package-json-に-homepage-を追加する"><span class="toc-number">3.5.</span> <span class="toc-text">package.json に homepage を追加する</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gh-pages-を導入する"><span class="toc-number">3.6.</span> <span class="toc-text">gh-pages を導入する</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#deploy-のスクリプトを追記する"><span class="toc-number">3.7.</span> <span class="toc-text">deploy のスクリプトを追記する</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#まとめ"><span class="toc-number">3.8.</span> <span class="toc-text">まとめ</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/11/19/host-react-app-by-github-pages/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/11/19/host-react-app-by-github-pages/&text=Reactで作ったアプリをgithub pagesでホストする"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/11/19/host-react-app-by-github-pages/&title=Reactで作ったアプリをgithub pagesでホストする"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/11/19/host-react-app-by-github-pages/&is_video=false&description=Reactで作ったアプリをgithub pagesでホストする"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Reactで作ったアプリをgithub pagesでホストする&body=Check out this article: http://k4h4shi.com/2017/11/19/host-react-app-by-github-pages/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/11/19/host-react-app-by-github-pages/&title=Reactで作ったアプリをgithub pagesでホストする"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/11/19/host-react-app-by-github-pages/&title=Reactで作ったアプリをgithub pagesでホストする"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/11/19/host-react-app-by-github-pages/&title=Reactで作ったアプリをgithub pagesでホストする"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/11/19/host-react-app-by-github-pages/&title=Reactで作ったアプリをgithub pagesでホストする"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/11/19/host-react-app-by-github-pages/&name=Reactで作ったアプリをgithub pagesでホストする&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 kotaro takahashi
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

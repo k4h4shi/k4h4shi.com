@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang=ja>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="flexbox って何って聞かれた時に答えられる程度にしておくための備忘録です。 flexbox とはflexbox は色々スクリーンサイズや表示デバイスに寄らずにレイアウトを行うためのもの。 なんだそれ、レスポンシブデザインじゃんと思うけど、それは考え方であり思想だから How には答えてくれない。 じゃあどうやるのって事で定義された CSS の仕様てな感じかなと勝手に思ってる。 ということで、">
+<meta name="keywords" content="front-end,css,なにそれ食べれるの,web-design,flexbox">
+<meta property="og:type" content="article">
+<meta property="og:title" content="flexboxってなにそれ食べれるの">
+<meta property="og:url" content="http://k4h4shi.com/2017/12/09/about-flexbox/index.html">
+<meta property="og:site_name" content="k4h4shi.com">
+<meta property="og:description" content="flexbox って何って聞かれた時に答えられる程度にしておくための備忘録です。 flexbox とはflexbox は色々スクリーンサイズや表示デバイスに寄らずにレイアウトを行うためのもの。 なんだそれ、レスポンシブデザインじゃんと思うけど、それは考え方であり思想だから How には答えてくれない。 じゃあどうやるのって事で定義された CSS の仕様てな感じかなと勝手に思ってる。 ということで、">
+<meta property="og:locale" content="ja">
+<meta property="og:image" content="https://developer.mozilla.org/files/3739/flex_terms.png">
+<meta property="og:updated_time" content="2019-06-30T11:17:25.019Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="flexboxってなにそれ食べれるの">
+<meta name="twitter:description" content="flexbox って何って聞かれた時に答えられる程度にしておくための備忘録です。 flexbox とはflexbox は色々スクリーンサイズや表示デバイスに寄らずにレイアウトを行うためのもの。 なんだそれ、レスポンシブデザインじゃんと思うけど、それは考え方であり思想だから How には答えてくれない。 じゃあどうやるのって事で定義された CSS の仕様てな感じかなと勝手に思ってる。 ということで、">
+<meta name="twitter:image" content="https://developer.mozilla.org/files/3739/flex_terms.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=16">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=192" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=180">
+          
+        
+    
+    <!-- title -->
+    <title>flexboxってなにそれ食べれるの</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/12/10/test-react-component-with-enzyme/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/12/09/embed-codepen/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/12/09/about-flexbox/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/12/09/about-flexbox/&text=flexboxってなにそれ食べれるの"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/12/09/about-flexbox/&title=flexboxってなにそれ食べれるの"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/12/09/about-flexbox/&is_video=false&description=flexboxってなにそれ食べれるの"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=flexboxってなにそれ食べれるの&body=Check out this article: http://k4h4shi.com/2017/12/09/about-flexbox/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/12/09/about-flexbox/&title=flexboxってなにそれ食べれるの"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/12/09/about-flexbox/&title=flexboxってなにそれ食べれるの"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/12/09/about-flexbox/&title=flexboxってなにそれ食べれるの"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/12/09/about-flexbox/&title=flexboxってなにそれ食べれるの"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/12/09/about-flexbox/&name=flexboxってなにそれ食べれるの&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#flexbox-とは"><span class="toc-number">1.</span> <span class="toc-text">flexbox とは</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#flexbox-のコンセプト"><span class="toc-number">1.1.</span> <span class="toc-text">flexbox のコンセプト</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flexbox-の用語"><span class="toc-number">1.2.</span> <span class="toc-text">flexbox の用語</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#まとめ"><span class="toc-number">1.3.</span> <span class="toc-text">まとめ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考リンク"><span class="toc-number">1.4.</span> <span class="toc-text">参考リンク</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        flexboxってなにそれ食べれるの
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">k4h4shi.com</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-12-09T12:20:46.000Z" itemprop="datePublished">2017-12-09</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/css/">css</a>, <a class="tag-link" href="/tags/flexbox/">flexbox</a>, <a class="tag-link" href="/tags/front-end/">front-end</a>, <a class="tag-link" href="/tags/web-design/">web-design</a>, <a class="tag-link" href="/tags/なにそれ食べれるの/">なにそれ食べれるの</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>flexbox って何って聞かれた時に答えられる程度にしておくための備忘録です。</p>
+<h1 id="flexbox-とは"><a href="#flexbox-とは" class="headerlink" title="flexbox とは"></a>flexbox とは</h1><p>flexbox は色々スクリーンサイズや表示デバイスに寄らずにレイアウトを行うためのもの。</p>
+<p>なんだそれ、レスポンシブデザインじゃんと思うけど、それは考え方であり思想だから How には答えてくれない。</p>
+<p>じゃあどうやるのって事で定義された CSS の仕様てな感じかなと勝手に思ってる。</p>
+<p>ということで、表示デバイスがスマホだろうが PC だろうが、CSS で相対的にレイアウトしたいっていう要求を満たしてくれる。</p>
+<p>楽に綺麗にかけるので、最近のフロントではデファクトになってるっぽい。</p>
+<h2 id="flexbox-のコンセプト"><a href="#flexbox-のコンセプト" class="headerlink" title="flexbox のコンセプト"></a>flexbox のコンセプト</h2><ul>
+<li>相対的にレイアウトする</li>
+<li>幅や高さという空間を引き伸ばしたり縮めたりして埋める</li>
+<li>垂直方向や水平方向へ偏向しない</li>
+</ul>
+<h2 id="flexbox-の用語"><a href="#flexbox-の用語" class="headerlink" title="flexbox の用語"></a>flexbox の用語</h2><p><img src="https://developer.mozilla.org/files/3739/flex_terms.png" alt="pic"></p>
+<ul>
+<li>Flex コンテナ: Flex アイテムの親要素</li>
+<li>Flex アイテム: Flex コンテナの子要素</li>
+<li>Axis(軸)<ul>
+<li>main axis(主軸): Flex アイテムに平行な軸</li>
+<li>cross axis(交差軸): main axis に対して垂直な軸</li>
+</ul>
+</li>
+<li>Direction(方向): Flex アイテムのフローの方向。 Axis 上の始点と終点で定義される。<ul>
+<li>main start/main end: main axis 上の始点と終点</li>
+<li>cross start/cross end: cross axis 上の始点と終点</li>
+</ul>
+</li>
+<li>Line(ライン): 交差軸の方向</li>
+<li>Dimension(寸法): 高さや幅に対する独断的でない同等物。<ul>
+<li>main size: main axis に占める大きさ</li>
+<li>cross size: cross axis に占める大きさ</li>
+</ul>
+</li>
+</ul>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>React Native とかやってたら出てきたので、調べるなどした。</p>
+<p>プロパティや、ガイド、現在のブラウザの対応状況などは<a href="https://developer.mozilla.org/ja/docs/Web/CSS/CSS_Flexible_Box_Layout" target="_blank" rel="external">公式のドキュメント</a>参照してください。</p>
+<h2 id="参考リンク"><a href="#参考リンク" class="headerlink" title="参考リンク"></a>参考リンク</h2><ul>
+<li><a href="https://philipwalton.github.io/solved-by-flexbox/" target="_blank" rel="external">Solved by Flexbox</a></li>
+<li><a href="https://www.webcreatorbox.com/tech/css-flexbox-cheat-sheet" target="_blank" rel="external">CSS Flexbox チートシート</a></li>
+<li><a href="https://facebook.github.io/react-native/docs/height-and-width.html" target="_blank" rel="external">React Native: height and width</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#flexbox-とは"><span class="toc-number">1.</span> <span class="toc-text">flexbox とは</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#flexbox-のコンセプト"><span class="toc-number">1.1.</span> <span class="toc-text">flexbox のコンセプト</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flexbox-の用語"><span class="toc-number">1.2.</span> <span class="toc-text">flexbox の用語</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#まとめ"><span class="toc-number">1.3.</span> <span class="toc-text">まとめ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考リンク"><span class="toc-number">1.4.</span> <span class="toc-text">参考リンク</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/12/09/about-flexbox/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/12/09/about-flexbox/&text=flexboxってなにそれ食べれるの"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/12/09/about-flexbox/&title=flexboxってなにそれ食べれるの"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/12/09/about-flexbox/&is_video=false&description=flexboxってなにそれ食べれるの"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=flexboxってなにそれ食べれるの&body=Check out this article: http://k4h4shi.com/2017/12/09/about-flexbox/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/12/09/about-flexbox/&title=flexboxってなにそれ食べれるの"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/12/09/about-flexbox/&title=flexboxってなにそれ食べれるの"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/12/09/about-flexbox/&title=flexboxってなにそれ食べれるの"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/12/09/about-flexbox/&title=flexboxってなにそれ食べれるの"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/12/09/about-flexbox/&name=flexboxってなにそれ食べれるの&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 kotaro takahashi
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

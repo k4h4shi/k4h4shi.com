@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang=ja>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="この記事はk4h4shi’s blogからの移転記事です。 はじめに1年目のプログラマが、今年一年で触れた技術について振り返りたいと思います。現在はWeb系の受託開発及び技術者の人材派遣を行っている企業に勤めています。 プログラマとして働き始めたのが去年の10月ですが、今年が1年目ということもあり、自分が触れた技術と資料などを忘備録としてまとめようと思い立ちました。 ちょうど友人が来年度からプログ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1年目のプログラマとして今年を振り返る">
+<meta property="og:url" content="http://k4h4shi.com/2016/12/29/lookback_firstyear_as_a_programmer/index.html">
+<meta property="og:site_name" content="k4h4shi.com">
+<meta property="og:description" content="この記事はk4h4shi’s blogからの移転記事です。 はじめに1年目のプログラマが、今年一年で触れた技術について振り返りたいと思います。現在はWeb系の受託開発及び技術者の人材派遣を行っている企業に勤めています。 プログラマとして働き始めたのが去年の10月ですが、今年が1年目ということもあり、自分が触れた技術と資料などを忘備録としてまとめようと思い立ちました。 ちょうど友人が来年度からプログ">
+<meta property="og:locale" content="ja">
+<meta property="og:updated_time" content="2019-06-30T11:17:25.029Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="1年目のプログラマとして今年を振り返る">
+<meta name="twitter:description" content="この記事はk4h4shi’s blogからの移転記事です。 はじめに1年目のプログラマが、今年一年で触れた技術について振り返りたいと思います。現在はWeb系の受託開発及び技術者の人材派遣を行っている企業に勤めています。 プログラマとして働き始めたのが去年の10月ですが、今年が1年目ということもあり、自分が触れた技術と資料などを忘備録としてまとめようと思い立ちました。 ちょうど友人が来年度からプログ">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=16">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=192" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=180">
+          
+        
+    
+    <!-- title -->
+    <title>1年目のプログラマとして今年を振り返る</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/03/04/read_refactoringwetware/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2016/09/10/read_softskills/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2016/12/29/lookback_firstyear_as_a_programmer/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2016/12/29/lookback_firstyear_as_a_programmer/&text=1年目のプログラマとして今年を振り返る"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2016/12/29/lookback_firstyear_as_a_programmer/&title=1年目のプログラマとして今年を振り返る"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2016/12/29/lookback_firstyear_as_a_programmer/&is_video=false&description=1年目のプログラマとして今年を振り返る"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=1年目のプログラマとして今年を振り返る&body=Check out this article: http://k4h4shi.com/2016/12/29/lookback_firstyear_as_a_programmer/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2016/12/29/lookback_firstyear_as_a_programmer/&title=1年目のプログラマとして今年を振り返る"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2016/12/29/lookback_firstyear_as_a_programmer/&title=1年目のプログラマとして今年を振り返る"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2016/12/29/lookback_firstyear_as_a_programmer/&title=1年目のプログラマとして今年を振り返る"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2016/12/29/lookback_firstyear_as_a_programmer/&title=1年目のプログラマとして今年を振り返る"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2016/12/29/lookback_firstyear_as_a_programmer/&name=1年目のプログラマとして今年を振り返る&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#はじめに"><span class="toc-number">1.</span> <span class="toc-text">はじめに</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#アウトライン"><span class="toc-number">1.1.</span> <span class="toc-text">アウトライン</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#今年使用した技術"><span class="toc-number">2.</span> <span class="toc-text">今年使用した技術</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#言語とツール"><span class="toc-number">2.1.</span> <span class="toc-text">言語とツール</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#今年を振り返って"><span class="toc-number">2.1.1.</span> <span class="toc-text">今年を振り返って</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#来年の目標"><span class="toc-number">2.1.2.</span> <span class="toc-text">来年の目標</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#開発環境"><span class="toc-number">2.2.</span> <span class="toc-text">開発環境</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#来年度の目標"><span class="toc-number">2.2.1.</span> <span class="toc-text">来年度の目標</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#情報収集と学習"><span class="toc-number">3.</span> <span class="toc-text">情報収集と学習</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#書籍"><span class="toc-number">3.1.</span> <span class="toc-text">書籍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#指南書"><span class="toc-number">3.1.1.</span> <span class="toc-text">指南書</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#入門書"><span class="toc-number">3.1.2.</span> <span class="toc-text">入門書</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#専門書"><span class="toc-number">3.1.3.</span> <span class="toc-text">専門書</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Web記事"><span class="toc-number">3.1.4.</span> <span class="toc-text">Web記事</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最後に"><span class="toc-number">3.2.</span> <span class="toc-text">最後に</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#良かった点"><span class="toc-number">3.3.</span> <span class="toc-text">良かった点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反省点"><span class="toc-number">3.4.</span> <span class="toc-text">反省点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#今後の目標"><span class="toc-number">3.5.</span> <span class="toc-text">今後の目標</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        1年目のプログラマとして今年を振り返る
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">k4h4shi.com</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2016-12-28T23:57:15.000Z" itemprop="datePublished">2016-12-29</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>この記事は<a href="http://k4h4shi.hatenablog.com/entry/2016/12/29/085715" target="_blank" rel="external">k4h4shi’s blog</a>からの移転記事です。</p>
+<h2 id="はじめに"><a href="#はじめに" class="headerlink" title="はじめに"></a>はじめに</h2><p>1年目のプログラマが、今年一年で触れた技術について振り返りたいと思います。<br>現在はWeb系の受託開発及び技術者の人材派遣を行っている企業に勤めています。</p>
+<p>プログラマとして働き始めたのが去年の10月ですが、今年が1年目ということもあり、自分が触れた技術と資料などを忘備録としてまとめようと思い立ちました。</p>
+<p>ちょうど友人が来年度からプログラマとして就職するという話も聞いていて、1年前の自分と彼に記事を書くとしたらどんなものが良いかな、と思いつつ書きました。</p>
+<h3 id="アウトライン"><a href="#アウトライン" class="headerlink" title="アウトライン"></a>アウトライン</h3><ul>
+<li>技術<ul>
+<li>言語<ul>
+<li>プログラミング言語</li>
+<li>SQL</li>
+<li>ライブラリ</li>
+<li>フレームワーク</li>
+</ul>
+</li>
+<li>開発環境<ul>
+<li>ツール </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>情報収集と学習<ul>
+<li>書籍</li>
+<li>Web記事</li>
+</ul>
+</li>
+</ul>
+<h2 id="今年使用した技術"><a href="#今年使用した技術" class="headerlink" title="今年使用した技術"></a>今年使用した技術</h2><h3 id="言語とツール"><a href="#言語とツール" class="headerlink" title="言語とツール"></a>言語とツール</h3><ul>
+<li><p>プログラミング言語</p>
+<ul>
+<li>Java</li>
+<li>Ruby</li>
+<li>PHP</li>
+<li>JavaScript</li>
+</ul>
+</li>
+<li><p>SQL</p>
+<ul>
+<li>MySQL</li>
+<li>Oracle</li>
+</ul>
+</li>
+<li><p>ライブラリ</p>
+<ul>
+<li>Google http java client</li>
+<li>jUnit</li>
+</ul>
+</li>
+<li><p>フレームワーク</p>
+<ul>
+<li>Struts</li>
+<li>Spring boot</li>
+<li>Spring MVC</li>
+</ul>
+</li>
+<li><p>ツール</p>
+<ul>
+<li>Maven</li>
+<li>Selenium (WebDriver)</li>
+<li>Hibernate</li>
+<li>iBatis</li>
+<li>lombok</li>
+</ul>
+</li>
+</ul>
+<h4 id="今年を振り返って"><a href="#今年を振り返って" class="headerlink" title="今年を振り返って"></a>今年を振り返って</h4><p>1年を振り返れば主にWebを基盤としたシステムの開発に携わっており、Javaをメインに開発していました。<br>自主的にRubyを学習したり、案件で必要だと言われPHPを学習したり(結局業務では使わず)、目標を定めずに学習してしまったのは効率が悪かったなと考えています。<br>しかし、それぞれの文化的な違いや記述の違い、得意分野などを大まかにでも知れたことは良かったと考えています。</p>
+<h4 id="来年の目標"><a href="#来年の目標" class="headerlink" title="来年の目標"></a>来年の目標</h4><p>来年度は合目的的に学習することを目標として、<br>今後も業務でも多く用いるであろうJavaをメインに、Rubyを自学したいと思っています。<br>理由としては以下が挙げられます。</p>
+<ul>
+<li>Javaとその周辺技術に興味がある</li>
+<li>Web系のBtoC開発を行う事を目標としていること</li>
+</ul>
+<p>まず一つ目ですが、型による補償が手厚い言語の元で開発、テスト、デバッグの基本を身につけられたことは良かったと思っています。<br>データ構造やアルゴリズムを学習していくと、Javaの堅さはそれらに基づく抽象データ型を表現するにはメリット足り得ると気づけました。</p>
+<p>二つ目ですが、自分がやりたいことは、BtoCのWeb開発だということ気づいたため、それを目標としています。</p>
+<p>その為そこでの需要があるであろう言語に熟達したいという事、<br>またタイプの違う二つの言語に触れることはプログラマとしてのスキルを磨く良い方法だと考えているからです。</p>
+<p>動的型付け言語に対する興味もありますが、コミュニティの文化の違いも個人的には興味深いです。</p>
+<h3 id="開発環境"><a href="#開発環境" class="headerlink" title="開発環境"></a>開発環境</h3><ul>
+<li>Eclipse<ul>
+<li>quickjUnit</li>
+<li>moonrize</li>
+</ul>
+</li>
+<li>Terminal</li>
+<li>zsh</li>
+<li>vim </li>
+<li>tmux</li>
+<li>Git(hub)</li>
+<li>vagrant</li>
+</ul>
+<p>去年初めてプログラミングを始めた際には、苦しみながらC言語を学んでいました。<br>そのため、ターミナルでソース作成、コンパイル、実行を行っていました。<br>何故Cなのかという話ですが、単純に何も知らなかった上、プログラミングとやらが出来ればそれで良いと思っていたからです。<br>仕事を始めてからは、ほぼほぼEclipseを使ってJavaで開発していました。<br>もともとキーボードショートカットマニアなところがあり、効率的に作業ができそうな場合には、都度調べて統合開発環境のキーボードショートカットを覚えていきました。<br>それを社内で公言していたこともあり、たまに先輩などからも質問されたりと、自分のキャラクターになってきているのは自分でも良い傾向だなと思っています。</p>
+<p>zsh, vim, tmuxは　b4b4ro7さんのqiita記事、さいつよのターミナル環境を構築するを読み、思い切り影響を受けた結果です。<br>Dotfileを作成しましたが、実務ではほとんど利用できず、メンテナンスもできていないことが残念です。</p>
+<h4 id="来年度の目標"><a href="#来年度の目標" class="headerlink" title="来年度の目標"></a>来年度の目標</h4><p>来年度は、Javaの開発環境に関しては業務上レガシーな事が多かったため、自宅で最新の環境を構築する事と、rubyの学習を含めターミナル環境をメンテナンスすることを目標とします。</p>
+<h2 id="情報収集と学習"><a href="#情報収集と学習" class="headerlink" title="情報収集と学習"></a>情報収集と学習</h2><p>全体的にインプットに対してアウトプットが足りていない事が問題だと考えています。<br>読んだ書籍について、自分で解決した課題について自分自身でまとめるだけでも定着度が違う事は経験でわかっていますが、焦りから大量に情報を欲する癖があるため、それらの整理が来年度の課題になると考えています。<br>対策として、以下を定期的に行える環境を作るつもりです</p>
+<ul>
+<li>ブログやqiitaなどで記事を書く</li>
+<li>社内での発表の機会には学習した事を発表する。</li>
+<li>個人プロジェクトの公開を目標に、計画的に学習をする。</li>
+</ul>
+<h3 id="書籍"><a href="#書籍" class="headerlink" title="書籍"></a>書籍</h3><p>読んだ書籍に関しては、<br>趣味として読んでいたプログラマとしての心構えや方法論について書かれたものがほとんどです。<br>こちらはよくネットで進められているものを、出退社時や昼休みに読んでいました。<br>個人的には良い頭休めと、知識の下地になったと思っていますが、意識に技術と環境が追いついていない感覚が常にありました。<br>実際の現場では、本で読んだアンチパターンが沢山起こる事、本を読むだけではコードは書けない事を学びました。</p>
+<p>技術書に関しては、必要に迫られて読んだものが多く、Java関係が3冊にRuby関係が1冊、PHP関係が1冊という結果です。<br>実際に手を動かしたものに関しては、振り返ってみても定着しているため、来年度は技術書の割合を高くして、手を動かしつつ読む事にします。</p>
+<h4 id="指南書"><a href="#指南書" class="headerlink" title="指南書"></a>指南書</h4><ul>
+<li>SOFT SKILLS</li>
+<li>コードコンプリート 第二版 上</li>
+<li>達人プログラマ</li>
+<li>リーダブルコード</li>
+<li>プログラマが知るべき99の事</li>
+</ul>
+<h4 id="入門書"><a href="#入門書" class="headerlink" title="入門書"></a>入門書</h4><ul>
+<li>スッキリわかるJava入門 基本編, 実践編</li>
+<li>JUnit実践入門</li>
+<li>JavaプログラマのためのRuby入門</li>
+</ul>
+<h4 id="専門書"><a href="#専門書" class="headerlink" title="専門書"></a>専門書</h4><ul>
+<li>プログラミング言語PHP</li>
+<li>ハッカーの教科書</li>
+<li>良いコードを書く技術</li>
+<li>Webを支える技術</li>
+</ul>
+<h4 id="Web記事"><a href="#Web記事" class="headerlink" title="Web記事"></a>Web記事</h4><p>やはり最新の情報を集めるには、Web記事はいいなと思います。<br>環境構築の手順や、ツールの利用方法、サンプルコードが載せてある記事からはとても恩恵を受けました。<br>しかし、それらを体系的に管理するツールを知らず、ほとんど記録を残していないことは勿体無いと思っています。<br>今後は、ウェブクリップでも良いので、何か良い方法を見つけて管理したいと思っています。</p>
+<p>ただ、1年間で公式の情報に敵う情報はないことだけはわかりましたので、公式のドキュメント読む前にググることはもうやめます。</p>
+<p>エセ医療系サイトの問題もありましたし、悲しいことにWebは今あまり綺麗ではないのかもしれません。<br>プログラマの心構えや基本的な考え方についての記事に関しては、プログラマが知るべき99の事とリーダブルコードで必要な知識は十分揃うと思いますし、似たような記事は多いです。</p>
+<p>ただ、独自の主張をしている記事は面白いですし、むしろ本では手に入らない生の声に近いものがあると思います。<br>個人的に以下に今年印象に残った記事をまとめました。</p>
+<ul>
+<li><p><a href="http://qiita.com/b4b4r07/items/09815eda8ef72e0b472e" target="_blank" rel="external">さいつよのターミナル環境を構築しよう</a></p>
+</li>
+<li><p><a href="http://chibicode.com/2-cs-vs-programming" target="_blank" rel="external">「プログラミング」と「プログラミング的思考」の違いを、分かったつもりになれるヒント</a></p>
+</li>
+<li><a href="http://d.hatena.ne.jp/naoya/20160204" target="_blank" rel="external">ソーシャルメディアにおける他人との関係性がコンテンツ価値に影響を与える</a></li>
+</ul>
+<h3 id="最後に"><a href="#最後に" class="headerlink" title="最後に"></a>最後に</h3><p>最後に、今年一年を振り返って</p>
+<h3 id="良かった点"><a href="#良かった点" class="headerlink" title="良かった点"></a>良かった点</h3><p>まず良かった点から振り返ると、</p>
+<ul>
+<li>1日に一問問題を解くことを始めた</li>
+<li>多くのものから貪欲に吸収しようとしていた</li>
+<li>空き時間を有効に活用できていた</li>
+</ul>
+<p>今年の後半から始めましたが、プログラミングの問題を1日一問解くことを初めてから、少しずつですがコードの質が上がったように思います。<br>データ構造やアルゴリズムといったアカデミックな知識に対する意欲も生まれるという副次的効果もありました。</p>
+<p>また、自宅で自分自身で興味を持ったことを積極的に試していたことは、評価できるように思います。</p>
+<p>通勤時や昼食休憩時、意図せず列に並ぶ羽目になった時には、本を取り出す、kindleまたはpocketにためていた記事を読む、podcastを聞くと言った行動を選択するように心がけていたことも、○です。</p>
+<h3 id="反省点"><a href="#反省点" class="headerlink" title="反省点"></a>反省点</h3><p>次に反省点ですが、</p>
+<ul>
+<li>仕入れていた情報が古いことがままあった</li>
+<li>自分自身の方針が不明瞭だったこともあり、触った程度で全く身についていないものも多くあった</li>
+</ul>
+<p>原因を分析すると、<br>一点目に関してはアウトプットが少なかったことと、それによりフィードバックが足りていないことによるものと思われます。</p>
+<p>二点目に関しては、元来飽き性なことと、事前知識が乏しいままに色々なものに手を出した結果、手を出しては引っ込めの繰り返しが多かったためだと思われます。</p>
+<h3 id="今後の目標"><a href="#今後の目標" class="headerlink" title="今後の目標"></a>今後の目標</h3><p>反省点に対する改善策としては</p>
+<ul>
+<li>計画的に物事を進める</li>
+<li>積極的に他者と関わり、新たな情報を仕入れる。</li>
+<li>アウトプットを行った上でフィードバックをもらい、改善に努める</li>
+</ul>
+<p>　<br>抽象的な目標としては、<br>また現在わからないことは、わからないと認め、それを表現すること。<br>全てを自己解決しようとしないことは、学習や成長においては大事なことだと思います。</p>
+<p>また年が明けた際に、上記に沿った具体的な目標を立てていこうかなと思っています。</p>
+<p>それでは皆さん、良いお年を。　</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#はじめに"><span class="toc-number">1.</span> <span class="toc-text">はじめに</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#アウトライン"><span class="toc-number">1.1.</span> <span class="toc-text">アウトライン</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#今年使用した技術"><span class="toc-number">2.</span> <span class="toc-text">今年使用した技術</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#言語とツール"><span class="toc-number">2.1.</span> <span class="toc-text">言語とツール</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#今年を振り返って"><span class="toc-number">2.1.1.</span> <span class="toc-text">今年を振り返って</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#来年の目標"><span class="toc-number">2.1.2.</span> <span class="toc-text">来年の目標</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#開発環境"><span class="toc-number">2.2.</span> <span class="toc-text">開発環境</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#来年度の目標"><span class="toc-number">2.2.1.</span> <span class="toc-text">来年度の目標</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#情報収集と学習"><span class="toc-number">3.</span> <span class="toc-text">情報収集と学習</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#書籍"><span class="toc-number">3.1.</span> <span class="toc-text">書籍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#指南書"><span class="toc-number">3.1.1.</span> <span class="toc-text">指南書</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#入門書"><span class="toc-number">3.1.2.</span> <span class="toc-text">入門書</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#専門書"><span class="toc-number">3.1.3.</span> <span class="toc-text">専門書</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Web記事"><span class="toc-number">3.1.4.</span> <span class="toc-text">Web記事</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最後に"><span class="toc-number">3.2.</span> <span class="toc-text">最後に</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#良かった点"><span class="toc-number">3.3.</span> <span class="toc-text">良かった点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反省点"><span class="toc-number">3.4.</span> <span class="toc-text">反省点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#今後の目標"><span class="toc-number">3.5.</span> <span class="toc-text">今後の目標</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2016/12/29/lookback_firstyear_as_a_programmer/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2016/12/29/lookback_firstyear_as_a_programmer/&text=1年目のプログラマとして今年を振り返る"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2016/12/29/lookback_firstyear_as_a_programmer/&title=1年目のプログラマとして今年を振り返る"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2016/12/29/lookback_firstyear_as_a_programmer/&is_video=false&description=1年目のプログラマとして今年を振り返る"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=1年目のプログラマとして今年を振り返る&body=Check out this article: http://k4h4shi.com/2016/12/29/lookback_firstyear_as_a_programmer/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2016/12/29/lookback_firstyear_as_a_programmer/&title=1年目のプログラマとして今年を振り返る"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2016/12/29/lookback_firstyear_as_a_programmer/&title=1年目のプログラマとして今年を振り返る"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2016/12/29/lookback_firstyear_as_a_programmer/&title=1年目のプログラマとして今年を振り返る"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2016/12/29/lookback_firstyear_as_a_programmer/&title=1年目のプログラマとして今年を振り返る"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2016/12/29/lookback_firstyear_as_a_programmer/&name=1年目のプログラマとして今年を振り返る&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 kotaro takahashi
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

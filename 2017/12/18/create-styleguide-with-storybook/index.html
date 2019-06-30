@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang=ja>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="storybook を導入する際の備忘録です。 storybook とはstorybook は UI コンポーネントのための開発環境。様々な状態における UI を可視化しつつ、インタラクティブに開発できる。 storybook の setup公式の通りに以下のコマンドを実行する 123$ npm i -g @storybook/cli$ cd my-react-app$ getstorybook">
+<meta name="keywords" content="front-end,React,storybook,UI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="storybookでstyleguideを作る">
+<meta property="og:url" content="http://k4h4shi.com/2017/12/18/create-styleguide-with-storybook/index.html">
+<meta property="og:site_name" content="k4h4shi.com">
+<meta property="og:description" content="storybook を導入する際の備忘録です。 storybook とはstorybook は UI コンポーネントのための開発環境。様々な状態における UI を可視化しつつ、インタラクティブに開発できる。 storybook の setup公式の通りに以下のコマンドを実行する 123$ npm i -g @storybook/cli$ cd my-react-app$ getstorybook">
+<meta property="og:locale" content="ja">
+<meta property="og:updated_time" content="2019-06-30T11:17:25.023Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="storybookでstyleguideを作る">
+<meta name="twitter:description" content="storybook を導入する際の備忘録です。 storybook とはstorybook は UI コンポーネントのための開発環境。様々な状態における UI を可視化しつつ、インタラクティブに開発できる。 storybook の setup公式の通りに以下のコマンドを実行する 123$ npm i -g @storybook/cli$ cd my-react-app$ getstorybook">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=16">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=192" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=180">
+          
+        
+    
+    <!-- title -->
+    <title>storybookでstyleguideを作る</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/12/18/about-proptypes-validator/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/12/13/setup-eslint-for-react/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/12/18/create-styleguide-with-storybook/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/12/18/create-styleguide-with-storybook/&text=storybookでstyleguideを作る"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/12/18/create-styleguide-with-storybook/&title=storybookでstyleguideを作る"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/12/18/create-styleguide-with-storybook/&is_video=false&description=storybookでstyleguideを作る"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=storybookでstyleguideを作る&body=Check out this article: http://k4h4shi.com/2017/12/18/create-styleguide-with-storybook/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/12/18/create-styleguide-with-storybook/&title=storybookでstyleguideを作る"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/12/18/create-styleguide-with-storybook/&title=storybookでstyleguideを作る"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/12/18/create-styleguide-with-storybook/&title=storybookでstyleguideを作る"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/12/18/create-styleguide-with-storybook/&title=storybookでstyleguideを作る"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/12/18/create-styleguide-with-storybook/&name=storybookでstyleguideを作る&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#storybook-とは"><span class="toc-number">1.</span> <span class="toc-text">storybook とは</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#storybook-の-setup"><span class="toc-number">2.</span> <span class="toc-text">storybook の setup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#storybook-の起動"><span class="toc-number">3.</span> <span class="toc-text">storybook の起動</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#storybook-の設定ファイル"><span class="toc-number">4.</span> <span class="toc-text">storybook の設定ファイル</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#story-を書く"><span class="toc-number">5.</span> <span class="toc-text">story を書く</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#まとめ"><span class="toc-number">6.</span> <span class="toc-text">まとめ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献"><span class="toc-number">7.</span> <span class="toc-text">参考文献</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        storybookでstyleguideを作る
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">k4h4shi.com</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-12-18T11:12:51.000Z" itemprop="datePublished">2017-12-18</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/React/">React</a>, <a class="tag-link" href="/tags/UI/">UI</a>, <a class="tag-link" href="/tags/front-end/">front-end</a>, <a class="tag-link" href="/tags/storybook/">storybook</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>storybook を導入する際の備忘録です。</p>
+<h2 id="storybook-とは"><a href="#storybook-とは" class="headerlink" title="storybook とは"></a>storybook とは</h2><p>storybook は UI コンポーネントのための開発環境。様々な状態における UI を可視化しつつ、インタラクティブに開発できる。</p>
+<h2 id="storybook-の-setup"><a href="#storybook-の-setup" class="headerlink" title="storybook の setup"></a>storybook の setup</h2><p>公式の通りに以下のコマンドを実行する</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ npm i -g @storybook/cli</div><div class="line">$ cd my-react-app</div><div class="line">$ getstorybook</div></pre></td></tr></table></figure>
+<p>上記コマンドによって、以下が行われる。</p>
+<ul>
+<li>プロジェクトに storybook の依存性をインストールする</li>
+<li>package.json ファイルに storybook と build-storybook のスクリプトを加える</li>
+<li>基本設定が入っている.storybook フォルダーと、コンポーネントとストーリーのサンプルが入った stories フォルダーを生成する</li>
+</ul>
+<p>たまに<code>storybook</code>をグローバルにインストールするというような情報を見かけるけど、最新の React では動作しないので注意。</p>
+<h2 id="storybook-の起動"><a href="#storybook-の起動" class="headerlink" title="storybook の起動"></a>storybook の起動</h2><p>インストールをした状態で以下コマンドを打つと、storybook が立ち上がる。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm run storybook</div></pre></td></tr></table></figure>
+<p>起動後はブラウザでアクセスできる。</p>
+<h2 id="storybook-の設定ファイル"><a href="#storybook-の設定ファイル" class="headerlink" title="storybook の設定ファイル"></a>storybook の設定ファイル</h2><p>storybook の設定ファイルは、<code>.storybook</code>以下に配置されている。以下は、story がどこに配置されているかだけを記した、<code>.storybook/config.js</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">import &#123; configure &#125; from &apos;@storybook/react&apos;;</div><div class="line"></div><div class="line">function loadStories() &#123;</div><div class="line">  require(&apos;../stories/index.js&apos;);</div><div class="line">  // You can require as many stories as you need.</div><div class="line">&#125;</div><div class="line"></div><div class="line">configure(loadStories, module);</div></pre></td></tr></table></figure>
+<p>これにより、story を記述したファイルを読み込むことができる。</p>
+<h2 id="story-を書く"><a href="#story-を書く" class="headerlink" title="story を書く"></a>story を書く</h2><p>storybook では、story という形式である特定の UI の状態を記述していける。以下は、ボタンに関する 2 つの story の例。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">import React from &apos;react&apos;;</div><div class="line">import &#123; storiesOf &#125; from &apos;@storybook/react&apos;;</div><div class="line">import &#123; action &#125; from &apos;@storybook/addon-actions&apos;;</div><div class="line"></div><div class="line">storiesOf(&apos;Button&apos;, module)</div><div class="line">  .add(&apos;with text&apos;, () =&gt; (</div><div class="line">    &lt;button onClick=&#123;action(&apos;clicked&apos;)&#125;&gt;Hello Button&lt;/button&gt;</div><div class="line">  ))</div><div class="line">  .add(&apos;with some emoji&apos;, () =&gt; (</div><div class="line">    &lt;button onClick=&#123;action(&apos;clicked&apos;)&#125;&gt;😀 😎 👍 💯&lt;/button&gt;</div><div class="line">  ));</div></pre></td></tr></table></figure>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>まだ導入したばかりのため、逐次追記していくつもり。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a href="https://storybook.js.org/" target="_blank" rel="external">storybook.js.org</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#storybook-とは"><span class="toc-number">1.</span> <span class="toc-text">storybook とは</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#storybook-の-setup"><span class="toc-number">2.</span> <span class="toc-text">storybook の setup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#storybook-の起動"><span class="toc-number">3.</span> <span class="toc-text">storybook の起動</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#storybook-の設定ファイル"><span class="toc-number">4.</span> <span class="toc-text">storybook の設定ファイル</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#story-を書く"><span class="toc-number">5.</span> <span class="toc-text">story を書く</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#まとめ"><span class="toc-number">6.</span> <span class="toc-text">まとめ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献"><span class="toc-number">7.</span> <span class="toc-text">参考文献</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/12/18/create-styleguide-with-storybook/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/12/18/create-styleguide-with-storybook/&text=storybookでstyleguideを作る"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/12/18/create-styleguide-with-storybook/&title=storybookでstyleguideを作る"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/12/18/create-styleguide-with-storybook/&is_video=false&description=storybookでstyleguideを作る"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=storybookでstyleguideを作る&body=Check out this article: http://k4h4shi.com/2017/12/18/create-styleguide-with-storybook/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/12/18/create-styleguide-with-storybook/&title=storybookでstyleguideを作る"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/12/18/create-styleguide-with-storybook/&title=storybookでstyleguideを作る"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/12/18/create-styleguide-with-storybook/&title=storybookでstyleguideを作る"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/12/18/create-styleguide-with-storybook/&title=storybookでstyleguideを作る"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/12/18/create-styleguide-with-storybook/&name=storybookでstyleguideを作る&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 kotaro takahashi
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

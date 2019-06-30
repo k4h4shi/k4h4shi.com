@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang=ja>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Node.jsのための環境構築を行いましたのでまとめます。Node本体とnpmはインストール済みの前提です。 今回は以下の手順で行います。  開発ツールのインストール npm init gulp babel eslint    プロジェクト作成今回は、toolsという開発環境構築のサンプルプロジェクトを作成します。 123$ mkdir tools$ cd tools$ npm init gulp">
+<meta name="keywords" content="node.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Node.jsの環境構築[Gulp + Bable + EsLint]">
+<meta property="og:url" content="http://k4h4shi.com/2017/09/18/build_js_environment/index.html">
+<meta property="og:site_name" content="k4h4shi.com">
+<meta property="og:description" content="Node.jsのための環境構築を行いましたのでまとめます。Node本体とnpmはインストール済みの前提です。 今回は以下の手順で行います。  開発ツールのインストール npm init gulp babel eslint    プロジェクト作成今回は、toolsという開発環境構築のサンプルプロジェクトを作成します。 123$ mkdir tools$ cd tools$ npm init gulp">
+<meta property="og:locale" content="ja">
+<meta property="og:updated_time" content="2019-06-30T11:17:25.022Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Node.jsの環境構築[Gulp + Bable + EsLint]">
+<meta name="twitter:description" content="Node.jsのための環境構築を行いましたのでまとめます。Node本体とnpmはインストール済みの前提です。 今回は以下の手順で行います。  開発ツールのインストール npm init gulp babel eslint    プロジェクト作成今回は、toolsという開発環境構築のサンプルプロジェクトを作成します。 123$ mkdir tools$ cd tools$ npm init gulp">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=16">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=192" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=180">
+          
+        
+    
+    <!-- title -->
+    <title>Node.jsの環境構築[Gulp + Bable + EsLint]</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/09/18/build_blog_with_hexo/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/09/18/add_directory_to_hash/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/09/18/build_js_environment/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/09/18/build_js_environment/&text=Node.jsの環境構築[Gulp + Bable + EsLint]"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/09/18/build_js_environment/&title=Node.jsの環境構築[Gulp + Bable + EsLint]"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/09/18/build_js_environment/&is_video=false&description=Node.jsの環境構築[Gulp + Bable + EsLint]"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Node.jsの環境構築[Gulp + Bable + EsLint]&body=Check out this article: http://k4h4shi.com/2017/09/18/build_js_environment/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/09/18/build_js_environment/&title=Node.jsの環境構築[Gulp + Bable + EsLint]"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/09/18/build_js_environment/&title=Node.jsの環境構築[Gulp + Bable + EsLint]"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/09/18/build_js_environment/&title=Node.jsの環境構築[Gulp + Bable + EsLint]"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/09/18/build_js_environment/&title=Node.jsの環境構築[Gulp + Bable + EsLint]"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/09/18/build_js_environment/&name=Node.jsの環境構築[Gulp + Bable + EsLint]&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#プロジェクト作成"><span class="toc-number">1.</span> <span class="toc-text">プロジェクト作成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gulpのインストール"><span class="toc-number">2.</span> <span class="toc-text">gulpのインストール</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#babelのインストール"><span class="toc-number">3.</span> <span class="toc-text">babelのインストール</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#gulpを使ってbabelを実行する"><span class="toc-number">3.1.</span> <span class="toc-text">gulpを使ってbabelを実行する</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ディレクトリ構成を整える"><span class="toc-number">3.1.1.</span> <span class="toc-text">ディレクトリ構成を整える</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#gulp-babelをインストールする"><span class="toc-number">3.1.2.</span> <span class="toc-text">gulp-babelをインストールする</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#動作確認をする"><span class="toc-number">3.1.3.</span> <span class="toc-text">動作確認をする</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ESLintのインストール"><span class="toc-number">4.</span> <span class="toc-text">ESLintのインストール</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#まとめ"><span class="toc-number">5.</span> <span class="toc-text">まとめ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献"><span class="toc-number">6.</span> <span class="toc-text">参考文献</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Node.jsの環境構築[Gulp + Bable + EsLint]
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">k4h4shi.com</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-09-18T05:19:00.000Z" itemprop="datePublished">2017-09-18</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/node-js/">node.js</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>Node.jsのための環境構築を行いましたのでまとめます。<br>Node本体とnpmはインストール済みの前提です。</p>
+<p>今回は以下の手順で行います。</p>
+<ul>
+<li>開発ツールのインストール<ul>
+<li>npm init</li>
+<li>gulp</li>
+<li>babel</li>
+<li>eslint</li>
+</ul>
+</li>
+</ul>
+<h2 id="プロジェクト作成"><a href="#プロジェクト作成" class="headerlink" title="プロジェクト作成"></a>プロジェクト作成</h2><p>今回は、toolsという開発環境構築のサンプルプロジェクトを作成します。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ mkdir tools</div><div class="line">$ cd tools</div><div class="line">$ npm init</div></pre></td></tr></table></figure>
+<h2 id="gulpのインストール"><a href="#gulpのインストール" class="headerlink" title="gulpのインストール"></a>gulpのインストール</h2><p>gulpはビルドツールです。<br>開発の過程で繰り返し行うタスクを自動化します。</p>
+<p>まずは、以下のコマンドラインでgulpをグローバルにインストールします。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo npm install -g gulp</div></pre></td></tr></table></figure></p>
+<p>gulpをグローバルにインストールする必要があるのは一度のみです。<br>以降は、作成するプロジェクトごとにローカルインストールを行います。</p>
+<p>その際は以下のコマンドラインを実行します。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install --save-dev gulp</div></pre></td></tr></table></figure></p>
+<p>以下のコマンドを実行します。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ gulp</div></pre></td></tr></table></figure></p>
+<p>この時点では<code>No gulpfile found</code>と出力されれば成功です。</p>
+<h2 id="babelのインストール"><a href="#babelのインストール" class="headerlink" title="babelのインストール"></a>babelのインストール</h2><p>gulpがインストールできたため、次はbabelをインストールします。<br>babelはトランスパイラと呼ばれ、ES6などの構文で記述されたJSをブラウザで安定して稼動するES5のJSに変換するものです。</p>
+<p>コマンドラインで利用出来るBabelをインストールするためには、以下のコマンドラインを実行します。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install --save-dev babel-cli babel-preset-latest</div></pre></td></tr></table></figure></p>
+<p>babelの設定は、.babelrcで行います。</p>
+<p>以下のような.babelrcを作成しておきます。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;presets&quot;: [&quot;latest&quot;]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="gulpを使ってbabelを実行する"><a href="#gulpを使ってbabelを実行する" class="headerlink" title="gulpを使ってbabelを実行する"></a>gulpを使ってbabelを実行する</h3><p>ここまでで、タスクランナーとトランスパイラが用意できたので、連携させます。</p>
+<h4 id="ディレクトリ構成を整える"><a href="#ディレクトリ構成を整える" class="headerlink" title="ディレクトリ構成を整える"></a>ディレクトリ構成を整える</h4><p>まずは、ディレクトリ構成を整えるために以下のコマンドラインを実行します。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ mkdir -p dist es6 public/dist public/es6</div></pre></td></tr></table></figure></p>
+<p>以下のコマンドラインで確認してみます。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ tree -I &apos;node_modules&apos;</div></pre></td></tr></table></figure></p>
+<p>ディレクトリ構成は以下のようになっているはずです<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── dist</div><div class="line">├── es6</div><div class="line">├── package-lock.json</div><div class="line">├── package.json</div><div class="line">└── public</div><div class="line">    ├── dist</div><div class="line">    └── es6</div><div class="line"></div><div class="line">5 directories, 2 files</div></pre></td></tr></table></figure></p>
+<h4 id="gulp-babelをインストールする"><a href="#gulp-babelをインストールする" class="headerlink" title="gulp-babelをインストールする"></a>gulp-babelをインストールする</h4><p>es6またはpublic/es6にあるコードをES5に変換して、それぞれをdistとpublic/distに配置します。<br>そのためにgulp-babelをインストールします。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install --save-dev gulp-babel</div></pre></td></tr></table></figure></p>
+<p>そして以下のようなgulpfile.jsを作成します。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">const gulp = require(&apos;gulp&apos;);</div><div class="line">const babel = require(&apos;gulp-babel&apos;);</div><div class="line"></div><div class="line">gulp.task(&apos;default&apos;, () =&gt; &#123;</div><div class="line">  // Nodeのソース</div><div class="line">  gulp.src(&quot;es6/**/*.js&quot;)</div><div class="line">    .pipe(babel())</div><div class="line">    .pipe(gulp.dest(&quot;dist&quot;));</div><div class="line"></div><div class="line">  // ブラウザのソース</div><div class="line">  gulp.src(&quot;public/es6/**/*.js&quot;)</div><div class="line">    .pipe(babel())</div><div class="line">    .pipe(gulp.dest(&quot;public/dist&quot;));</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h4 id="動作確認をする"><a href="#動作確認をする" class="headerlink" title="動作確認をする"></a>動作確認をする</h4><p>ここまでの設定で、ES6で記述されたJSのソースをトランスパイルするgulpタスクが実行できるようになっているはずです。</p>
+<p>そのため、es6/test.jsと、public/es6/test.jsいうファイルを作成し、どちらも以下のような内容にします。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&apos;use strict&apos;;</div><div class="line">const sentences = [</div><div class="line">  &#123; subject: &apos;Javascript&apos;, verb: &apos;is&apos;, object: &apos;great&apos; &#125;,</div><div class="line">  &#123; subject: &apos;Elephants&apos;, verb: &apos;are&apos;, object: &apos;large&apos; &#125;</div><div class="line">];</div><div class="line"></div><div class="line">function say(&#123; subject, verb, object &#125;) &#123;</div><div class="line">  console.log(`$&#123;subject&#125; $&#123;verb&#125; $&#123;object&#125;`);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">for(let s of sentences) &#123;</div><div class="line">  say(s);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>この状態で<code>gulp</code>コマンドを実行すると、distとpublic/distにかなり異なる内容のファイルが生成されてます。</p>
+<p>念のため、すべての実行結果が同じことを確認します。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ node es6/test.js</div><div class="line">$ node public/es6/test.js</div><div class="line">$ node dist/test.js</div><div class="line">$ node public/dist/test.js</div></pre></td></tr></table></figure></p>
+<p>distとpublic/distは.gitignoreに追加しておきます。</p>
+<h2 id="ESLintのインストール"><a href="#ESLintのインストール" class="headerlink" title="ESLintのインストール"></a>ESLintのインストール</h2><p>lintとは、コードの問題点を指摘するチェッカーです。<br>JSには幾つかlintプログラムがありますが、ESLintはその一つです。</p>
+<p>以下のコマンドラインでESLintをグローバルインストールします。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install -g eslint</div></pre></td></tr></table></figure></p>
+<p>lintを行う前に、構成ファイルである.eslintrcをプロジェクトごとに作成する必要があります。<br><code>eslint --init</code>を行うことで簡単に作成できます。</p>
+<p>質問に答えると、.eslintrcが生成されます。</p>
+<p>これでESLintを例えば以下のコマンドラインで実行できます。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">eslint es6/test.js</div></pre></td></tr></table></figure>
+<p>ESLintをGulpfileに追加することもできます。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install --save-dev gulp-eslint</div></pre></td></tr></table></figure>
+<p>そして、gulpfile.jsを次のように変更します。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">const gulp = require(&apos;gulp&apos;);</div><div class="line">const babel = require(&apos;gulp-babel&apos;);</div><div class="line">const eslint = require(&apos;gulp-eslint&apos;);</div><div class="line"></div><div class="line">gulp.task(&apos;default&apos;, () =&gt; &#123;</div><div class="line">  gulp.src([&apos;es6/**/*.js&apos;, &apos;public/es6/**/*.js&apos;])</div><div class="line">    .pipe(eslint())</div><div class="line">    .pipe(eslint.format());</div><div class="line">  // Nodeのソース</div><div class="line">  gulp.src(&apos;es6/**/*.js&apos;)</div><div class="line">    .pipe(babel())</div><div class="line">    .pipe(gulp.dest(&apos;dist&apos;));</div><div class="line"></div><div class="line">  // ブラウザのソース</div><div class="line">  gulp.src(&apos;public/es6/**/*.js&apos;)</div><div class="line">    .pipe(babel())</div><div class="line">    .pipe(gulp.dest(&apos;public/dist&apos;));</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>これでgulpタスク実行時にEslintが走るようになります。<br>より細かな設定などは<a href="https://eslint.org.r/" target="_blank" rel="external">ESLint.org</a>を参照してください。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>モダンなJavaScript開発に使われるツールのインストールと、簡単な使い方を紹介しました。<br>今回は以下の構成でしたが、選択肢はこれに限りません。</p>
+<ul>
+<li>タスクランナー: Gulp</li>
+<li>トランスパイラ: Babel</li>
+<li>リントプログラム: ESLint</li>
+</ul>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a href="https://www.oreilly.co.jp/books/9784873117836/" target="_blank" rel="external">初めてのJavaScript</a></li>
+<li><a href="https://gulpjs.com/" target="_blank" rel="external">gulp.js</a></li>
+<li><a href="https://babeljs.io/" target="_blank" rel="external">bablejs.io</a></li>
+<li><a href="https://eslint.org/" target="_blank" rel="external">eslint.org</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#プロジェクト作成"><span class="toc-number">1.</span> <span class="toc-text">プロジェクト作成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#gulpのインストール"><span class="toc-number">2.</span> <span class="toc-text">gulpのインストール</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#babelのインストール"><span class="toc-number">3.</span> <span class="toc-text">babelのインストール</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#gulpを使ってbabelを実行する"><span class="toc-number">3.1.</span> <span class="toc-text">gulpを使ってbabelを実行する</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ディレクトリ構成を整える"><span class="toc-number">3.1.1.</span> <span class="toc-text">ディレクトリ構成を整える</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#gulp-babelをインストールする"><span class="toc-number">3.1.2.</span> <span class="toc-text">gulp-babelをインストールする</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#動作確認をする"><span class="toc-number">3.1.3.</span> <span class="toc-text">動作確認をする</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ESLintのインストール"><span class="toc-number">4.</span> <span class="toc-text">ESLintのインストール</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#まとめ"><span class="toc-number">5.</span> <span class="toc-text">まとめ</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献"><span class="toc-number">6.</span> <span class="toc-text">参考文献</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/09/18/build_js_environment/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/09/18/build_js_environment/&text=Node.jsの環境構築[Gulp + Bable + EsLint]"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/09/18/build_js_environment/&title=Node.jsの環境構築[Gulp + Bable + EsLint]"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/09/18/build_js_environment/&is_video=false&description=Node.jsの環境構築[Gulp + Bable + EsLint]"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Node.jsの環境構築[Gulp + Bable + EsLint]&body=Check out this article: http://k4h4shi.com/2017/09/18/build_js_environment/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/09/18/build_js_environment/&title=Node.jsの環境構築[Gulp + Bable + EsLint]"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/09/18/build_js_environment/&title=Node.jsの環境構築[Gulp + Bable + EsLint]"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/09/18/build_js_environment/&title=Node.jsの環境構築[Gulp + Bable + EsLint]"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/09/18/build_js_environment/&title=Node.jsの環境構築[Gulp + Bable + EsLint]"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/09/18/build_js_environment/&name=Node.jsの環境構築[Gulp + Bable + EsLint]&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 kotaro takahashi
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

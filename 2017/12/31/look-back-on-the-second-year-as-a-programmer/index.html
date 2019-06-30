@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang=ja>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="はじめに業務経験 2 年目のプログラマが、今年一年で触れた技術について振り返りたいと思います。 普段は、Java や Node.js で業務システムを開発しています。 去年の暮れにも振り返りの記事を書きました。 自分の立ち位置を見直す上で良い経験でしたので、今年も振り返りを行います。 アウトライン 今年を振り返って 今年使用した技術 今年読んだ書籍 今年作ったもの   来年の目標 まとめ  今年の">
+<meta property="og:type" content="article">
+<meta property="og:title" content="業務経験 2 年目のプログラマが今年を振り返る">
+<meta property="og:url" content="http://k4h4shi.com/2017/12/31/look-back-on-the-second-year-as-a-programmer/index.html">
+<meta property="og:site_name" content="k4h4shi.com">
+<meta property="og:description" content="はじめに業務経験 2 年目のプログラマが、今年一年で触れた技術について振り返りたいと思います。 普段は、Java や Node.js で業務システムを開発しています。 去年の暮れにも振り返りの記事を書きました。 自分の立ち位置を見直す上で良い経験でしたので、今年も振り返りを行います。 アウトライン 今年を振り返って 今年使用した技術 今年読んだ書籍 今年作ったもの   来年の目標 まとめ  今年の">
+<meta property="og:locale" content="ja">
+<meta property="og:updated_time" content="2019-06-30T11:17:25.029Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="業務経験 2 年目のプログラマが今年を振り返る">
+<meta name="twitter:description" content="はじめに業務経験 2 年目のプログラマが、今年一年で触れた技術について振り返りたいと思います。 普段は、Java や Node.js で業務システムを開発しています。 去年の暮れにも振り返りの記事を書きました。 自分の立ち位置を見直す上で良い経験でしたので、今年も振り返りを行います。 アウトライン 今年を振り返って 今年使用した技術 今年読んだ書籍 今年作ったもの   来年の目標 まとめ  今年の">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=16">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=192" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=180">
+          
+        
+    
+    <!-- title -->
+    <title>業務経験 2 年目のプログラマが今年を振り返る</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/03/01/about-hoc/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/12/29/responsive-deign/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/12/31/look-back-on-the-second-year-as-a-programmer/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/12/31/look-back-on-the-second-year-as-a-programmer/&text=業務経験 2 年目のプログラマが今年を振り返る"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/12/31/look-back-on-the-second-year-as-a-programmer/&title=業務経験 2 年目のプログラマが今年を振り返る"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/12/31/look-back-on-the-second-year-as-a-programmer/&is_video=false&description=業務経験 2 年目のプログラマが今年を振り返る"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=業務経験 2 年目のプログラマが今年を振り返る&body=Check out this article: http://k4h4shi.com/2017/12/31/look-back-on-the-second-year-as-a-programmer/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/12/31/look-back-on-the-second-year-as-a-programmer/&title=業務経験 2 年目のプログラマが今年を振り返る"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/12/31/look-back-on-the-second-year-as-a-programmer/&title=業務経験 2 年目のプログラマが今年を振り返る"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/12/31/look-back-on-the-second-year-as-a-programmer/&title=業務経験 2 年目のプログラマが今年を振り返る"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/12/31/look-back-on-the-second-year-as-a-programmer/&title=業務経験 2 年目のプログラマが今年を振り返る"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/12/31/look-back-on-the-second-year-as-a-programmer/&name=業務経験 2 年目のプログラマが今年を振り返る&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#はじめに"><span class="toc-number">1.</span> <span class="toc-text">はじめに</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#アウトライン"><span class="toc-number">2.</span> <span class="toc-text">アウトライン</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#今年の振り返り"><span class="toc-number">3.</span> <span class="toc-text">今年の振り返り</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-年に-1-つ学ぶ言語として、Ruby-を学ぶ"><span class="toc-number">3.1.</span> <span class="toc-text">1 年に 1 つ学ぶ言語として、Ruby を学ぶ</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#個人プロジェクトの公開を目標に計画的に学習をする"><span class="toc-number">3.2.</span> <span class="toc-text">個人プロジェクトの公開を目標に計画的に学習をする</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#アウトプットを行った上でフィードバックを貰う。"><span class="toc-number">3.3.</span> <span class="toc-text">アウトプットを行った上でフィードバックを貰う。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#今年の反省と改善点"><span class="toc-number">3.4.</span> <span class="toc-text">今年の反省と改善点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#今年の良かったこと"><span class="toc-number">4.</span> <span class="toc-text">今年の良かったこと</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#今年触って良かった技術"><span class="toc-number">4.1.</span> <span class="toc-text">今年触って良かった技術</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#今年読んで良かった本"><span class="toc-number">5.</span> <span class="toc-text">今年読んで良かった本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#今年作ったもの"><span class="toc-number">6.</span> <span class="toc-text">今年作ったもの</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#来年の目標"><span class="toc-number">7.</span> <span class="toc-text">来年の目標</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#まとめ"><span class="toc-number">8.</span> <span class="toc-text">まとめ</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        業務経験 2 年目のプログラマが今年を振り返る
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">k4h4shi.com</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-12-31T07:51:08.000Z" itemprop="datePublished">2017-12-31</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h2 id="はじめに"><a href="#はじめに" class="headerlink" title="はじめに"></a>はじめに</h2><p>業務経験 2 年目のプログラマが、今年一年で触れた技術について振り返りたいと思います。</p>
+<p>普段は、Java や Node.js で業務システムを開発しています。</p>
+<p>去年の暮れにも<a href="http://k4h4shi.com/2016/12/29/lookback_firstyear_as_a_programmer/">振り返りの記事</a>を書きました。</p>
+<p>自分の立ち位置を見直す上で良い経験でしたので、今年も振り返りを行います。</p>
+<h2 id="アウトライン"><a href="#アウトライン" class="headerlink" title="アウトライン"></a>アウトライン</h2><ul>
+<li>今年を振り返って<ul>
+<li>今年使用した技術</li>
+<li>今年読んだ書籍</li>
+<li>今年作ったもの</li>
+</ul>
+</li>
+<li>来年の目標</li>
+<li>まとめ</li>
+</ul>
+<h2 id="今年の振り返り"><a href="#今年の振り返り" class="headerlink" title="今年の振り返り"></a>今年の振り返り</h2><p>まずは、今年の目標としてあげていたものを達成できているか確認をします。</p>
+<p>去年立てていた目標を要約すると以下のようになります。</p>
+<ul>
+<li>1 年に 1 つ学ぶ言語として、Ruby を学ぶ。</li>
+<li>個人プロジェクトの公開を目標に、計画的に学習をする</li>
+<li>アウトプットを行った上でフィードバックを貰う。</li>
+</ul>
+<p>今見ると目標が抽象的ですね、これも反省点です。</p>
+<p>では一つ一つ確認していきます。</p>
+<h3 id="1-年に-1-つ学ぶ言語として、Ruby-を学ぶ"><a href="#1-年に-1-つ学ぶ言語として、Ruby-を学ぶ" class="headerlink" title="1 年に 1 つ学ぶ言語として、Ruby を学ぶ"></a>1 年に 1 つ学ぶ言語として、Ruby を学ぶ</h3><p>結論から言うと Ruby は言うほど触ってなく、JS を使っていました。</p>
+<p>1 年に 1 つ新たな言語を学ぶという点では達成できたと思っています。（後付け</p>
+<p>1 年に 1 つ言語を学ぶことについては、来年も継続します。</p>
+<h3 id="個人プロジェクトの公開を目標に計画的に学習をする"><a href="#個人プロジェクトの公開を目標に計画的に学習をする" class="headerlink" title="個人プロジェクトの公開を目標に計画的に学習をする"></a>個人プロジェクトの公開を目標に計画的に学習をする</h3><p>JS は割と計画的に学習していて、成果物としては CLI ツールやライブラリ、簡単な Web アプリを作りました。</p>
+<p>もっと人の役に立つものを作りたいです。</p>
+<h3 id="アウトプットを行った上でフィードバックを貰う。"><a href="#アウトプットを行った上でフィードバックを貰う。" class="headerlink" title="アウトプットを行った上でフィードバックを貰う。"></a>アウトプットを行った上でフィードバックを貰う。</h3><p>アウトプットに関しては数は行っていました。</p>
+<p>しかし、あまりフィードバックはいただけていません。</p>
+<p>その理由を考えると、以下になります。</p>
+<ul>
+<li>他の人の興味を引けなかった</li>
+<li>あまり他の人の役には立ってなかった</li>
+<li>そもそも人に知られていない</li>
+</ul>
+<p>活動を定量化すると、ブログは 62 記事、Qiita の記事が 12 件、社内での発表は 3 回ほどで、技術系の勉強会への参加は、1 度のみです。</p>
+<p>記事は結構書きましたが、ほとんどは自分の勉強のまとめとポエムです。</p>
+<h3 id="今年の反省と改善点"><a href="#今年の反省と改善点" class="headerlink" title="今年の反省と改善点"></a>今年の反省と改善点</h3><p>まとめると、反省点は以下のようになります。</p>
+<ul>
+<li>使う予定のない技術を勉強する計画を立てていた</li>
+<li>勉強のまとめ記事ばかり書いていた</li>
+<li>人にとって役に立たないやツールを公開していた</li>
+<li>勉強会などにほとんど参加しなかった</li>
+</ul>
+<p>また、スキルがなんでも屋っぽくなってしまっているなと感じています。</p>
+<p>全部をひっくり返すと、以下のようになるかなと思います。</p>
+<ul>
+<li>実際に使うものを勉強する</li>
+<li>実際に得た知見を記事にする</li>
+<li>自分にある課題を解決するツールを作る</li>
+<li>勉強会などに足を運び、顔や活動を知ってもらう</li>
+<li>専門分野を決める</li>
+</ul>
+<p>この点を意識して、来年は改善していきたいです。</p>
+<h2 id="今年の良かったこと"><a href="#今年の良かったこと" class="headerlink" title="今年の良かったこと"></a>今年の良かったこと</h2><p>反省ばかりしても落ち込むだけなので、良かったこともまとめます。</p>
+<h3 id="今年触って良かった技術"><a href="#今年触って良かった技術" class="headerlink" title="今年触って良かった技術"></a>今年触って良かった技術</h3><p>今年は個人的に JS の年でした。</p>
+<p>React や、Node.js などで楽しく開発ができました。</p>
+<p>また、AWS などの Paas を使っていたので、 来年に個人で も Web サービスなどを作る 際に利用したいです。</p>
+<ul>
+<li>vscode</li>
+<li>JS</li>
+<li>Babel</li>
+<li>node.js</li>
+<li>parcel</li>
+<li>npm</li>
+<li>Redux</li>
+<li>create-react-app</li>
+<li>react-router</li>
+<li>react</li>
+<li>Pretiier</li>
+<li>React.js</li>
+<li>Next.js</li>
+<li>Enzyme</li>
+<li>mocha</li>
+<li>chai</li>
+<li>sinon</li>
+<li>Github</li>
+<li>vagrant</li>
+<li>serverless framework</li>
+<li>AWS<ul>
+<li>lambda</li>
+<li>dynamodb</li>
+<li>s3</li>
+<li>API Gateway</li>
+<li>Cognito</li>
+</ul>
+</li>
+<li>mongodb</li>
+<li>mongoose</li>
+</ul>
+<h2 id="今年読んで良かった本"><a href="#今年読んで良かった本" class="headerlink" title="今年読んで良かった本"></a>今年読んで良かった本</h2><p>今年読んだ本の中で、実際に役に立ったり、読んで良かったと思えた本です。</p>
+<p>全体的に入門書と古典、自己啓発書が多いですね。</p>
+<ul>
+<li><a href="http://amzn.asia/8tkAmYw" target="_blank" rel="external">初めての JavaScript 第 3 版 ―ES2015 以降の最新ウェブ開発 </a></li>
+<li><a href="http://amzn.asia/ipKt3ho" target="_blank" rel="external">ノンデザイナーでもわかる UX+理論で作る Web デザイン</a></li>
+<li><a href="http://amzn.asia/5bKMVp7" target="_blank" rel="external">HTML5&amp;CSS3 デザイン 現場の新標準ガイド(特典 PDF 付き) </a></li>
+<li><a href="http://amzn.asia/8zRbxKx" target="_blank" rel="external">サーバーレスシングルページアプリケーション ―S3、AWS Lambda、API Gateway、DynamoDB、Cognito で構築するスケーラブルな Web サービス </a></li>
+<li><a href="http://amzn.asia/cl9cuuw" target="_blank" rel="external">Java 本格入門 ~モダンスタイルによる基礎からオブジェクト指向・実用ライブラリまで </a></li>
+<li><a href="http://amzn.asia/br7X16J" target="_blank" rel="external">初めての SQL </a></li>
+<li><a href="http://amzn.asia/hUBiHtf" target="_blank" rel="external">新装版 リファクタリング―既存のコードを安全に改善する― (OBJECT TECHNOLOGY SERIES) </a></li>
+<li><a href="http://amzn.asia/f17pXBb" target="_blank" rel="external">UNIX という考え方―その設計思想と哲学 </a></li>
+<li><a href="http://amzn.asia/4Aleu6n" target="_blank" rel="external">ハッカーと画家 コンピュータ時代の創造者たち </a></li>
+<li><a href="http://amzn.asia/9nP1Uoc" target="_blank" rel="external">コーディングを支える技術 ~成り立ちから学ぶプログラミング作法 (WEB+DB PRESS plus) </a></li>
+<li><a href="http://amzn.asia/4padLyq" target="_blank" rel="external">SPRINT 最速仕事術――あらゆる仕事がうまくいく最も合理的な方法 </a></li>
+<li><a href="http://amzn.asia/a6L0Y2w" target="_blank" rel="external">リファクタリング・ウェットウェア ―達人プログラマーの思考法と学習法 </a></li>
+</ul>
+<h2 id="今年作ったもの"><a href="#今年作ったもの" class="headerlink" title="今年作ったもの"></a>今年作ったもの</h2><p>仕事では Java や Node.js, AWS など で Web システムを作ったり、Node.js を使ってライブラリなどを、作っていました。</p>
+<p>個人では、ほぼ Node.js と、たまに React を使って開発をしていました。</p>
+<ul>
+<li><a href="https://github.com/k4h4shi/k4h4shi.com" target="_blank" rel="external">このブログ</a></li>
+<li><a href="https://github.com/k4h4shi/intensityjs" target="_blank" rel="external">加速度データから、計測震度を算出するライブラリ</a></li>
+<li><a href="https://github.com/k4h4shi/dpndon" target="_blank" rel="external">npm モジュールの依存関係に含まれるデータを取得するライブラリ</a></li>
+<li><a href="https://github.com/k4h4shi/dpndon-cli" target="_blank" rel="external">npm モジュールの依存関係に関する CLI ツール</a></li>
+<li><a href="https://github.com/k4h4shi/dpndon.io" target="_blank" rel="external">npm モジュールの依存モジュールのホームページを開く Web アプリ</a></li>
+</ul>
+<h2 id="来年の目標"><a href="#来年の目標" class="headerlink" title="来年の目標"></a>来年の目標</h2><p>今年の反省から立てた目標は以下です。</p>
+<ul>
+<li>実際に使うものを勉強する</li>
+<li>課題を解決するためのツールを作る</li>
+<li>開発から得た知見を記事にする</li>
+<li>勉強会などに足を運び、顔や活動を知ってもらう</li>
+<li>専門分野を決める</li>
+</ul>
+<p>これは少し抽象的なので具体的な目標にします。</p>
+<ul>
+<li>個人で 1 つ Web サービスを開発する</li>
+<li>個人で 1 つフロントエンドの開発ツールを作る</li>
+<li>ツールと Web サービスの開発、から得た知見を記事にする</li>
+<li>3 ヶ月に 1 度程度勉強会へ顔を出す</li>
+<li>フロントエンドエンジニアとして、2 から 3 つほどのポートフォリオを作る</li>
+</ul>
+<p>来年覚える言語ですが、Hasckel, Python, などを覚えたいと思っています。</p>
+<p>ただ興味のみで、まだ具たい的な使い道がわからないので、保留としておきます。</p>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>今年は、時間があったので、気の向くままに開発ができました。</p>
+<p>ただし、目的がなくダラダラとした開発をしていたようにも思います。</p>
+<p>来年は、メリハリをつけて上記の目標を達成していきます。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#はじめに"><span class="toc-number">1.</span> <span class="toc-text">はじめに</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#アウトライン"><span class="toc-number">2.</span> <span class="toc-text">アウトライン</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#今年の振り返り"><span class="toc-number">3.</span> <span class="toc-text">今年の振り返り</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-年に-1-つ学ぶ言語として、Ruby-を学ぶ"><span class="toc-number">3.1.</span> <span class="toc-text">1 年に 1 つ学ぶ言語として、Ruby を学ぶ</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#個人プロジェクトの公開を目標に計画的に学習をする"><span class="toc-number">3.2.</span> <span class="toc-text">個人プロジェクトの公開を目標に計画的に学習をする</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#アウトプットを行った上でフィードバックを貰う。"><span class="toc-number">3.3.</span> <span class="toc-text">アウトプットを行った上でフィードバックを貰う。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#今年の反省と改善点"><span class="toc-number">3.4.</span> <span class="toc-text">今年の反省と改善点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#今年の良かったこと"><span class="toc-number">4.</span> <span class="toc-text">今年の良かったこと</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#今年触って良かった技術"><span class="toc-number">4.1.</span> <span class="toc-text">今年触って良かった技術</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#今年読んで良かった本"><span class="toc-number">5.</span> <span class="toc-text">今年読んで良かった本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#今年作ったもの"><span class="toc-number">6.</span> <span class="toc-text">今年作ったもの</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#来年の目標"><span class="toc-number">7.</span> <span class="toc-text">来年の目標</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#まとめ"><span class="toc-number">8.</span> <span class="toc-text">まとめ</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/12/31/look-back-on-the-second-year-as-a-programmer/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/12/31/look-back-on-the-second-year-as-a-programmer/&text=業務経験 2 年目のプログラマが今年を振り返る"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/12/31/look-back-on-the-second-year-as-a-programmer/&title=業務経験 2 年目のプログラマが今年を振り返る"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/12/31/look-back-on-the-second-year-as-a-programmer/&is_video=false&description=業務経験 2 年目のプログラマが今年を振り返る"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=業務経験 2 年目のプログラマが今年を振り返る&body=Check out this article: http://k4h4shi.com/2017/12/31/look-back-on-the-second-year-as-a-programmer/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/12/31/look-back-on-the-second-year-as-a-programmer/&title=業務経験 2 年目のプログラマが今年を振り返る"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/12/31/look-back-on-the-second-year-as-a-programmer/&title=業務経験 2 年目のプログラマが今年を振り返る"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/12/31/look-back-on-the-second-year-as-a-programmer/&title=業務経験 2 年目のプログラマが今年を振り返る"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/12/31/look-back-on-the-second-year-as-a-programmer/&title=業務経験 2 年目のプログラマが今年を振り返る"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/12/31/look-back-on-the-second-year-as-a-programmer/&name=業務経験 2 年目のプログラマが今年を振り返る&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 kotaro takahashi
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

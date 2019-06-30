@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang=ja>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="windowオブジェクトのhistoryオブジェクト経由でブラウザの履歴にアクセスできます。 ブラウザの履歴は履歴スタックで管理されています。以下のコードでその長さを取得することができます。 1history.length // 履歴スタックの長さ また履歴スタックの任意の位置に遷移することができます。 123history.back() // 履歴を1つ戻るhistory.forward() /">
+<meta name="keywords" content="javascript,history">
+<meta property="og:type" content="article">
+<meta property="og:title" content="history APIの使い方">
+<meta property="og:url" content="http://k4h4shi.com/2017/09/19/how-to-use-history-api/index.html">
+<meta property="og:site_name" content="k4h4shi.com">
+<meta property="og:description" content="windowオブジェクトのhistoryオブジェクト経由でブラウザの履歴にアクセスできます。 ブラウザの履歴は履歴スタックで管理されています。以下のコードでその長さを取得することができます。 1history.length // 履歴スタックの長さ また履歴スタックの任意の位置に遷移することができます。 123history.back() // 履歴を1つ戻るhistory.forward() /">
+<meta property="og:locale" content="ja">
+<meta property="og:updated_time" content="2019-06-30T11:17:25.026Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="history APIの使い方">
+<meta name="twitter:description" content="windowオブジェクトのhistoryオブジェクト経由でブラウザの履歴にアクセスできます。 ブラウザの履歴は履歴スタックで管理されています。以下のコードでその長さを取得することができます。 1history.length // 履歴スタックの長さ また履歴スタックの任意の位置に遷移することができます。 123history.back() // 履歴を1つ戻るhistory.forward() /">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=16">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=192" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=180">
+          
+        
+    
+    <!-- title -->
+    <title>history APIの使い方</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/09/19/run-test-with-karma/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/09/19/test_js_code_with_mocha/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/09/19/how-to-use-history-api/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/09/19/how-to-use-history-api/&text=history APIの使い方"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/09/19/how-to-use-history-api/&title=history APIの使い方"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/09/19/how-to-use-history-api/&is_video=false&description=history APIの使い方"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=history APIの使い方&body=Check out this article: http://k4h4shi.com/2017/09/19/how-to-use-history-api/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/09/19/how-to-use-history-api/&title=history APIの使い方"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/09/19/how-to-use-history-api/&title=history APIの使い方"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/09/19/how-to-use-history-api/&title=history APIの使い方"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/09/19/how-to-use-history-api/&title=history APIの使い方"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/09/19/how-to-use-history-api/&name=history APIの使い方&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#履歴の編集や追加"><span class="toc-number">1.</span> <span class="toc-text">履歴の編集や追加</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#履歴スタックへの追加"><span class="toc-number">1.1.</span> <span class="toc-text">履歴スタックへの追加</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#state属性の編集"><span class="toc-number">1.2.</span> <span class="toc-text">state属性の編集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#戻る・進むイベントを監視する"><span class="toc-number">1.3.</span> <span class="toc-text">戻る・進むイベントを監視する</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#その他のプロパティ"><span class="toc-number">1.4.</span> <span class="toc-text">その他のプロパティ</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献"><span class="toc-number">2.</span> <span class="toc-text">参考文献</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        history APIの使い方
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">k4h4shi.com</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-09-19T13:44:15.000Z" itemprop="datePublished">2017-09-19</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/history/">history</a>, <a class="tag-link" href="/tags/javascript/">javascript</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>windowオブジェクトのhistoryオブジェクト経由でブラウザの履歴にアクセスできます。</p>
+<p>ブラウザの履歴は履歴スタックで管理されています。<br>以下のコードでその長さを取得することができます。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">history.length // 履歴スタックの長さ</div></pre></td></tr></table></figure>
+<p>また履歴スタックの任意の位置に遷移することができます。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">history.back() // 履歴を1つ戻る</div><div class="line">history.forward() // 履歴を1つ進める</div><div class="line">history.go() // 現在のページを0して、履歴相対位置にあるページを読み込む</div></pre></td></tr></table></figure>
+<h2 id="履歴の編集や追加"><a href="#履歴の編集や追加" class="headerlink" title="履歴の編集や追加"></a>履歴の編集や追加</h2><p>HTML 5以降は履歴スタックに任意の履歴エントリを追加したり、編集することができるようになっています。</p>
+<h3 id="履歴スタックへの追加"><a href="#履歴スタックへの追加" class="headerlink" title="履歴スタックへの追加"></a>履歴スタックへの追加</h3><p>履歴スタックの追加は以下のように行います。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">history.pushState(&quot;hoge&quot;, &quot;&quot;, &quot;/hoge&quot;);</div></pre></td></tr></table></figure></p>
+<p>上記によって<code>location.href</code>の値が変更されています。</p>
+<p>また、履歴スタックが1つ増えましたのでブラウザの戻るボタンを押下することで<code>location.href</code>の値がもとにもどります。</p>
+<p>pushStateには任意のオブジェクトを渡すことができますので、アプリケーションにおけるある状態を保存パスとともに保存しておくことができます。</p>
+<h3 id="state属性の編集"><a href="#state属性の編集" class="headerlink" title="state属性の編集"></a>state属性の編集</h3><p><code>history</code>をコンソールに入力すると、履歴に関する情報がみれます。</p>
+<p>初めてページを開いたときは、<code>history.state</code>の値が<code>null</code>になっています。</p>
+<p><code>history.state</code>の値は任意に設定することができます。</p>
+<p>以下のコードで、現在のstateの値を変更することができます。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">history.replaceState(&quot;index&quot;);</div></pre></td></tr></table></figure>
+<h3 id="戻る・進むイベントを監視する"><a href="#戻る・進むイベントを監視する" class="headerlink" title="戻る・進むイベントを監視する"></a>戻る・進むイベントを監視する</h3><p>ブラウザで履歴スタックから値が取り出されたさいのイベントを監視します。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">winndow.onpopstate = function(event) &#123;</div><div class="line">  console.log(&apos;event&apos;, event);</div><div class="line">  console.log(&apos;event.state&apos;, event.state);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>ブラウザで遷移を行うたびに、ログが出力されるのがわかると思います。</p>
+<h3 id="その他のプロパティ"><a href="#その他のプロパティ" class="headerlink" title="その他のプロパティ"></a>その他のプロパティ</h3><ul>
+<li>history.state: 状態を保持するプロパティ</li>
+<li>history.pathname: パス名を保持するプロパティ</li>
+<li>history.search: クエリパラメータを保持するプロパティ</li>
+</ul>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/Guide/DOM/Manipulating_the_browser_history" target="_blank" rel="external">ブラウザの履歴を操作する</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#履歴の編集や追加"><span class="toc-number">1.</span> <span class="toc-text">履歴の編集や追加</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#履歴スタックへの追加"><span class="toc-number">1.1.</span> <span class="toc-text">履歴スタックへの追加</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#state属性の編集"><span class="toc-number">1.2.</span> <span class="toc-text">state属性の編集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#戻る・進むイベントを監視する"><span class="toc-number">1.3.</span> <span class="toc-text">戻る・進むイベントを監視する</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#その他のプロパティ"><span class="toc-number">1.4.</span> <span class="toc-text">その他のプロパティ</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献"><span class="toc-number">2.</span> <span class="toc-text">参考文献</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/09/19/how-to-use-history-api/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/09/19/how-to-use-history-api/&text=history APIの使い方"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/09/19/how-to-use-history-api/&title=history APIの使い方"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/09/19/how-to-use-history-api/&is_video=false&description=history APIの使い方"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=history APIの使い方&body=Check out this article: http://k4h4shi.com/2017/09/19/how-to-use-history-api/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/09/19/how-to-use-history-api/&title=history APIの使い方"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/09/19/how-to-use-history-api/&title=history APIの使い方"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/09/19/how-to-use-history-api/&title=history APIの使い方"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/09/19/how-to-use-history-api/&title=history APIの使い方"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/09/19/how-to-use-history-api/&name=history APIの使い方&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 kotaro takahashi
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

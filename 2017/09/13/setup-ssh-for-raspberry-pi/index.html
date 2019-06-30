@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang=ja>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Raspberry PiにSSHが出来るようの設定しました。 SSHはSecure Shellの略で、遠隔で安全にリモートコンピュータと通信するためのプロトコルです。 これによってRasberry Piを遠隔で操作することができるようになります。 設定方法Terminalで以下のコマンドで実行しRaspberry Piの設定ツールを起動します。 1$sudo raspi-config SSHの有効">
+<meta name="keywords" content="ssh,raspberry-pi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="raspberry piにssh接続できるように設定した">
+<meta property="og:url" content="http://k4h4shi.com/2017/09/13/setup-ssh-for-raspberry-pi/index.html">
+<meta property="og:site_name" content="k4h4shi.com">
+<meta property="og:description" content="Raspberry PiにSSHが出来るようの設定しました。 SSHはSecure Shellの略で、遠隔で安全にリモートコンピュータと通信するためのプロトコルです。 これによってRasberry Piを遠隔で操作することができるようになります。 設定方法Terminalで以下のコマンドで実行しRaspberry Piの設定ツールを起動します。 1$sudo raspi-config SSHの有効">
+<meta property="og:locale" content="ja">
+<meta property="og:updated_time" content="2019-06-30T11:17:25.034Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="raspberry piにssh接続できるように設定した">
+<meta name="twitter:description" content="Raspberry PiにSSHが出来るようの設定しました。 SSHはSecure Shellの略で、遠隔で安全にリモートコンピュータと通信するためのプロトコルです。 これによってRasberry Piを遠隔で操作することができるようになります。 設定方法Terminalで以下のコマンドで実行しRaspberry Piの設定ツールを起動します。 1$sudo raspi-config SSHの有効">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=16">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=192" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=180">
+          
+        
+    
+    <!-- title -->
+    <title>raspberry piにssh接続できるように設定した</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/09/14/build-a-server-with-express/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/09/12/start-a-simple-server-with-python/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/09/13/setup-ssh-for-raspberry-pi/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/09/13/setup-ssh-for-raspberry-pi/&text=raspberry piにssh接続できるように設定した"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/09/13/setup-ssh-for-raspberry-pi/&title=raspberry piにssh接続できるように設定した"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/09/13/setup-ssh-for-raspberry-pi/&is_video=false&description=raspberry piにssh接続できるように設定した"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=raspberry piにssh接続できるように設定した&body=Check out this article: http://k4h4shi.com/2017/09/13/setup-ssh-for-raspberry-pi/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/09/13/setup-ssh-for-raspberry-pi/&title=raspberry piにssh接続できるように設定した"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/09/13/setup-ssh-for-raspberry-pi/&title=raspberry piにssh接続できるように設定した"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/09/13/setup-ssh-for-raspberry-pi/&title=raspberry piにssh接続できるように設定した"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/09/13/setup-ssh-for-raspberry-pi/&title=raspberry piにssh接続できるように設定した"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/09/13/setup-ssh-for-raspberry-pi/&name=raspberry piにssh接続できるように設定した&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#設定方法"><span class="toc-number">1.</span> <span class="toc-text">設定方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SSHの有効化"><span class="toc-number">1.1.</span> <span class="toc-text">SSHの有効化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ip-addressを確認する"><span class="toc-number">2.</span> <span class="toc-text">ip addressを確認する</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SSHでログインする"><span class="toc-number">3.</span> <span class="toc-text">SSHでログインする</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公開鍵認証でSSHログインする"><span class="toc-number">4.</span> <span class="toc-text">公開鍵認証でSSHログインする</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献"><span class="toc-number">5.</span> <span class="toc-text">参考文献</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        raspberry piにssh接続できるように設定した
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">k4h4shi.com</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-09-13T12:11:18.000Z" itemprop="datePublished">2017-09-13</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/raspberry-pi/">raspberry-pi</a>, <a class="tag-link" href="/tags/ssh/">ssh</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>Raspberry PiにSSHが出来るようの設定しました。</p>
+<p>SSHはSecure Shellの略で、遠隔で安全にリモートコンピュータと通信するためのプロトコルです。</p>
+<p>これによってRasberry Piを遠隔で操作することができるようになります。</p>
+<h2 id="設定方法"><a href="#設定方法" class="headerlink" title="設定方法"></a>設定方法</h2><p>Terminalで以下のコマンドで実行しRaspberry Piの設定ツールを起動します。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$sudo raspi-config</div></pre></td></tr></table></figure>
+<h3 id="SSHの有効化"><a href="#SSHの有効化" class="headerlink" title="SSHの有効化"></a>SSHの有効化</h3><ol>
+<li>5のInterfacing Optionsを選択します</li>
+<li>P2のSSHを選択します</li>
+<li>Would you like the SSH server to be enabled?と尋ねられるので、はいを選択します。</li>
+<li>The SSH server is enabledと表示されたら成功です。</li>
+</ol>
+<p>設定ツールを終了します。</p>
+<h2 id="ip-addressを確認する"><a href="#ip-addressを確認する" class="headerlink" title="ip addressを確認する"></a>ip addressを確認する</h2><p>Raspberry Piのipアドレスを知るために、Terminalで以下のコマンドを実行します。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hostname -I</div></pre></td></tr></table></figure>
+<p>表示されたipアドレスはsshに必要なので控えておきます。</p>
+<h2 id="SSHでログインする"><a href="#SSHでログインする" class="headerlink" title="SSHでログインする"></a>SSHでログインする</h2><p>同一ネットワークに存在する端末から、ipアドレスを使ってRaspberry Piにアクセスします。</p>
+<p>Raspberry Piの初期ユーザ名とpassは以下になります。</p>
+<ul>
+<li>user: pi</li>
+<li>pass: raspberry</li>
+</ul>
+<p>以下のコマンドでsshを行います。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ssh [ユーザ名]@[ipアドレス]</div></pre></td></tr></table></figure>
+<p>passを聞かれるため入力します。</p>
+<p>接続ができたら設定は完了です。</p>
+<h2 id="公開鍵認証でSSHログインする"><a href="#公開鍵認証でSSHログインする" class="headerlink" title="公開鍵認証でSSHログインする"></a>公開鍵認証でSSHログインする</h2><p>公開鍵と秘密鍵のペアを生成します。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd ~/.ssh</div><div class="line">$ ssh-keygen</div></pre></td></tr></table></figure></p>
+<p>幾つか質問をされるので答えると公開鍵と秘密鍵のペアが生成されます。</p>
+<p>生成したら、scpで公開鍵をラズベリーパイへ転送します。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ scp [key.pub] pi@xxx.xxx.xxx.xxx:/home/pi/.ssh/`</div></pre></td></tr></table></figure></p>
+<p>Raspberry piへsshログインを行って、公開鍵情報をauthorized_keysファイルへ書き出し、権限を変更します。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ raspberrypi ~ $ cat id_rsa.pub &gt;&gt; .ssh/authorized_keys</div><div class="line">$ raspberrypi ~ $ chmod 700 .ssh</div><div class="line">$ raspberrypi ~ $ chmod 600 .ssh/authorized_keys</div></pre></td></tr></table></figure></p>
+<p>sshd_configを編集します<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.org</div><div class="line">$ sudo vi /etc/ssh/sshd_config</div></pre></td></tr></table></figure></p>
+<p>設定箇所は以下の3つです。</p>
+<ul>
+<li>ルートログインの禁止</li>
+<li>公開鍵ファイル認証を有効化</li>
+<li>パスワード認証の無効化</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">PermitRootLogin without-password</div><div class="line">↓</div><div class="line">PermitRootLogin no</div><div class="line"></div><div class="line">#AuthorizedKeysFile  %h/.ssh/authorized_keys</div><div class="line">↓</div><div class="line">AuthorizedKeysFile  %h/.ssh/authorized_keys</div><div class="line"></div><div class="line">PasswordAuthentication yes</div><div class="line">↓</div><div class="line">PasswordAuthentication no</div></pre></td></tr></table></figure>
+<p>sshを再起動して設定を有効化します。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo /etc/init.d/ssh restart</div></pre></td></tr></table></figure></p>
+<p>パスワードによるsshが失敗し、公開鍵によるsshが成功すれば完了です。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ ssh pi@xxx.xxx.xxx.xxx </div><div class="line">$ ssh -i ~/.ssh/key -p 22 pi@xxx.xxx.xxx.xxx</div></pre></td></tr></table></figure></p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>-<a href="https://www.raspberrypi.org/documentation/remote-access/ssh/README.md" target="_blank" rel="external">ssh(SECURE SHELL)</a><br>-<a href="https://qiita.com/ritukiii/items/c724f09fe66fedf2618b" target="_blank" rel="external">SCPコマンドでローカルのファイルをサーバにアップ＆サーバ上のファイルをDL</a><br>-<a href="https://qiita.com/kinpira/items/c9e6dc910e8d96e8c19b" target="_blank" rel="external">Raspberry Piに外部ネットワークからアクセスできる様にして携帯でペットを遠隔監視する方法</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#設定方法"><span class="toc-number">1.</span> <span class="toc-text">設定方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SSHの有効化"><span class="toc-number">1.1.</span> <span class="toc-text">SSHの有効化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ip-addressを確認する"><span class="toc-number">2.</span> <span class="toc-text">ip addressを確認する</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SSHでログインする"><span class="toc-number">3.</span> <span class="toc-text">SSHでログインする</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#公開鍵認証でSSHログインする"><span class="toc-number">4.</span> <span class="toc-text">公開鍵認証でSSHログインする</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文献"><span class="toc-number">5.</span> <span class="toc-text">参考文献</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/09/13/setup-ssh-for-raspberry-pi/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/09/13/setup-ssh-for-raspberry-pi/&text=raspberry piにssh接続できるように設定した"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/09/13/setup-ssh-for-raspberry-pi/&title=raspberry piにssh接続できるように設定した"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/09/13/setup-ssh-for-raspberry-pi/&is_video=false&description=raspberry piにssh接続できるように設定した"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=raspberry piにssh接続できるように設定した&body=Check out this article: http://k4h4shi.com/2017/09/13/setup-ssh-for-raspberry-pi/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/09/13/setup-ssh-for-raspberry-pi/&title=raspberry piにssh接続できるように設定した"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/09/13/setup-ssh-for-raspberry-pi/&title=raspberry piにssh接続できるように設定した"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/09/13/setup-ssh-for-raspberry-pi/&title=raspberry piにssh接続できるように設定した"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/09/13/setup-ssh-for-raspberry-pi/&title=raspberry piにssh接続できるように設定した"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/09/13/setup-ssh-for-raspberry-pi/&name=raspberry piにssh接続できるように設定した&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 kotaro takahashi
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>

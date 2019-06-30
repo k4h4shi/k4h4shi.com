@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang=ja>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="hexo に theme を設定する。hexo は任意のテーマを設定できます。自分で構築することもできますし、hexo.io のテーマ一覧から選択することもできます。このブログはcacutus-darkというテーマを使っています。正直読みづらさは否めませんが、ターミナルみたいでかっこいいと思います。 theme の設定方法既存テーマを利用する方法について説明します。 ほとんどのテーマは設定項目が存">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexoにthemeを設定する">
+<meta property="og:url" content="http://k4h4shi.com/2017/09/18/setup_theme_for_hexo/index.html">
+<meta property="og:site_name" content="k4h4shi.com">
+<meta property="og:description" content="hexo に theme を設定する。hexo は任意のテーマを設定できます。自分で構築することもできますし、hexo.io のテーマ一覧から選択することもできます。このブログはcacutus-darkというテーマを使っています。正直読みづらさは否めませんが、ターミナルみたいでかっこいいと思います。 theme の設定方法既存テーマを利用する方法について説明します。 ほとんどのテーマは設定項目が存">
+<meta property="og:locale" content="ja">
+<meta property="og:updated_time" content="2019-06-30T11:17:25.034Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hexoにthemeを設定する">
+<meta name="twitter:description" content="hexo に theme を設定する。hexo は任意のテーマを設定できます。自分で構築することもできますし、hexo.io のテーマ一覧から選択することもできます。このブログはcacutus-darkというテーマを使っています。正直読みづらさは否めませんが、ターミナルみたいでかっこいいと思います。 theme の設定方法既存テーマを利用する方法について説明します。 ほとんどのテーマは設定項目が存">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=16">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=192" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="https://www.gravatar.com/avatar/7c7732bd8c8ec414de4572594f8b9c96?s=180">
+          
+        
+    
+    <!-- title -->
+    <title>hexoにthemeを設定する</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- persian styles -->
+    
+      <link rel="stylesheet" href="/css/rtl.css">
+    
+    <!-- rss -->
+    
+    
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2017/09/19/create-mock-server-with-json-server-js/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2017/09/18/integrate_git_with_hexo/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Post Anterior</span>
+      <span id="i-next" class="info" style="display:none;">Post Següent</span>
+      <span id="i-top" class="info" style="display:none;">Adalt</span>
+      <span id="i-share" class="info" style="display:none;">Compartir Post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/09/18/setup_theme_for_hexo/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/09/18/setup_theme_for_hexo/&text=hexoにthemeを設定する"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/09/18/setup_theme_for_hexo/&title=hexoにthemeを設定する"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/09/18/setup_theme_for_hexo/&is_video=false&description=hexoにthemeを設定する"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=hexoにthemeを設定する&body=Check out this article: http://k4h4shi.com/2017/09/18/setup_theme_for_hexo/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/09/18/setup_theme_for_hexo/&title=hexoにthemeを設定する"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/09/18/setup_theme_for_hexo/&title=hexoにthemeを設定する"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/09/18/setup_theme_for_hexo/&title=hexoにthemeを設定する"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/09/18/setup_theme_for_hexo/&title=hexoにthemeを設定する"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/09/18/setup_theme_for_hexo/&name=hexoにthemeを設定する&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#hexo-に-theme-を設定する。"><span class="toc-number">1.</span> <span class="toc-text">hexo に theme を設定する。</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#theme-の設定方法"><span class="toc-number">1.1.</span> <span class="toc-text">theme の設定方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#任意のテーマをフォークする"><span class="toc-number">1.1.1.</span> <span class="toc-text">任意のテーマをフォークする</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#テーマのフォークを-git-のサブモジュールとして追加する"><span class="toc-number">1.1.2.</span> <span class="toc-text">テーマのフォークを git のサブモジュールとして追加する</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hexo-に使用するテーマの設定を行う"><span class="toc-number">1.1.3.</span> <span class="toc-text">hexo に使用するテーマの設定を行う</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#テーマに対する設定を行う。"><span class="toc-number">1.1.4.</span> <span class="toc-text">テーマに対する設定を行う。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gravator-の設定"><span class="toc-number">1.1.5.</span> <span class="toc-text">gravator の設定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nav-の設定"><span class="toc-number">1.1.6.</span> <span class="toc-text">nav の設定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#social-link-の設定"><span class="toc-number">1.1.7.</span> <span class="toc-text">social_link の設定</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#まとめ"><span class="toc-number">1.2.</span> <span class="toc-text">まとめ</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        hexoにthemeを設定する
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">k4h4shi.com</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-09-18T13:19:00.000Z" itemprop="datePublished">2017-09-18</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="hexo-に-theme-を設定する。"><a href="#hexo-に-theme-を設定する。" class="headerlink" title="hexo に theme を設定する。"></a>hexo に theme を設定する。</h1><p>hexo は任意のテーマを設定できます。自分で構築することもできますし、<a href="https://hexo.io/themes/" target="_blank" rel="external">hexo.io のテーマ一覧</a>から選択することもできます。このブログは<a href="https://probberechts.github.io/cactus-dark/" target="_blank" rel="external">cacutus-dark</a>というテーマを使っています。正直読みづらさは否めませんが、ターミナルみたいでかっこいいと思います。</p>
+<h2 id="theme-の設定方法"><a href="#theme-の設定方法" class="headerlink" title="theme の設定方法"></a>theme の設定方法</h2><p>既存テーマを利用する方法について説明します。</p>
+<p>ほとんどのテーマは設定項目が存在します。これは、hexo 自体とは別の管理を行う必要があるということです。</p>
+<p>そのため、管理の意味で git の submodule を用いる方がメリットがあります。</p>
+<p>そのため手順は以下のようになります。</p>
+<ul>
+<li>既存のテーマをフォークする</li>
+<li>テーマのフォークを自身の hexo リポジトリにサブモジュールとして追加する</li>
+<li>hexo に使用するテーマの設定を行う</li>
+<li>テーマに対する設定を行う</li>
+</ul>
+<h3 id="任意のテーマをフォークする"><a href="#任意のテーマをフォークする" class="headerlink" title="任意のテーマをフォークする"></a>任意のテーマをフォークする</h3><p><a href="https://hexo.io/themes/" target="_blank" rel="external">hexo.io のテーマ一覧</a>から好みのものを選びます。<br>github のリンクがあるはずなので任意のテーマをフォークします。</p>
+<p>github にてフォークをすると、自身のフォークが作成されます。</p>
+<h3 id="テーマのフォークを-git-のサブモジュールとして追加する"><a href="#テーマのフォークを-git-のサブモジュールとして追加する" class="headerlink" title="テーマのフォークを git のサブモジュールとして追加する"></a>テーマのフォークを git のサブモジュールとして追加する</h3><p>サブモジュール追加は hexo プロジェクトルートにて以下のコマンドで行います。<br>[]は任意の文字列に置き換えてください。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git submodule add [repo_url] themes/[theme_name]</div></pre></td></tr></table></figure>
+<p>すると、theme/[theme_name]にフォークしたリポジトリが追加されます。</p>
+<h3 id="hexo-に使用するテーマの設定を行う"><a href="#hexo-に使用するテーマの設定を行う" class="headerlink" title="hexo に使用するテーマの設定を行う"></a>hexo に使用するテーマの設定を行う</h3><p>hexo のプロジェクトルートにある、_config.yml に設定を行います。僕の場合は cactus-dark を利用するため、以下のように設定しました。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">## Themes: https://hexo.io/themes/</div><div class="line">theme: cactus-dark</div></pre></td></tr></table></figure>
+<h3 id="テーマに対する設定を行う。"><a href="#テーマに対する設定を行う。" class="headerlink" title="テーマに対する設定を行う。"></a>テーマに対する設定を行う。</h3><p>それぞれ設定方法が違うと思うので、テーマのリポジトリの README.md を参照しつつ設定を行ってください。</p>
+<p>参考までに、僕が cactos-dark にて行った設定をまとめます。</p>
+<ul>
+<li>graviator の設定</li>
+<li>nav の設定</li>
+<li>social_link の設定</li>
+</ul>
+<h3 id="gravator-の設定"><a href="#gravator-の設定" class="headerlink" title="gravator の設定"></a>gravator の設定</h3><p><a href="https://ja.gravatar.com/" target="_blank" rel="external">gravator</a>は、グローバルに認識されるアバターです。一度写真を設定すれば、SNS などの icon を一括で設定できます。<br>cactos-dark はこれをサポートしていたため、favicon と avator を設定しました。</p>
+<h3 id="nav-の設定"><a href="#nav-の設定" class="headerlink" title="nav の設定"></a>nav の設定</h3><p>以下のように Projects のリンクをクリックすると、github へ遷移するよう設定しました。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">nav:</div><div class="line">  Home: /</div><div class="line">  About: /about/</div><div class="line">  Writing: /archives/</div><div class="line">  Projects: https://github.com/k4h4shi</div></pre></td></tr></table></figure>
+<h3 id="social-link-の設定"><a href="#social-link-の設定" class="headerlink" title="social_link の設定"></a>social_link の設定</h3><p>個人の SNS アカウントのリンクを設定しました。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">customize:</div><div class="line">    social_links:</div><div class="line">        github: https://github.com/k4h4shi</div><div class="line">        facebook: https://facebook.com/k4h4shi</div><div class="line">        twitter: https://twitter.com/k4h4shi</div><div class="line">        instagram: https://instagram.com/k4h4shi</div></pre></td></tr></table></figure>
+<h2 id="まとめ"><a href="#まとめ" class="headerlink" title="まとめ"></a>まとめ</h2><p>多くのブログフレームワークでは、ブログ本体とテーマが独立して設定できます。<br>hexo も類にもれず設定を行うことができるため、ぜひ活用してください。</p>
+<p>cactus-dark は Google Analytics なども設定できるため、今後はこちらについても設定します。</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#hexo-に-theme-を設定する。"><span class="toc-number">1.</span> <span class="toc-text">hexo に theme を設定する。</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#theme-の設定方法"><span class="toc-number">1.1.</span> <span class="toc-text">theme の設定方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#任意のテーマをフォークする"><span class="toc-number">1.1.1.</span> <span class="toc-text">任意のテーマをフォークする</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#テーマのフォークを-git-のサブモジュールとして追加する"><span class="toc-number">1.1.2.</span> <span class="toc-text">テーマのフォークを git のサブモジュールとして追加する</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hexo-に使用するテーマの設定を行う"><span class="toc-number">1.1.3.</span> <span class="toc-text">hexo に使用するテーマの設定を行う</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#テーマに対する設定を行う。"><span class="toc-number">1.1.4.</span> <span class="toc-text">テーマに対する設定を行う。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gravator-の設定"><span class="toc-number">1.1.5.</span> <span class="toc-text">gravator の設定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#nav-の設定"><span class="toc-number">1.1.6.</span> <span class="toc-text">nav の設定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#social-link-の設定"><span class="toc-number">1.1.7.</span> <span class="toc-text">social_link の設定</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#まとめ"><span class="toc-number">1.2.</span> <span class="toc-text">まとめ</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://k4h4shi.com/2017/09/18/setup_theme_for_hexo/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://k4h4shi.com/2017/09/18/setup_theme_for_hexo/&text=hexoにthemeを設定する"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://k4h4shi.com/2017/09/18/setup_theme_for_hexo/&title=hexoにthemeを設定する"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://k4h4shi.com/2017/09/18/setup_theme_for_hexo/&is_video=false&description=hexoにthemeを設定する"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=hexoにthemeを設定する&body=Check out this article: http://k4h4shi.com/2017/09/18/setup_theme_for_hexo/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://k4h4shi.com/2017/09/18/setup_theme_for_hexo/&title=hexoにthemeを設定する"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://k4h4shi.com/2017/09/18/setup_theme_for_hexo/&title=hexoにthemeを設定する"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://k4h4shi.com/2017/09/18/setup_theme_for_hexo/&title=hexoにthemeを設定する"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://k4h4shi.com/2017/09/18/setup_theme_for_hexo/&title=hexoにthemeを設定する"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://k4h4shi.com/2017/09/18/setup_theme_for_hexo/&name=hexoにthemeを設定する&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menú</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Compartir</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Cap amunt</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 kotaro takahashi
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/k4h4shi">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+    <!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
